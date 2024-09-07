@@ -6,6 +6,11 @@ import diseaseRouter from './routes/diseaseRoute.js';
 import path from 'path';
 import cropRoutes from './routes/selectRoute.js'
 
+// Importing routes
+import Products_Route from './routes/Products_Route.js';
+
+
+
 // Creating an instance of the Express application
 const app = express();
 
@@ -15,10 +20,10 @@ app.use(express.json());
 // Middleware for handling CORS POLICY
 app.use(cors());
 
-app.get('/', (req, res) => {
-    console.log(req);
-    return res.status(234).send("welcome")
-})
+// Using routes for endpoints
+app.use('/products', Products_Route);
+
+
 
 
 // Connecting to the MongoDB database
