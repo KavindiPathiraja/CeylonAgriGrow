@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Spinner from '../components/Spinner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
 const provinces = {
   Eastern: ['Ampara', 'Batticaloa', 'Trincomalee'],
   'North Central': ['Anuradhapura', 'Polonnaruwa'],
