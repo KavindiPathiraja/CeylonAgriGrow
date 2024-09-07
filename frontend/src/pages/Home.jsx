@@ -11,9 +11,9 @@ const Home = () => {
       <button style={styles.button}><Link to="/farmers/Login">Log In</Link></button>
 
       <ul style={styles.navList}>
-        <li style={styles.navItem}><Link to="/">Crop</Link></li>
+        <li style={styles.navItem}><Link to="/crops/getall">Crop</Link></li>
         <li style={styles.navItem}><Link to="/">Fertilizer</Link></li>
-        <li style={styles.navItem}><Link to="/">Diseases</Link></li>
+        <li style={styles.navItem}><Link to="/Pest&Disease/selectCrop">Diseases</Link></li>
         <li style={styles.navItem}><Link to="/products/allProducts">Products</Link></li>
       </ul>
 

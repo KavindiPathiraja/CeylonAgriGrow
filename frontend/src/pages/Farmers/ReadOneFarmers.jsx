@@ -80,6 +80,7 @@ const ShowFarmer = () => {
     return (
         <div className='p-6 bg-gray-100 min-h-screen'>
             <li><Link to="/" className="text-green-800 hover:text-green-600">Home</Link></li>
+            <li><Link to="/myProducts/allProducts" className="text-green-800 hover:text-green-600">All Products</Link></li>
             <h1 className="show-Farmers-title text-3xl my-4 text-green-800">Farmer Dashboard</h1>
             
             {loading ? (

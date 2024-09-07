@@ -9,7 +9,7 @@ import cropRoutes from './routes/selectRoute.js'
 // Importing routes
 import Products_Route from './routes/Products_Route.js';
 import Farmers_Route from './routes/Farmers_Route.js';
-
+import Purchase_Route from './routes/Purchase_Route.js';
 //Import crop routes
 import cropsRouter from "./routes/cropsRoute.js"; 
 
@@ -27,7 +27,7 @@ app.use(cors());
 app.use('/products', Products_Route);
 app.use('/farmers',Farmers_Route);
 app.use('/crops', cropsRouter); 
-
+app.use('/purchase', Purchase_Route);
 
 
 // Connecting to the MongoDB database

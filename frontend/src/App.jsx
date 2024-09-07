@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import Home from './pages/Home';
 import CreateCrop from './pages/CreateCrop';
 import EditCrop from './pages/EditCrop';
 import ShowCrop from './pages/ShowCrop';
@@ -36,14 +35,13 @@ import ReadOneMyProducts from './pages/Farmers/ReadOneMyProducts';
 import CreateMyProducts from './pages/Farmers/CreateMyProducts';
 import EditMyProducts from './pages/Farmers/EditMyProducts';
 import DeleteMyProducts from './pages/Farmers/DeleteMyProducts';
-
+import ShowAllProduct from './pages/Farmers/ShowAllProducts';
 
 
 const App = () => {
   return (
     <Routes>
 
-      <Route path='/' element={<Home />} />
       <Route path='/crops/create' element={<CreateCrop />} />
       <Route path='/crops/details/:id' element={<ShowCrop />} />
       <Route path='/crops/edit/:id' element={<EditCrop />} />
@@ -80,7 +78,7 @@ const App = () => {
       <Route path='/myProducts/create' element={<CreateMyProducts />}/>
       <Route path='/myProducts/edit/:id' element={<EditMyProducts />}/>
       <Route path='/myProducts/delete/:id' element={<DeleteMyProducts />}/>
-      
+      <Route path='/myProducts/allProducts' element={<ShowAllProduct />}/> 
 
     </Routes>
   );
