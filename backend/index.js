@@ -2,6 +2,9 @@ import express from 'express';
 import { PORT,mongoDBURL } from "./config.js";
 import mongoose from 'mongoose';
 import cors from 'cors';
+import diseaseRouter from './routes/diseaseRoute.js';
+import path from 'path';
+import cropRoutes from './routes/selectRoute.js'
 
 // Importing routes
 import Products_Route from './routes/Products_Route.js';
@@ -35,3 +38,7 @@ mongoose.connect(mongoDBURL)
   .catch((error) => {
     console.log(error);
   });
+
+app.use('/diseases', diseaseRouter);
+app.use('/images', express.static(path.join('images')));
+app.use('/api', cropRoutes);
