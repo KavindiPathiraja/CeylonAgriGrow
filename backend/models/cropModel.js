@@ -3,47 +3,46 @@ import mongoose from "mongoose";
 const cropSchema = new mongoose.Schema({
   province: {
     type: String,
-    required:true
+    required: true,
   },
   district: {
     type: String,
-    required:true
+    required: true,
   },
   landarea: {
-    type: Boolean,
-    required:true
+    type: String,  // Changed to String
+    required: true,
   },
   distancewater: {
-    type: Boolean,
-    required:true
+    type: String,  // Changed to String
+    required: true,
   },
   soiltype: {
-    type: Boolean,
-    required:true
+    type: String,  // Changed to String
+    required: true,
   },
   soilph: {
-    type: Boolean,
-    required:true
+    type: String,  // Changed to String
+    required: true,
   },
   rainfall: {
-    type: Boolean,
-    required:true
+    type: String,  // Changed to String
+    required: true,
   },
   pastCrop: {
     type: String,
-    required:true
+    required: true,
   },
   labour: {
     type: Number,
-    required:true
+    required: true,
   },
   dateOfPlanting: {
     type: Date,
-    required:true
-  }
+    required: true,
+  },
 });
 
 const Crop = mongoose.model('Crop', cropSchema);
 
-// Change to default export
 export default Crop;

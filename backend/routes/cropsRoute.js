@@ -96,7 +96,7 @@ router.put('/upcrops/:id',async(request , response)=>{
         if(!result){
             return response.status(404).json({message: 'Crop detail not found'});
         }
-        return response.status(404).json({message: 'Crop detail updated successfully'});
+        return response.status(200).send({message: 'Crop detail updated successfully'});
 
     }catch(error){
         console.log(error.message);

@@ -1,0 +1,55 @@
+/* ShowCrop.css */
+
+.page-container {
+    background-image: url('/assets/table_bg');
+    background-size: cover;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .header {
+    font-size: 3rem;
+    margin: 20px 0;
+  }
+  
+  .button-container {
+    margin-bottom: 20px;
+  }
+  
+  .predict-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: #fff;
+    background-color: #4CAF50;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .predict-button:hover {
+    background-color: #45a049;
+  }
+  
+  .crop-details {
+    display: inline-block;
+    border: 2px solid #000;
+    border-radius: 10px;
+    background-color: #d1ffbd;
+    padding: 20px;
+    width: fit-content;
+    text-align: left;
+  }
+  
+  .detail-row {
+    margin-bottom: 10px;
+  }
+  
+  .label {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .value {
+    font-size: 1.1rem;
+  }
+  
