@@ -65,3 +65,15 @@
 .report-button {
   display: inline-block;
 }
+.button-search-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.search-bar {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 250px; /* Adjust width as needed */
+}

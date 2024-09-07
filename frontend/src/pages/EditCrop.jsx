@@ -33,19 +33,19 @@ const EditCrop = () => {
 
   useEffect(() => {
     // Fetch crop data by ID
-    axios.get(`http://localhost:5556/crops/${id}`)
+    axios.get(`http://localhost:5556/crops/getcrops/${id}`)
       .then(response => {
         const crop = response.data;
-        setProvince(crop.province);
-        setDistrict(crop.district);
-        setLandArea(crop.landarea);
-        setDistanceWater(crop.distancewater);
-        setSoilType(crop.soiltype);
-        setSoilPhAcidic(crop.soilph);
-        setRainfall(crop.rainfall);
-        setPastCrop(crop.pastCrop);
-        setLabour(crop.labour);
-        setDateOfPlanting(crop.dateOfPlanting);
+        setProvince(crop.province || '');
+        setDistrict(crop.district || '');
+        setLandArea(crop.landarea || '');
+        setDistanceWater(crop.distancewater || '');
+        setSoilType(crop.soiltype || '');
+        setSoilPhAcidic(crop.soilph || '');
+        setRainfall(crop.rainfall || '');
+        setPastCrop(crop.pastCrop || '');
+        setLabour(crop.labour || '');
+        setDateOfPlanting(crop.dateOfPlanting ? new Date(crop.dateOfPlanting).toISOString().split('T')[0] : '');
         setLoadingData(false);
       })
       .catch(error => {
