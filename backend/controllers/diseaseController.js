@@ -135,4 +135,4 @@ export default {
     getDiseaseById,
     deleteDisease,
     updateDisease
-};
+}
