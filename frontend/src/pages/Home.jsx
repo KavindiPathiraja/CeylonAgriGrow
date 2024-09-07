@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -7,7 +8,15 @@ const Home = () => {
       <p style={styles.description}>
         This is a simple home page built with React. Explore more by navigating through the links!
       </p>
-      <button style={styles.button}>Get Started</button>
+      <button style={styles.button}><Link to="/farmers/Login">Log In</Link></button>
+
+      <ul style={styles.navList}>
+        <li style={styles.navItem}><Link to="/">Crop</Link></li>
+        <li style={styles.navItem}><Link to="/">Fertilizer</Link></li>
+        <li style={styles.navItem}><Link to="/">Diseases</Link></li>
+        <li style={styles.navItem}><Link to="/products/allProducts">Products</Link></li>
+      </ul>
+
     </div>
   );
 }

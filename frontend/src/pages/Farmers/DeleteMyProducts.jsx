@@ -18,7 +18,7 @@ const DeleteProduct = () => {
       .then(() => {
         // If the deletion is successful, update the state and navigate to the home page
         setLoading(false);
-        navigate('/products/allProducts');
+        navigate('/farmers/details/:id');
       })
       .catch((error) => {
         // If an error occurs, update the state, show an alert, and log the error to the console
@@ -31,7 +31,7 @@ const DeleteProduct = () => {
   return (
     <div className='p-6 bg-gray-100 min-h-screen'>
       {/* Back button to navigate back */}
-      <BackButton destination='/products/allProducts'/>
+      <BackButton destination='/farmers/details/:id'/>
       <h1 className='text-3xl my-4 text-red-800'>Delete Product</h1>
       {/* Display a spinner while the delete operation is in progress */}
       {loading ? <Spinner /> : ''}

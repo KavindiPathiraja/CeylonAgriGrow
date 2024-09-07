@@ -2,34 +2,30 @@ import React from "react";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 
-export default function ReportProduct({ filteredProducts }) {
-  function generatePDF(filteredProducts) {
+export default function ReportFarmer({ filteredFarmers }) {
+  function generatePDF(filteredFarmers) {
     const doc = new jsPDF();
     const tableColumn = [
       "No",
-      "Product No",
-      "Product Name",
-      "Category",
-      "Quantity",
-      "Selling Price",
+      "Farmer ID",
       "Farmer Name",
-      "Farmer Email",
+      "Contact No",
+      "Email",
+      "Address",
     ];
     const tableRows = [];
 
-    filteredProducts
+    filteredFarmers
       .slice(0) // Ensure reverse order if needed
       .reverse()
-      .map((product, index) => {
+      .map((farmer, index) => {
         const data = [
           index + 1,
-          product.ProductNo,
-          product.ProductName,
-          product.Category,
-          product.Quantity,
-          product.SellingPrice,
-          product.FarmerName,
-          product.FarmerEmail,
+          farmer.FarmerID,
+          farmer.FarmerName,
+          farmer.ContactNo,
+          farmer.Email,
+          farmer.Address,
         ];
         tableRows.push(data);
       });
@@ -42,7 +38,7 @@ export default function ReportProduct({ filteredProducts }) {
     doc.text("Farmers' Marketplace", 60, 15);
 
     doc.setFont("helvetica", "normal").setFontSize(20).setTextColor(0, 0, 0);
-    doc.text("Product Details Report", 65, 25);
+    doc.text("Farmer Details Report", 65, 25);
 
     doc.setFont("times", "normal").setFontSize(15).setTextColor(100, 100, 100);
     doc.text(`Report Generated Date: ${dateStr}`, 65, 35);
@@ -77,16 +73,16 @@ export default function ReportProduct({ filteredProducts }) {
     });
 
     // Save the generated PDF
-    doc.save(`Product-Details-Report_${dateStr}.pdf`);
+    doc.save(`Farmer-Details-Report_${dateStr}.pdf`);
   }
 
   return (
     <div>
       <button
-        onClick={() => generatePDF(filteredProducts)}
+        onClick={() => generatePDF(filteredFarmers)}
         className="btn2 px-4 py-2 bg-green-500 text-white rounded-lg"
       >
-        Product Report
+        Farmer Report
       </button>
     </div>
   );

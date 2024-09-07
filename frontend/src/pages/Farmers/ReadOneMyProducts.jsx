@@ -25,7 +25,7 @@ const ShowProducts = () => {
 
   return (
     <div className="show-products-container p-6 bg-gray-100 min-h-screen">
-      <BackButton destination='/products/allProducts'/>
+      <BackButton destination='/farmers/details/:id'/>
       <h1 className="show-products-title text-4xl text-green-700 font-bold mb-6">Product Details</h1>
 
       {loading ? (

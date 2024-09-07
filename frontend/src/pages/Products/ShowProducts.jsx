@@ -47,12 +47,13 @@ const ShowProduct = () => {
     });
 
     return (
-        <div className='p-4'>
-            <li><Link to="/">Home</Link></li>
-            <div className='flex flex-col md:flex-row justify-between items-center'>
+        <div className='p-6 bg-gray-100 min-h-screen'>
+            <li><Link to="/" className="text-green-800 hover:text-green-600">Home</Link></li>
+            <h1 className="show-Products-title text-3xl my-4 text-green-800">Farmer's Marketplace</h1>
+            <div className='flex flex-col md:flex-row justify-between items-center mb-6'>
                 {/* Dropdown for filtering */}
                 <select 
-                    className='text-3l my-8 p-2 border border-gray-400 rounded-md' 
+                    className='text-lg my-4 p-2 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
                     onChange={handleCategoryChange}
                     value={selectedCategory}
                 >
@@ -65,14 +66,14 @@ const ShowProduct = () => {
                 {/* Search input field */}
                 <input
                     type="text"
-                    placeholder="Search..."
-                    className='text-3l my-8 p-2 border border-gray-400 rounded-md'
+                    placeholder="Search products..."
+                    className='text-lg my-4 p-2 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
                     onChange={handleSearchChange}
                 />
 
                 <div className="flex items-center space-x-4">
                     <Link to='/products/create' className="flex items-center">
-                        <MdOutlineAddBox className='text-sky-800 text-4xl' />
+                        <MdOutlineAddBox className='text-green-800 text-4xl' />
                     </Link>
                     {/* Render the ReportProduct component for generating PDF */}
                     <ReportProduct filteredProducts={filteredProducts} className="flex items-center" />
@@ -82,53 +83,53 @@ const ShowProduct = () => {
             {loading ? (
                 <Spinner />
             ) : (
-                <table className='w-full border-separate border-spacing-2'>
+                <table className='w-full border border-green-500 rounded-lg bg-white'>
                     <thead>
-                        <tr>
-                            <th className='border border-slate-600 rounded-md'>ProductNo</th>
-                            <th className='border border-slate-600 rounded-md'>ProductName</th>
-                            <th className='border border-slate-600 rounded-md max-md:hidden'>Category</th>
-                            <th className='border border-slate-600 rounded-md max-md:hidden'>Quantity</th>
-                            <th className='border border-slate-600 rounded-md max-md:hidden'>SellingPrice</th>
-                            <th className='border border-slate-600 rounded-md max-md:hidden'>FarmerName</th>
-                            <th className='border border-slate-600 rounded-md max-md:hidden'>FarmerEmail</th>
-                            <th className='border border-slate-600 rounded-md'>Operations</th>
+                        <tr className='bg-green-100'>
+                            <th className='p-4 border border-green-300'>Product No</th>
+                            <th className='p-4 border border-green-300'>Product Name</th>
+                            <th className='p-4 border border-green-300 max-md:hidden'>Category</th>
+                            <th className='p-4 border border-green-300 max-md:hidden'>Quantity</th>
+                            <th className='p-4 border border-green-300 max-md:hidden'>Selling Price</th>
+                            <th className='p-4 border border-green-300 max-md:hidden'>Farmer Name</th>
+                            <th className='p-4 border border-green-300 max-md:hidden'>Farmer Email</th>
+                            <th className='p-4 border border-green-300'>Operations</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredProducts.map((Product) => (
-                            <tr key={Product._id} className='h-8'>
-                                <td className='border border-slate-700 rounded-md text-center'>
-                                    {Product.ProductNo}
+                        {filteredProducts.map((product) => (
+                            <tr key={product._id} className='text-center bg-white even:bg-green-50'>
+                                <td className='p-4 border border-green-300'>
+                                    {product.ProductNo}
                                 </td>
-                                <td className='border border-slate-700 rounded-md text-center'>
-                                    {Product.ProductName}
+                                <td className='p-4 border border-green-300'>
+                                    {product.ProductName}
                                 </td>
-                                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
-                                    {Product.Category}
+                                <td className='p-4 border border-green-300 max-md:hidden'>
+                                    {product.Category}
                                 </td>
-                                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
-                                    {Product.Quantity}
+                                <td className='p-4 border border-green-300 max-md:hidden'>
+                                    {product.Quantity}
                                 </td>
-                                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
-                                    {Product.SellingPrice}
+                                <td className='p-4 border border-green-300 max-md:hidden'>
+                                    {product.SellingPrice}
                                 </td>
-                                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
-                                    {Product.FarmerName}
+                                <td className='p-4 border border-green-300 max-md:hidden'>
+                                    {product.FarmerName}
                                 </td>
-                                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
-                                    {Product.FarmerEmail}
+                                <td className='p-4 border border-green-300 max-md:hidden'>
+                                    {product.FarmerEmail}
                                 </td>
-                                <td className='border border-slate-700 rounded-md text-center'>
-                                    <div className='flex justify-center gap-x-4'>
-                                        <Link to={`/products/details/${Product._id}`}>
-                                            <BsInfoCircle className='text-2xl text-green-800' />
+                                <td className='p-4 border border-green-300'>
+                                    <div className='flex justify-center gap-4'>
+                                        <Link to={`/products/details/${product._id}`}>
+                                            <BsInfoCircle className='text-2xl text-green-800 hover:text-green-600' />
                                         </Link>
-                                        <Link to={`/products/edit/${Product._id}`}>
-                                            <AiOutlineEdit className='text-2xl text-yellow-600' />
+                                        <Link to={`/products/edit/${product._id}`}>
+                                            <AiOutlineEdit className='text-2xl text-yellow-600 hover:text-yellow-500' />
                                         </Link>
-                                        <Link to={`/products/delete/${Product._id}`}>
-                                            <MdOutlineDelete className='text-2xl text-red-600' />
+                                        <Link to={`/products/delete/${product._id}`}>
+                                            <MdOutlineDelete className='text-2xl text-red-600 hover:text-red-500' />
                                         </Link>
                                     </div>
                                 </td>

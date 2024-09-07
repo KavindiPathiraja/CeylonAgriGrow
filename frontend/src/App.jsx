@@ -1,5 +1,14 @@
-import React from 'react'
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+
+import Home from './pages/Home';
+import CreateCrop from './pages/CreateCrop';
+import EditCrop from './pages/EditCrop';
+import ShowCrop from './pages/ShowCrop';
+import DeleteCrop from './pages/DeleteCrop';
+import AllCrop from './pages/AllCrop';
+import ReportCrop from './pages/ReportCrop';
+
 import Home from './pages/Home'
 import AddDisease from './pages/AddDisease'
 import DiseaseTable from './pages/diseaseTable'
@@ -15,10 +24,33 @@ import CreateProducts from './pages/Products/CreateProducts';
 import EditProducts from './pages/Products/EditProducts';
 import DeleteProducts from './pages/Products/DeleteProducts';
 
+import ShowFarmers from './pages/Farmers/ShowFarmers';
+import ReadOneFarmers from './pages/Farmers/ReadOneFarmers';
+import CreateFarmers from './pages/Farmers/CreateFarmers';
+import EditFarmers from './pages/Farmers/EditFarmers';
+import DeleteFarmers from './pages/Farmers/DeleteFarmers';
+
+import Login from './components/Login';
+
+import ReadOneMyProducts from './pages/Farmers/ReadOneMyProducts';
+import CreateMyProducts from './pages/Farmers/CreateMyProducts';
+import EditMyProducts from './pages/Farmers/EditMyProducts';
+import DeleteMyProducts from './pages/Farmers/DeleteMyProducts';
+
+
 
 const App = () => {
   return (
     <Routes>
+
+      <Route path='/' element={<Home />} />
+      <Route path='/crops/create' element={<CreateCrop />} />
+      <Route path='/crops/details/:id' element={<ShowCrop />} />
+      <Route path='/crops/edit/:id' element={<EditCrop />} />
+      <Route path='/crops/getall' element={<AllCrop />} />
+      <Route path='/crops/report' element={<ReportCrop />} />
+      <Route path='/crops/delete/:id' element={<DeleteCrop />} />
+
       <Route path='/' element={<Home />}/>
 
       <Route path='/Pest&Disease/addDisease' element={<AddDisease />}/>
@@ -36,8 +68,22 @@ const App = () => {
       <Route path='/products/edit/:id' element={<EditProducts />}/>
       <Route path='/products/delete/:id' element={<DeleteProducts />}/>
 
+      <Route path='/farmers/allFarmers' element={<ShowFarmers />}/>
+      <Route path='/farmers/details/:id' element={<ReadOneFarmers />}/>
+      <Route path='/farmers/create' element={<CreateFarmers />}/>
+      <Route path='/farmers/edit/:id' element={<EditFarmers />}/>
+      <Route path='/farmers/delete/:id' element={<DeleteFarmers />}/>
+
+      <Route path='/farmers/Login' element={<Login />}/>
+
+      <Route path='/myProducts/details/:id' element={<ReadOneMyProducts />}/>
+      <Route path='/myProducts/create' element={<CreateMyProducts />}/>
+      <Route path='/myProducts/edit/:id' element={<EditMyProducts />}/>
+      <Route path='/myProducts/delete/:id' element={<DeleteMyProducts />}/>
+      
+
     </Routes>
-  )
+  );
 }
 
-export default App
+export default App;

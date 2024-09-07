@@ -8,7 +8,10 @@ import cropRoutes from './routes/selectRoute.js'
 
 // Importing routes
 import Products_Route from './routes/Products_Route.js';
+import Farmers_Route from './routes/Farmers_Route.js';
 
+//Import crop routes
+import cropsRouter from "./routes/cropsRoute.js"; 
 
 
 // Creating an instance of the Express application
@@ -22,7 +25,8 @@ app.use(cors());
 
 // Using routes for endpoints
 app.use('/products', Products_Route);
-
+app.use('/farmers',Farmers_Route);
+app.use('/crops', cropsRouter); 
 
 
 
