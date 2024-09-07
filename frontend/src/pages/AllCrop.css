@@ -1,0 +1,79 @@
+/* AllCrop.css */
+
+.page-container {
+    background-image: url('/assets/table_bg.jpg');
+    background-size: cover;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .header {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .button-container {
+    margin-bottom: 20px;
+  }
+  
+  .predict-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    text-decoration: none;
+  }
+  
+  .predict-button:hover {
+    background-color: #45a049;
+  }
+  
+  .crop-table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 90%;
+    background-color: #d1ffbd;
+    border: 2px solid black;
+  }
+  
+  .crop-table th,
+  .crop-table td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .crop-table th {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .crop-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Flex container for aligning buttons side by side */
+.button-flex-container {
+  display: flex;
+  justify-content: flex-start; /* Align items to the start */
+  gap: 20px; /* Space between the buttons */
+  margin-bottom: 20px; /* Space below the buttons */
+}
+/* Report button styles */
+.report-button {
+  display: inline-block;
+}
+.button-search-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.search-bar {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 250px; /* Adjust width as needed */
+}
