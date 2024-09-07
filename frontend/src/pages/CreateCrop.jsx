@@ -3,6 +3,8 @@ import Spinner from '../components/Spinner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import backgroundImage from '../assets/table_bg.jpg'; // Import the background image
+import BackButton from '../components/BackButton';
+
 
 const provinces = {
   Eastern: ['Ampara', 'Batticaloa', 'Trincomalee'],
@@ -65,6 +67,7 @@ const CreateCrops = () => {
     >
       <div className="p-4">
         <h1 className="text-3xl my-4 text-white">Create Crop</h1> {/* Text changed to white for contrast */}
+        <BackButton destination='/crops/getall'/>
         {loading ? <Spinner /> : ''}
         <div className="border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto bg-white">
           <div className="flex flex-wrap">
