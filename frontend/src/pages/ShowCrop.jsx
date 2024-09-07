@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 import backgroundImage from '../assets/table_bg.jpg'; // Import the background image
+import BackButton from '../components/BackButton';
 
 const ShowCrop = () => {
   const [crop, setCrop] = useState({});
@@ -35,6 +36,7 @@ const ShowCrop = () => {
     >
       <div className='flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4 bg-white shadow-lg'>
         <h1 className='text-3xl mb-4 text-center'>Show Crop Details</h1>
+        <BackButton destination='crops/getall'/>
         {loading ? (
           <Spinner />
         ) : (
