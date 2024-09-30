@@ -1,0 +1,17 @@
+.single_crop {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.crop {
+    width: 20%;
+    background-color: aliceblue;
+    border-radius: 8px;
+    margin: 10px;
+}
+
+.action_btn {
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+}

@@ -1,0 +1,86 @@
+/* CSS for Add Catering Service Form */
+
+.add-service {
+  margin: auto;
+  padding: 30px;
+  margin-top: 150px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  width: 90%;
+}
+
+.add-service h2 {
+  text-align: center;
+  font-size: x-large;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.add-service form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-service label {
+  margin-bottom: 5px;
+}
+
+.add-service input {
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-service button {
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  background-color: #ffe40b;
+  color: rgb(6, 0, 0);
+  cursor: pointer;
+  width: 170px;
+}
+
+.add-service button:hover {
+  background-color: black;
+  color: white;
+}
+
+.headcount {
+  width: 80px;
+}
+
+.cateringtotal{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px gold solid;
+  width: 260px;
+  height: 50px;
+  margin: auto;
+}
+
+.cateringbtn {
+  display: flex;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffe40b;
+  border-radius: 4px;
+  width: 260px;
+  height: 50px;
+  margin: auto;
+}
+
+.cateringbtn:hover {
+  background-color: black;
+  color: white;
+}
+
+.ca:hover {
+  color: black;
+}

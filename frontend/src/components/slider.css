@@ -1,0 +1,557 @@
+.ubuntu-light {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.ubuntu-regular {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ubuntu-medium {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.ubuntu-bold {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.ubuntu-light-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.ubuntu-regular-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.ubuntu-medium-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.ubuntu-bold-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Slider Container */
+.slider {
+
+  overflow: hidden;
+  background-size: contain;
+  transition: opacity 1s ease-in-out;
+}
+
+/* Slide Wrapper */
+.slide-wrapper {
+  background-color: rgb(227, 228, 223);
+  margin: auto;
+  width: 70%;
+  height: 70vh;
+  border-radius: 8px;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+
+
+.cropImg {
+  width: 60%;
+  position: relative;
+  top: 15%;
+  margin: auto;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* Slider Contents */
+.slider-contents {
+  color: white;
+  text-align: center;
+  position: absolute;
+  z-index: 2;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Slide Animation */
+.slide-enter {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.slide-enter-active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.slide-exit {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.slide-exit-active {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+/* Button Styles */
+.btn-next {
+  position: absolute;
+  top: 59%;
+  right: 5.5%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+}
+
+.btn-pre {
+  position: absolute;
+  top: 42%;
+  right: 5.5%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+}
+
+
+.cropName {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 5px;
+  width: 40%;
+  text-align: center;
+  margin: 20px auto;
+  color: white;
+  border-radius: 10px;
+}
+
+.info_btn {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  background-color: #ffe40b;
+  border-radius: 40%;
+  top: 50%;
+  right: 4%;
+}
+
+body {
+  /* background-color: rgb(10, 70, 66); */
+  font-family: "Ubuntu";
+}
+
+
+.text-box {
+  position: absolute;
+  top: 47%;
+  right: 4%;
+}
+
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 40px;
+  display: inline-block;
+  border-radius: 14px;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-white {
+  background-color: #fff;
+  color: #ffffff;
+  width: 40px;
+}
+
+.btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 14px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.btn-white::after {
+  background-color: #fff;
+}
+
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+.btn-animated {
+  animation: moveInBottom 5s ease-out;
+  animation-fill-mode: backwards;
+}
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+/* .modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border-radius: 14px;
+  z-index: 10;
+  background-color: aliceblue;
+  width: 60%;
+  min-width: 40%;
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: 200ms ease-in-out;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+#overlay.active {
+  pointer-events: all;
+  opacity: 1;
+} */
+
+/* .modal.active {
+  transform: translate(-50%, -50%) scale(1);
+} */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+
+}
+
+/* Popup styles */
+.popup {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  min-width: 150px;
+  min-height: 150px;
+  max-height: 90%;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transform: scale(1);
+  animation: myAnim 0.5s ease 0s 1 normal forwards;
+}
+
+.popup-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.popup-enter-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.popup-exit {
+  animation: myAnim1 2s ease 0s 1 normal forwards;
+}
+
+@keyframes myAnim {
+  0% {
+    transform: scale(0.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes myAnim1 {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
+.popup-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+
+.fertilizer {
+  position: absolute;
+  top: 50%;
+  left: 4%;
+}
+
+
+/* Keyframes for the slide up animation */
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* styles.css */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+.text-animation {
+  animation: fadeInOut 3s ease-in-out infinite;
+  font-size: 24px;
+  color: #333;
+}
+
+.modal_info {
+  max-width: 600px;
+}
+
+
+.loader {
+  position: absolute;
+  top: calc(50% - 32px);
+  left: calc(50% - 32px);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  perspective: 800px;
+}
+
+.inner {
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.inner.one {
+  left: 0%;
+  top: 0%;
+  animation: rotate-one 1s linear infinite;
+  border-bottom: 3px solid #011b11;
+}
+
+.inner.two {
+  right: 0%;
+  top: 0%;
+  animation: rotate-two 1s linear infinite;
+  border-right: 3px solid #011b11;
+}
+
+.inner.three {
+  right: 0%;
+  bottom: 0%;
+  animation: rotate-three 1s linear infinite;
+  border-top: 3px solid #011b11;
+}
+
+@keyframes rotate-one {
+  0% {
+    transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+  }
+
+  100% {
+    transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+  }
+}
+
+@keyframes rotate-two {
+  0% {
+    transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+  }
+
+  100% {
+    transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+  }
+}
+
+@keyframes rotate-three {
+  0% {
+    transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+  }
+
+  100% {
+    transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+  }
+}
+
+/* button */
+
+.wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  min-width: 80px;
+  min-height: 60px;
+  display: inline-flex;
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 1.3px;
+  font-weight: 700;
+  color: #313133;
+  background: #4FD1C5;
+  background: linear-gradient(90deg, rgb(238, 244, 244) 0%, rgb(220, 230, 229) 100%);
+  border: none;
+  border-radius: 10px;
+  /* box-shadow: 12px 12px 24px rgba(79, 209, 197, .64); */
+  transition: all 0.3s ease-in-out 0s;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  padding: 10px;
+}
+
+.button::before {
+  content: '';
+  border-radius: 16px;
+  min-width: calc(80px + 12px);
+  min-height: calc(60px + 12px);
+  border: 4px solid rgb(165, 228, 69);
+  box-shadow: 0 0 60px rgba(122, 176, 41, 0.6);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all .3s ease-in-out 0s;
+}
+
+.button:hover,
+.button:focus {
+  color: #313133;
+  transform: translateY(-6px);
+}
+
+.button:hover::before,
+.button:focus::before {
+  opacity: 1;
+}
+
+/* .button::after {
+  content: '';
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  border: 6px solid #00FFCB;
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ring 1.5s infinite;
+} */
+
+.button:hover::after,
+.button:focus::after {
+  animation: none;
+  display: none;
+}
+
+/* 
+@keyframes ring {
+  0% {
+    width: 30px;
+    height: 30px;
+    opacity: 1;
+  }
+
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+  }
+} */
+
+.header {
+  height: 100px;
+  background-color: #ffffff;
+}
