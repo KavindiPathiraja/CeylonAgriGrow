@@ -19,32 +19,51 @@ const CreateFarmers = () => {
   const navigate = useNavigate();
 
   // Event handler for saving the Farmers
-  const handleSaveFarmers = () => {
-    // Creating data object from form inputs
-    const data = {
-      FarmerName,
-      ContactNo,
-      Email,
-      Address,
-      Password,
-    };
-    setLoading(true);
+const handleSaveFarmers = () => {
+  // Basic validation to ensure no required fields are empty
+  if (!FarmerName || !ContactNo || !Email || !Address || !Password) {
+    alert("All fields are required.");
+    return;
+  }
 
-    // Making a POST request to save the Farmers data
-    axios
-      .post('http://localhost:5556/farmers', data)
-      .then(() => {
-        // Resetting loading state and navigating to the all Farmers page
-        setLoading(false);
-        navigate('/farmers/Login');
-      })
-      .catch((error) => {
-        // Handling errors by resetting loading state, showing an alert, and logging the error
-        setLoading(false);
-        alert('An error happened. Please check console');
-        console.log(error);
-      });
+  // Check if the email format is valid (basic regex for email validation)
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(Email)) {
+    alert("Please enter a valid email address.");
+    return;
+  }
+
+  // Creating data object from form inputs
+  const data = {
+    FarmerName,
+    ContactNo,
+    Email,
+    Address,
+    Password,
   };
+  
+  setLoading(true);
+
+  // Making a POST request to save the Farmers data
+  axios
+    .post('http://localhost:5556/farmers', data)
+    .then(() => {
+      // Resetting loading state and navigating to the all Farmers page
+      setLoading(false);
+      navigate('/farmers/Login');
+    })
+    .catch((error) => {
+      // Handling errors by resetting loading state, showing an alert, and logging the error
+      setLoading(false);
+      if (error.response && error.response.data && error.response.data.message) {
+        alert(error.response.data.message); // Show error from server
+      } else {
+        alert('An error happened. Please check console');
+      }
+      console.log(error);
+    });
+};
+
 
   // JSX for rendering the create Farmers form
   return (
