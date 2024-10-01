@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import ReactLoading from 'react-loading';
 import Modal from '../../components/prediction';  // Import the Modal component
 import spidersGif from '../../assets/spiders.gif';  // Import the GIF
 
@@ -67,12 +68,12 @@ const DiseasePredictionForm = () => {
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>
+
           <button
             type="submit"
-            disabled={loading}
-            className={`w-full px-4 py-2 rounded-md shadow-sm ${loading ? 'bg-gray-400' : 'bg-indigo-600 hover:bg-indigo-700'} text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+            className="w-full px-4 py-2 rounded-md shadow-sm bg-indigo-600 hover:bg-indigo-700 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            {loading ? 'Predicting...' : 'Predict Disease'}
+            Predict Disease
           </button>
         </form>
 
@@ -88,6 +89,13 @@ const DiseasePredictionForm = () => {
           content={prediction}
         />
       </div>
+
+      {/* Full-screen loading overlay */}
+      {loading && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
+          <ReactLoading type="spinningBubbles" color="#fff" height={100} width={100} />
+        </div>
+      )}
     </div>
   );
 };
