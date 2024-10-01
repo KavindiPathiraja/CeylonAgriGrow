@@ -5,6 +5,8 @@ import cors from 'cors';
 import diseaseRouter from './routes/diseaseRoute.js';
 import path from 'path';
 import cropRoutes from './routes/selectRoute.js'
+import dotenv from 'dotenv';
+import geminiRouter from './routes/geminiApi.js'; // Import Gemini AI route
 
 // Importing routes
 import Products_Route from './routes/Products_Route.js';
@@ -22,6 +24,9 @@ app.use(express.json());
 
 // Middleware for handling CORS POLICY
 app.use(cors());
+
+// Use the Gemini AI router
+app.use('/generate-response', geminiRouter);
 
 // Using routes for endpoints
 app.use('/products', Products_Route);

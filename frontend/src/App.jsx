@@ -9,14 +9,15 @@ import DeleteCrop from './pages/DeleteCrop';
 import AllCrop from './pages/AllCrop';
 import ReportCrop from './pages/ReportCrop';
 
-import Home from './pages/Home'
-import AddDisease from './pages/AddDisease'
-import DiseaseTable from './pages/diseaseTable'
-import DiseaseList from './pages/diseaseList'
-import UpdateDisease from './pages/updateDisease'
-import SelectCrop from './pages/selectCropPage'
-import CropDiseases from './pages/CropDiseases'
-import SingleDisease from './pages/SingleDisese'
+
+import AddDisease from './pages/Disease/AddDisease'
+import DiseaseTable from './pages/Disease/diseaseTable'
+import DiseaseList from './pages/Disease/diseaseList'
+import UpdateDisease from './pages/Disease/updateDisease'
+import SelectCrop from './pages/Disease/selectCropPage'
+import CropDiseases from './pages/Disease/CropDiseases'
+import SingleDisease from './pages/Disease/SingleDisease'
+import DiseasePrediction from './pages/Disease/DiseasePredictionForm'
 
 import ShowProduct from './pages/Products/ShowProducts';
 import ReadOneProducts from './pages/Products/ReadOneProducts';
@@ -58,6 +59,7 @@ const App = () => {
       <Route path='/Pest&Disease/diseaseList' element={<DiseaseList />}/>
       <Route path='/Pest&Disease/diseaseTable/UpdateDisease/:id' element={<UpdateDisease />}/>
       <Route path='/Pest&Disease/selectCrop' element={<SelectCrop />}/>
+      <Route path='/Pest&Disease/PredictDisease' element={<DiseasePrediction />}/>
       <Route path='/Pest&Disease/FindDiseases/:Crop' element={<CropDiseases />}/>
       <Route path='/Diseaselist/:id' element={<SingleDisease />}/>
 
