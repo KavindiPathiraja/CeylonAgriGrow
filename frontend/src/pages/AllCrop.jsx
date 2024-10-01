@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './AllCrop.css'; // Import the CSS file
 import ReportCrop from './ReportCrop'; // Import the new report component
 import backgroundImage from '../assets/table_bg.jpg'; // Import the background image
+import BackButton from '../components/BackButton';
 
 const provinces = {
   Eastern: ['Ampara', 'Batticaloa', 'Trincomalee'],
@@ -55,6 +56,7 @@ const AllCrop = () => {
     <div className="page-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <h1 className="header">All Crop Details</h1>
       <div className="button-flex-container">
+      <BackButton destination='/'/>
         <a href="/crops/create" className="predict-button">Predict Crop</a>
         <ReportCrop className="report-button" /> 
       </div>
