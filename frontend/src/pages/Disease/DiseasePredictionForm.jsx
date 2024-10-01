@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Modal from '../../components/prediction';  // Import the Modal component
+import spidersGif from '../../assets/spiders.gif';  // Import the GIF
 
 const DiseasePredictionForm = () => {
   const [cropName, setCropName] = useState('');
@@ -38,8 +39,11 @@ const DiseasePredictionForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-start justify-center pt-12 bg-gray-50">
-      <div className="max-w-md w-full p-4 bg-white shadow-md rounded-lg">
+    <div
+      className="min-h-screen flex items-start justify-center pt-12 bg-cover bg-center"
+      style={{ backgroundImage: `url(${spidersGif})` }}  // Add the path to your GIF background here
+    >
+      <div className="max-w-md w-full p-4 bg-white bg-opacity-80 shadow-md rounded-lg">
         <h2 className="text-2xl font-bold mb-4 text-center">Disease Prediction</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

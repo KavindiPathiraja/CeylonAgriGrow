@@ -54,7 +54,7 @@ const App = () => {
 
       <Route path='/' element={<Home />}/>
 
-      <Route path='/Pest&Disease/addDisease' element={<AddDisease />}/>
+      <Route path='/Pest&Disease/diseaseTable/addNew' element={<AddDisease />}/>
       <Route path='/Pest&Disease/diseaseTable' element={<DiseaseTable />}/>
       <Route path='/Pest&Disease/diseaseList' element={<DiseaseList />}/>
       <Route path='/Pest&Disease/diseaseTable/UpdateDisease/:id' element={<UpdateDisease />}/>
