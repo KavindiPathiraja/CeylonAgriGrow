@@ -11,6 +11,13 @@ const Home = () => {
         This is a simple home page built with React. Explore more by navigating through the links!
       </p>
 
+      <ul style={styles.navList}>
+        <li style={styles.navItem}><Link to="/">Crop</Link></li>
+        <li style={styles.navItem}><Link to="/">Fertilizer</Link></li>
+        <li style={styles.navItem}><Link to="/Pest&Disease/PredictDisease">Diseases</Link></li>
+        <li style={styles.navItem}><Link to="/products/allProducts">Products</Link></li>
+      </ul>
+
       <div style={styles.boxContainer}>
         {/* Crop Prediction Box */}
         <div style={styles.box}>

@@ -64,7 +64,7 @@ const ReadDiseases = () => {
   });
 
   return (
-    <div className="p-4">
+    <div className="p-4"><div className="flex justify-between items-center mb-4">
       <input
         onChange={(e) => setSearch(e.target.value)}
         type="text"
@@ -72,7 +72,11 @@ const ReadDiseases = () => {
         placeholder="Search diseases"
         className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 h-12 px-4 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg mb-4"
       />
-
+       <button
+                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+                        onClick={() => navigate('/Pest&Disease/diseaseTable/addNew')}
+                      >Add New</button>
+      </div>
       <div className="flex flex-col items-center">
         {noResults ? (
           <div className="text-lg font-semibold">No Records</div>
