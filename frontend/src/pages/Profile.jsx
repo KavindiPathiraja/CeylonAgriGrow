@@ -96,7 +96,6 @@ const Profile = () => {
 
   return (
     <>
-      <Header />
       <div className='bg-cover bg-[url("/7.jpg")] h- min-h-screen'>
         <div className="mt-24"></div>
         <div className="p-3 max-w-lg mx-auto bg-white rounded-2xl">
@@ -183,7 +182,6 @@ const Profile = () => {
           </p>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

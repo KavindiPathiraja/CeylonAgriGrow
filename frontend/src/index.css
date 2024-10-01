@@ -6,3 +6,13 @@
     font-family: 'Carnero';
     src: url(./assets/CarneroBold.ttf);
 }
+
+@font-face {
+    font-family: 'Playwrite';
+    src: url(./assets/Playwrite.ttf);
+}
+
+@font-face {
+    font-family: 'Pacifico';
+    src: url(./assets/Pacifico.ttf);
+}

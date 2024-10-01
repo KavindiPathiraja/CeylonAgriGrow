@@ -7,7 +7,7 @@ import AnimatedSVG from './AnimatedSVG';
 function MyCrops() {
     return (
         <>
-            {/* <Header /> */}
+            <Header />
             <Slider />
             <AnimatedSVG />
         </>
