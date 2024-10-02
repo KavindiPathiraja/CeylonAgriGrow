@@ -3,11 +3,12 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import { useReactToPrint } from "react-to-print";
+import BackgroundImg from '../../assets/wheat.jpg';  // Import the background image
 
 const ReadDiseases = () => {
   const [diseases, setDiseases] = useState([]);
   const navigate = useNavigate();
-  const generatePDF = useRef();
+  const generatePDF = useRef(); // Reference to the div for report generation
   const [search, setSearch] = useState('');
   const [noResults, setNoResults] = useState(false);
 
@@ -53,7 +54,7 @@ const ReadDiseases = () => {
       alert('Deletion successful');
     } catch (error) {
       console.error('Error deleting disease:', error);
-      navigate('/Pest&Disease/diseaseList')
+      navigate('/Pest&Disease/diseaseList');
     }
   };
 
@@ -64,18 +65,24 @@ const ReadDiseases = () => {
   });
 
   return (
-    <div className="p-4"><div className="flex justify-between items-center mb-4">
-      <input
-        onChange={(e) => setSearch(e.target.value)}
-        type="text"
-        name="search"
-        placeholder="Search diseases"
-        className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 h-12 px-4 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg mb-4"
-      />
-       <button
-                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-                        onClick={() => navigate('/Pest&Disease/diseaseTable/addNew')}
-                      >Add New</button>
+    <div className="p-4 justify-center pt-12 bg-cover bg-center relative"
+      style={{ backgroundImage: `url(${BackgroundImg})` }}>
+      <div className="flex justify-center items-center mb-4"> {/* Centering the search bar */}
+        <input
+          onChange={(e) => setSearch(e.target.value)}
+          type="text"
+          name="search"
+          placeholder="Search diseases"
+          className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 h-12 px-4 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg mb-4"
+        />
+      </div>
+      <div className="flex justify-end mb-4"> {/* Adjusted placement for "Add New" button */}
+        <button
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+          onClick={() => navigate('/Pest&Disease/diseaseTable/addNew')}
+        >
+          Add New
+        </button>
       </div>
       <div className="flex flex-col items-center">
         {noResults ? (
@@ -83,8 +90,8 @@ const ReadDiseases = () => {
         ) : (
           <div ref={generatePDF} className="w-full max-w-6xl">
             <h1 className="text-2xl font-bold mb-4">Disease Details</h1>
-            <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
-              <thead className="bg-gray-100">
+            <table className="min-w-full bg-white bg-opacity-50 border border-gray-300 rounded-lg shadow-md">
+              <thead className="bg-gray-100 bg-opacity-70">
                 <tr>
                   <th className="px-4 py-2 border-b text-left">Number</th>
                   <th className="px-4 py-2 border-b text-left">Name</th>
@@ -96,7 +103,9 @@ const ReadDiseases = () => {
               </thead>
               <tbody>
                 {diseases.filter(disease => {
-                  return search.toLowerCase() === '' ? disease : disease.DiseaseName.toLowerCase().includes(search.toLowerCase());
+                  return search.toLowerCase() === '' 
+                    ? disease 
+                    : disease.DiseaseName.toLowerCase().includes(search.toLowerCase());
                 }).map((disease, index) => (
                   <tr key={disease._id} className="border-b">
                     <td className="px-4 py-2">{index + 1}</td>
@@ -104,7 +113,9 @@ const ReadDiseases = () => {
                     <td className="px-4 py-2">{disease.Type}</td>
                     <td className="px-4 py-2">{disease.CropType}</td>
                     <td className="px-4 py-2">
-                      {disease.photo ? <img src={disease.photo} alt={disease.DiseaseName} className="w-16 h-16 object-cover" /> : "No Image"}
+                      {disease.photo 
+                        ? <img src={disease.photo} alt={disease.DiseaseName} className="w-16 h-16 object-cover" /> 
+                        : "No Image"}
                     </td>
                     <td className="px-4 py-2 no-print">
                       <button
