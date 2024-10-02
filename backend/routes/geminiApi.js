@@ -52,5 +52,79 @@ router.post('/', async (req, res) => {
     res.status(500).json({ error: 'Failed to generate disease prediction' });
   }
 });
+// Function to clean the description from Markdown formatting
+const cleanDescription = (text) => {
+  return text
+    .replace(/##/g, '') // Remove headings
+    .replace(/[*_]{1,2}/g, '') // Remove bold/italic markers
+    .replace(/(?:\r\n|\r|\n)/g, ' ') // Replace new lines with space
+    .replace(/\s+/g, ' ') // Replace multiple spaces with a single space
+    .trim(); // Trim leading/trailing whitespace
+};
+
+// Route for generating product descriptions using only the product name
+router.post('/generate-description', async (req, res) => {
+  try {
+    const { productName } = req.body;
+
+    // Validate input
+    if (!productName) {
+      return res.status(400).json({ error: 'Product name is required.' });
+    }
+
+    // Construct the user message for product description generation
+    const userMessage = `Generate a product description for the product named "${productName}". Please provide a descriptive and engaging text suitable for marketing.`;
+
+    // Start chat session
+    const chatSession = model.startChat({
+      generationConfig,
+      history: [], // Optionally you can manage conversation history
+    });
+
+    // Send the user input (product name) to the AI model
+    const result = await chatSession.sendMessage(userMessage);
+
+    // Clean the generated description
+    const cleanedDescription = cleanDescription(result.response.text());
+
+    // Return the AI-generated product description
+    res.status(200).json({ productDescription: cleanedDescription });
+  } catch (error) {
+    console.error('Error generating product description:', error);
+    res.status(500).json({ error: 'Failed to generate product description' });
+  }
+});
+// Route for generating product descriptions using only the product name
+router.post('/generate-description', async (req, res) => {
+  try {
+    const { productName } = req.body;
+
+    // Validate input
+    if (!productName) {
+      return res.status(400).json({ error: 'Product name is required.' });
+    }
+
+    // Construct the user message for product description generation
+    const userMessage = `Create a simple product description for "${productName}". Keep it concise, easy to read for farmers, and ensure it is strictly 20 words or fewer.`;
+    
+    // Start chat session
+    const chatSession = model.startChat({
+      generationConfig,
+      history: [], // Optionally you can manage conversation history
+    });
+
+    // Send the user input (product name) to the AI model
+    const result = await chatSession.sendMessage(userMessage);
+
+    // Clean the generated description
+    const cleanedDescription = cleanDescription(result.response.text());
+
+    // Return the AI-generated product description
+    res.status(200).json({ productDescription: cleanedDescription });
+  } catch (error) {
+    console.error('Error generating product description:', error);
+    res.status(500).json({ error: 'Failed to generate product description' });
+  }
+});
 
 export default router;

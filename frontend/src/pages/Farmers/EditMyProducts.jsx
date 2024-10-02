@@ -54,7 +54,7 @@ const EditProducts = () => {
       const data = {
         ProductName,
         Category,
-        Description,
+        Descriptioon,
         Quantity,
         SellingPrice,
         FarmerName,
@@ -141,8 +141,8 @@ const EditProducts = () => {
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Description</label>
           <textarea
-            value={Description}
-            onChange={(e) => setDescription(e.target.value)}
+            value={Descriptioon}
+            onChange={(e) => setDescriptioon(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
             rows="4" // You can adjust the number of rows as needed
           />

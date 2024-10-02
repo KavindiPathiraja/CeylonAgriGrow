@@ -111,7 +111,7 @@ const CreateProducts = () => {
                     value={Description}
                     onChange={(e) => setDescription(e.target.value)}
                     className="border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-                    rows="4" 
+                    rows="4" // You can adjust the number of rows as needed
                 />
                 </div>
 

@@ -108,10 +108,12 @@ const ShowProduct = () => {
                                     {product.ProductName}
                                 </td>
                                 <td className='p-4 border border-green-300'>
-                                    <img src={product.image} alt="Profile Pic" className="w-16 h-16 object-cover rounded-full" />
+                                    <img src={product.image} alt="Product" className="w-16 h-16 object-cover rounded-full" />
                                 </td>
-                                <td className='p-4 border border-green-300'>
-                                    {product.Description}
+                                <td className='p-2 border border-green-300'>
+                                    <div className="h-24 overflow-auto">
+                                        {product.Description}
+                                    </div>
                                 </td>
                                 <td className='p-4 border border-green-300 max-md:hidden'>
                                     {product.Category}
