@@ -65,25 +65,28 @@ const ReadDiseases = () => {
   });
 
   return (
-    <div className="p-4 justify-center pt-12 bg-cover bg-center relative"
+    <div className="p-4  min-h-screen justify-center pt-12 bg-cover bg-center relative"
       style={{ backgroundImage: `url(${BackgroundImg})` }}>
-      <div className="flex justify-center items-center mb-4"> {/* Centering the search bar */}
-        <input
-          onChange={(e) => setSearch(e.target.value)}
-          type="text"
-          name="search"
-          placeholder="Search diseases"
-          className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 h-12 px-4 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg mb-4"
-        />
+      
+      <div className="flex justify-center mb-4"> {/* Flexbox to center content */}
+        <div className="flex justify-between items-center w-full max-w-4xl"> {/* Flexbox for search bar and button */}
+          <input
+            onChange={(e) => setSearch(e.target.value)}
+            type="text"
+            name="search"
+            placeholder="Search diseases"
+            className="w-full h-12 px-4 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
+          />
+          <button
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 ml-4"
+            onClick={() => navigate('/Pest&Disease/diseaseTable/addNew')}
+            style={{marginRight:"-300px"}}
+          >
+            Add New
+          </button>
+        </div>
       </div>
-      <div className="flex justify-end mb-4"> {/* Adjusted placement for "Add New" button */}
-        <button
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-          onClick={() => navigate('/Pest&Disease/diseaseTable/addNew')}
-        >
-          Add New
-        </button>
-      </div>
+
       <div className="flex flex-col items-center">
         {noResults ? (
           <div className="text-lg font-semibold">No Records</div>
