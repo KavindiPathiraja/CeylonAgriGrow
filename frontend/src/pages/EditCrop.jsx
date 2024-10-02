@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Spinner from '../components/Spinner';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import BackButton from '../components/BackButton';
 const provinces = {
   Eastern: ['Ampara', 'Batticaloa', 'Trincomalee'],
   'North Central': ['Anuradhapura', 'Polonnaruwa'],
@@ -89,6 +89,7 @@ const EditCrop = () => {
   return (
     <div className='p-4'>
       <h1 className='text-3xl my-4'>Edit Crop</h1>
+      <BackButton destination='crops/getall'/>
       {loading && <Spinner />}
       <div className='border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto'>
         <div className='flex flex-wrap'>
