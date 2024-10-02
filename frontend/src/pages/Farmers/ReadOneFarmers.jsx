@@ -115,6 +115,7 @@ const ShowFarmer = () => {
                             <th className='p-4 border border-green-300'>Product No</th>
                             <th className='p-4 border border-green-300'>Product Name</th>
                             <th className='p-4 border border-green-300'>Image</th>
+                            <th className='p-4 border border-green-300'>Description</th>
                             <th className='p-4 border border-green-300'>Category</th>
                             <th className='p-4 border border-green-300'>Quantity</th>
                             <th className='p-4 border border-green-300'>Selling Price</th>
@@ -130,6 +131,7 @@ const ShowFarmer = () => {
                                     <td className='p-4 border border-green-300'>
                                         <img src={product.image} alt="Product Pic" className="w-16 h-16 object-cover rounded-full" />
                                     </td>
+                                    <td className='p-4 border border-green-300'>{product.Description}</td>
                                     <td className='p-4 border border-green-300'>{product.Category}</td>
                                     <td className='p-4 border border-green-300'>{product.Quantity}</td>
                                     <td className='p-4 border border-green-300'>{product.SellingPrice}</td>

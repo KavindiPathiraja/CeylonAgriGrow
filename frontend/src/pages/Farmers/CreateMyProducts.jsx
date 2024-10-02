@@ -21,6 +21,7 @@ const CreateProducts = () => {
     const [FarmerName, setFarmerName] = useState(farmerName);
     const [FarmerEmail, setFarmerEmail] = useState(farmerEmail);
     const [image, setImage] = useState(null);
+    const [Description, setDescription] = useState(null);
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -31,6 +32,7 @@ const CreateProducts = () => {
             const data = {
                 ProductName,
                 image: downloadURL || null, // Set image to null if no image is uploaded
+                Description,
                 Category,
                 Quantity,
                 SellingPrice,
@@ -103,6 +105,16 @@ const CreateProducts = () => {
                         className="border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                     />
                 </div>
+                <div className="my-4">
+                <label className="text-xl mr-4 text-gray-500">Description</label>
+                <textarea
+                    value={Description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    className="border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    rows="4" 
+                />
+                </div>
+
                 <div className="my-4">
                     <label className='text-xl mr-4 text-gray-500'>Category</label>
                     <select
