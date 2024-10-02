@@ -88,6 +88,8 @@ const ShowProduct = () => {
                         <tr className='bg-green-100'>
                             <th className='p-4 border border-green-300'>Product No</th>
                             <th className='p-4 border border-green-300'>Product Name</th>
+                            <th className='p-4 border border-green-300'>Image</th>
+                            <th className='p-4 border border-green-300'>Description</th>
                             <th className='p-4 border border-green-300 max-md:hidden'>Category</th>
                             <th className='p-4 border border-green-300 max-md:hidden'>Quantity</th>
                             <th className='p-4 border border-green-300 max-md:hidden'>Selling Price</th>
@@ -104,6 +106,14 @@ const ShowProduct = () => {
                                 </td>
                                 <td className='p-4 border border-green-300'>
                                     {product.ProductName}
+                                </td>
+                                <td className='p-4 border border-green-300'>
+                                    <img src={product.image} alt="Product" className="w-16 h-16 object-cover rounded-full" />
+                                </td>
+                                <td className='p-2 border border-green-300'>
+                                    <div className="h-24 overflow-auto">
+                                        {product.Description}
+                                    </div>
                                 </td>
                                 <td className='p-4 border border-green-300 max-md:hidden'>
                                     {product.Category}

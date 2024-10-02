@@ -3,11 +3,14 @@ import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Spinner from "../../components/Spinner";
 import BackButton from "../../components/BackButton";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { app } from "../../config/firebase";
 
 const CreateProducts = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    
+    const storage = getStorage(app);
+
     // Extracting farmer details from location state
     const { farmerName = '', farmerEmail = '' } = location.state || {};
 
@@ -17,34 +20,62 @@ const CreateProducts = () => {
     const [SellingPrice, setSellingPrice] = useState('');
     const [FarmerName, setFarmerName] = useState(farmerName);
     const [FarmerEmail, setFarmerEmail] = useState(farmerEmail);
+    const [image, setImage] = useState(null);
+    const [Description, setDescription] = useState(null);
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
     const handleSaveProducts = () => {
-        // Creating data object from form inputs
-        const data = {
-            ProductName,
-            Category,
-            Quantity,
-            SellingPrice,
-            FarmerName,
-            FarmerEmail,
-        };
-        setLoading(true);
-        setError('');
+        const uploadImageAndSubmit = (downloadURL) => {
+            // Creating data object from form inputs
+            const data = {
+                ProductName,
+                image: downloadURL || null, // Set image to null if no image is uploaded
+                Description,
+                Category,
+                Quantity,
+                SellingPrice,
+                FarmerName,
+                FarmerEmail,
+            };
 
-        axios
-            .post('http://localhost:5556/products', data)
-            .then(() => {
-                setLoading(false);
-                navigate('/farmers/details/:id');
-            })
-            .catch((error) => {
-                setLoading(false);
-                setError('An error occurred. Please check console.');
-                console.log(error);
-            });
+            setLoading(true);
+            setError('');
+
+            // Making a POST request to save the Products data
+            axios
+                .post('http://localhost:5556/products', data)
+                .then(() => {
+                    setLoading(false);
+                    navigate('/farmers/details/:id'); // Update with the correct ID
+                })
+                .catch((error) => {
+                    setLoading(false);
+                    setError('An error occurred. Please check console.');
+                    console.log(error);
+                });
+        };
+
+        if (image) {
+            const storageRef = ref(storage, `product_images/${image.name}`);
+            const uploadTask = uploadBytesResumable(storageRef, image);
+
+            uploadTask.on(
+                "state_changed",
+                (snapshot) => {},
+                (error) => {
+                    console.error(error);
+                    setLoading(false);
+                    setError('Failed to upload image. Please try again.');
+                },
+                () => {
+                    getDownloadURL(uploadTask.snapshot.ref).then(uploadImageAndSubmit);
+                }
+            );
+        } else {
+            uploadImageAndSubmit(null); // No image uploaded
+        }
     };
 
     return (
@@ -63,6 +94,27 @@ const CreateProducts = () => {
                         className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
                     />
                 </div>
+                <div className="my-4">
+                    <label htmlFor="image" className="text-xl mr-4 text-gray-500">Image (Optional)</label>
+                    <input
+                        id="image"
+                        name="image"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setImage(e.target.files[0])}
+                        className="border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    />
+                </div>
+                <div className="my-4">
+                <label className="text-xl mr-4 text-gray-500">Description</label>
+                <textarea
+                    value={Description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    className="border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    rows="4" // You can adjust the number of rows as needed
+                />
+                </div>
+
                 <div className="my-4">
                     <label className='text-xl mr-4 text-gray-500'>Category</label>
                     <select

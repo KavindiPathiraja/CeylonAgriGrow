@@ -42,6 +42,11 @@ const ShowProducts = () => {
             <label className="detail-label text-lg mr-4 font-semibold text-gray-600">Product Name:</label>
             <span className="text-lg text-gray-800">{product.ProductName}</span>
           </div>
+          {/* Description */}
+          <div className="detail-item flex items-center my-4">
+            <label className="detail-label text-lg mr-4 font-semibold text-gray-600">Description:</label>
+            <span className="text-lg text-gray-800">{product.Description}</span>
+          </div>
           {/* Category */}
           <div className="detail-item flex items-center my-4">
             <label className="detail-label text-lg mr-4 font-semibold text-gray-600">Category:</label>

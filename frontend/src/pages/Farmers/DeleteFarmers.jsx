@@ -18,7 +18,7 @@ const DeleteFarmer = () => {
       .then(() => {
         // If the deletion is successful, update the state and navigate to the home page
         setLoading(false);
-        navigate('/farmers/Login');
+        navigate('/farmers/details/:id');
       })
       .catch((error) => {
         // If an error occurs, update the state, show an alert, and log the error to the console

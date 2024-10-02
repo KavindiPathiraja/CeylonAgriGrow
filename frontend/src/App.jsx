@@ -36,7 +36,7 @@ import CreateMyProducts from './pages/Farmers/CreateMyProducts';
 import EditMyProducts from './pages/Farmers/EditMyProducts';
 import DeleteMyProducts from './pages/Farmers/DeleteMyProducts';
 
-
+import Home from './pages/Home';
 
 const App = () => {
   return (
