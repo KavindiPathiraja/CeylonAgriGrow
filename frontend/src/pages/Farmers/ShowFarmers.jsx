@@ -40,7 +40,9 @@ const ShowFarmer = () => {
 
     return (
         <div className='p-6 bg-gray-100 min-h-screen'>
-            <li><Link to="/" className="text-green-800 hover:text-green-600">Home</Link></li>
+            <li>
+                <Link to="/" className="text-green-800 hover:text-green-600">Home</Link>
+            </li>
             <h1 className="show-Farmers-title text-3xl my-4 text-green-800">Farmer's Marketplace</h1>
             <div className='flex flex-col md:flex-row justify-between items-center mb-6'>
                 {/* Search input field */}
@@ -50,7 +52,6 @@ const ShowFarmer = () => {
                     className='text-lg my-4 p-2 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
                     onChange={handleSearchChange}
                 />
-
                 <div className="flex items-center space-x-4">
                     <Link to='/farmers/create' className="flex items-center">
                         <MdOutlineAddBox className='text-green-800 text-4xl' />
@@ -66,6 +67,7 @@ const ShowFarmer = () => {
                 <table className='w-full border border-green-500 rounded-lg bg-white'>
                     <thead>
                         <tr className='bg-green-100'>
+                            <th className='p-4 border border-green-300'>Profile Pic</th>
                             <th className='p-4 border border-green-300'>Farmer ID</th>
                             <th className='p-4 border border-green-300'>Farmer Name</th>
                             <th className='p-4 border border-green-300'>Contact No</th>
@@ -79,23 +81,14 @@ const ShowFarmer = () => {
                         {filteredFarmers.map((farmer) => (
                             <tr key={farmer._id} className='text-center bg-white even:bg-green-50'>
                                 <td className='p-4 border border-green-300'>
-                                    {farmer.FarmerID}
+                                    <img src={farmer.image} alt="Profile Pic" className="w-16 h-16 object-cover rounded-full" />
                                 </td>
-                                <td className='p-4 border border-green-300'>
-                                    {farmer.FarmerName}
-                                </td>
-                                <td className='p-4 border border-green-300'>
-                                    {farmer.ContactNo}
-                                </td>
-                                <td className='p-4 border border-green-300'>
-                                    {farmer.Email}
-                                </td>
-                                <td className='p-4 border border-green-300'>
-                                    {farmer.Address}
-                                </td>
-                                <td className='p-4 border border-green-300'>
-                                    {farmer.Password}
-                                </td>
+                                <td className='p-4 border border-green-300'>{farmer.FarmerID}</td>
+                                <td className='p-4 border border-green-300'>{farmer.FarmerName}</td>
+                                <td className='p-4 border border-green-300'>{farmer.ContactNo}</td>
+                                <td className='p-4 border border-green-300'>{farmer.Email}</td>
+                                <td className='p-4 border border-green-300'>{farmer.Address}</td>
+                                <td className='p-4 border border-green-300'>{farmer.Password}</td>
                                 <td className='p-4 border border-green-300'>
                                     <div className='flex justify-center gap-4'>
                                         <Link to={`/farmers/details/${farmer._id}`}>

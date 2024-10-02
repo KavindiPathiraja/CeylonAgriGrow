@@ -6,15 +6,15 @@ const router = express.Router();
 // Route for saving a new Farmer
 router.post('/', async (req, res) => {
   try {
-    const { FarmerName, ContactNo, Email, Address, Password } = req.body;
+    const { FarmerName, ContactNo, Email, Address, Password,image } = req.body;
 
-    if (!FarmerName || !ContactNo || !Email || !Address || !Password) {
+    if (!FarmerName || !ContactNo || !Email || !Address || !Password || !image) {
       return res.status(400).send({
         message: 'Send all required fields: FarmerName, ContactNo, Email, Address, Password',
       });
     }
 
-    const newFarmer = { FarmerName, ContactNo, Email, Address, Password };
+    const newFarmer = { FarmerName, ContactNo, Email, Address, Password,image };
 
     const farmer = await Farmers.create(newFarmer);
 
@@ -62,9 +62,9 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { FarmerName, ContactNo, Email, Address, Password } = req.body;
+    const { FarmerName, ContactNo, Email, Address, Password,image } = req.body;
 
-    if (!FarmerName || !ContactNo || !Email || !Address || !Password) {
+    if (!FarmerName || !ContactNo || !Email || !Address || !Password || !image) {
       return res.status(400).send({
         message: 'Send all required fields: FarmerName, ContactNo, Email, Address, Password',
       });

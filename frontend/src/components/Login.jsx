@@ -16,10 +16,11 @@ function Login() {
       const userData = response.data;
 
       if (userData) {
-        // Perform navigation after successful login
+        localStorage.setItem('farmerId', userData._id); // Store farmer ID in local storage
         navigate(`/farmers/details/${userData._id}`);
         alert(`Welcome back, ${userData.FarmerName}!`);
-      } else {
+      }
+       else {
         alert("Invalid credentials");
       }
     } catch (error) {

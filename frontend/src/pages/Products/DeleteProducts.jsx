@@ -14,7 +14,7 @@ const DeleteProduct = () => {
     setLoading(true);
     // Sending a DELETE request to the server to delete the Product by ID
     axios
-      .delete(`http://localhost:8076/products/${id}`)
+      .delete(`http://localhost:5556/products/${id}`)
       .then(() => {
         // If the deletion is successful, update the state and navigate to the home page
         setLoading(false);
