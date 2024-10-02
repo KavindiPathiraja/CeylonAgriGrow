@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBar from './Navbar';
 import Carousel from './CropsPrediction/Carousel';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (

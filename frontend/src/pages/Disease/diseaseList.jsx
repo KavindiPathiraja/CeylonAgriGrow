@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";  // Import axios
 import { useParams } from "react-router-dom";
-// components
+import BackgroundImg from '../../assets/field.jpg';  // Import the background image
 import DiseaseDetails from './dieases'; // Ensure this path is correct
 
 const SetDiseases = () => {
@@ -47,7 +47,10 @@ const SetDiseases = () => {
     };
 
     return (
-        <div className="flex flex-col items-center p-4">
+        
+        <div className="flex flex-col items-center p-4 min-h-screen flex items-start justify-center pt-12 bg-cover bg-center relative"
+        style={{ backgroundImage: `url(${BackgroundImg})` }}
+        >
             <input 
                 onChange={(e) => setSearch(e.target.value)}
                 type="text"
