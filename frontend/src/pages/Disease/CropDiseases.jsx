@@ -11,7 +11,7 @@ const SetDiseases = ({ cropName }) => {
     useEffect(() => {
         const fetchDiseases = async () => {
             try {
-                const response = await axios.get('http://localhost:5556/diseases/all');
+                const response = await axios.get(`http://localhost:5556/diseases/crop/${cropName}`);
                 
                 if (response.status === 200) {
                     setDiseases(response.data);

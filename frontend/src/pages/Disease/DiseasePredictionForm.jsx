@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';  // Import the navigation hook
 import axios from 'axios';
 import ReactLoading from 'react-loading';
 import Modal from '../../components/prediction';  // Import the Modal component
-import spidersGif from '../../assets/spiders.gif';  // Import the GIF
+import BackgroundImg from '../../assets/cropsImg.jpg';  // Import the background image
 
 const DiseasePredictionForm = () => {
   const [cropName, setCropName] = useState('');
@@ -11,6 +12,7 @@ const DiseasePredictionForm = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();  // Use the navigation hook
 
   // Handle form submission
   const handleSubmit = async (e) => {
@@ -41,9 +43,17 @@ const DiseasePredictionForm = () => {
 
   return (
     <div
-      className="min-h-screen flex items-start justify-center pt-12 bg-cover bg-center"
-      style={{ backgroundImage: `url(${spidersGif})` }}  // Add the path to your GIF background here
+      className="min-h-screen flex items-start justify-center pt-12 bg-cover bg-center relative"
+      style={{ backgroundImage: `url(${BackgroundImg})` }}
     >
+      {/* Navigation button in the top-right corner */}
+      <button
+        onClick={() => navigate('/Pest&Disease/selectCrop')}
+        className="absolute top-4 right-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+      >
+        Find About Disease
+      </button>
+
       <div className="max-w-md w-full p-4 bg-white bg-opacity-80 shadow-md rounded-lg">
         <h2 className="text-2xl font-bold mb-4 text-center">Disease Prediction</h2>
         <form onSubmit={handleSubmit} className="space-y-4">

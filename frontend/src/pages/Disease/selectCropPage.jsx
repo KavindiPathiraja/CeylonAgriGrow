@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import CropTypeDropdown from '../../components/DropDown'; // Adjust path as needed
 import { useNavigate } from "react-router-dom";
+import BackgroundImg from '../../assets/plant-growing-from-soil.jpg';  // Import the background image
 
 const SomeComponent = () => {
     const navigate = useNavigate();
@@ -11,11 +12,13 @@ const SomeComponent = () => {
     };
 
     const handleClick = () => {
-        navigate(`/Pest&Disease/FindDiseases/${selectedCropType}`);
+        navigate(`/Pest&Disease/selectCrop/${selectedCropType}`);
     };
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+        <div className="flex flex-col items-center justify-center h-screen bg-gray-100 min-h-screen flex items-start justify-center pt-12 bg-cover bg-center relative"
+        style={{ backgroundImage: `url(${BackgroundImg})` }}
+        >
             <div className="text-center">
                 <h1 className="text-4xl font-light mb-8">Select Crop Type</h1>
                 <div className="w-1/2 mx-auto">

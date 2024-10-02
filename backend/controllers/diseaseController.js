@@ -63,6 +63,27 @@ const getDiseaseById = async (req, res) => {
     }
 };
 
+//get by crop
+const getDiseasesByCropType = async (req, res) => {
+    try {
+        const { cropType } = req.params;
+        const diseases = await Disease.find({ CropType: cropType });  // Use `find` for multiple results
+
+        if (diseases.length === 0) {
+            return res.status(404).json('No diseases found for the given crop type');
+        }
+
+        const diseasesWithImageUrl = diseases.map(disease => ({
+            ...disease.toObject(),
+            photo: disease.photo ? `http://localhost:5556/images/${disease.photo}` : null
+        }));
+
+        res.json(diseasesWithImageUrl);
+    } catch (err) {
+        res.status(400).json('Error: ' + err.message);
+    }
+};
+
 // Delete a disease by ID
 const deleteDisease = async (req, res) => {
     try {
@@ -134,5 +155,7 @@ export default {
     getAllDiseases,
     getDiseaseById,
     deleteDisease,
-    updateDisease
+    updateDisease,
+    getDiseasesByCropType
+   
 }
