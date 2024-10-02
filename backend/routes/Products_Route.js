@@ -1,30 +1,67 @@
 import express from 'express';
 import { Products } from '../models/Products.js';
+import { GoogleGenerativeAI } from '@google/generative-ai'; // Import Google Generative AI
+import dotenv from 'dotenv';
 
+dotenv.config(); // Load environment variables
 const router = express.Router();
 
-// Route for Save a new Products
+// Initialize the Google Generative AI
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({
+  model: 'gemini-1.5-flash',
+});
+
+const generationConfig = {
+  temperature: 1,
+  topP: 0.95,
+  topK: 64,
+  maxOutputTokens: 8192,
+  responseMimeType: 'text/plain',
+};
+
+// Route for saving a new product
 router.post('/', async (request, response) => {
   try {
     if (
-      
       !request.body.ProductName ||
       !request.body.image ||
       !request.body.Category ||
       !request.body.Quantity ||
       !request.body.SellingPrice ||
       !request.body.FarmerName ||
-      !request.body.FarmerEmail
-
+      !request.body.FarmerEmail 
     ) {
       return response.status(400).send({
-        message: 'Send all required fields:  ProductName, image, Category, Quantity, SellingPrice, FarmerName, FarmerEmail',
+        message: 'Send all required fields: ProductName, image, Category, Quantity, SellingPrice, FarmerName, FarmerEmail',
       });
     }
-    const newProducts = {
+
+    let description;
+    
+    // Check if the farmer provided a description
+    if (request.body.Description) {
+      description = request.body.Description; // Use provided description
+    } else {
+      // Automatically generate the product description using the product name
+      const userMessage = `Generate a marketing description for the product named "${request.body.ProductName}".`;
       
+      // Start chat session
+      const chatSession = model.startChat({
+        generationConfig,
+        history: [],
+      });
+
+      // Send the user input (product name) to the AI model
+      const result = await chatSession.sendMessage(userMessage);
+      description = result.response.text(); // Use the generated description
+    }
+
+    // Create a new product object
+    const newProducts = {
       ProductName: request.body.ProductName,
       image: request.body.image,
+      Description: description, // Use the determined description
       Category: request.body.Category,
       Quantity: request.body.Quantity,
       SellingPrice: request.body.SellingPrice,
@@ -41,11 +78,10 @@ router.post('/', async (request, response) => {
   }
 });
 
-// Route for Get All Products from database
+// Route for getting all products from the database
 router.get('/', async (request, response) => {
   try {
     const products = await Products.find({});
-    
     return response.status(200).json({
       count: products.length,
       data: products,
@@ -56,14 +92,11 @@ router.get('/', async (request, response) => {
   }
 });
 
-
-// Route for Get One Products from database by id
+// Route for getting one product from the database by ID
 router.get('/:id', async (request, response) => {
   try {
     const { id } = request.params;
-
     const products = await Products.findById(id);
-
     return response.status(200).json(products);
   } catch (error) {
     console.log(error.message);
@@ -71,11 +104,13 @@ router.get('/:id', async (request, response) => {
   }
 });
 
-// Route for Update an Products
+// Route for updating a product
 router.put('/:id', async (request, response) => {
   try {
+    const { id } = request.params;
+
+    // Check if any required fields are missing
     if (
-      
       !request.body.ProductName ||
       !request.body.image ||
       !request.body.Category ||
@@ -83,57 +118,83 @@ router.put('/:id', async (request, response) => {
       !request.body.SellingPrice ||
       !request.body.FarmerName ||
       !request.body.FarmerEmail 
-
     ) {
       return response.status(400).send({
-        message: 'Send all required fields: ProductNo, ProductName,image, Category, Quantity, SellingPrice, FarmerName, FarmerEmail',
+        message: 'Send all required fields: ProductName, image, Category, Quantity, SellingPrice, FarmerName, FarmerEmail',
       });
     }
 
-    const { id } = request.params;
-
-    const result = await Products.findByIdAndUpdate(id, request.body);
-
-    if (!result) {
-      return response.status(404).json({ message: 'Products not found' });
+    // Retrieve the existing product to check if a description is needed
+    const existingProduct = await Products.findById(id);
+    if (!existingProduct) {
+      return response.status(404).json({ message: 'Product not found' });
     }
 
-    return response.status(200).send({ message: 'Products updated successfully' });
+    let description;
+
+    // Check if the farmer provided a description
+    if (request.body.Description) {
+      description = request.body.Description; // Use provided description
+    } else {
+      // Automatically generate the product description using the product name
+      const userMessage = `Generate a marketing description for the product named "${request.body.ProductName}".`;
+
+      // Start chat session
+      const chatSession = model.startChat({
+        generationConfig,
+        history: [],
+      });
+
+      // Send the user input (product name) to the AI model
+      const result = await chatSession.sendMessage(userMessage);
+      description = result.response.text(); // Use the generated description
+    }
+
+    // Update the product with the new data, including the determined description
+    const updatedProduct = {
+      ...existingProduct._doc, // Retain existing data
+      ...request.body,
+      Description: description, // Use the determined description
+    };
+
+    const result = await Products.findByIdAndUpdate(id, updatedProduct, { new: true });
+
+    return response.status(200).send({ message: 'Product updated successfully', data: result });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
 
-// Route for Delete an Products
+
+// Route for deleting a product
 router.delete('/:id', async (request, response) => {
   try {
     const { id } = request.params;
-
     const result = await Products.findByIdAndDelete(id);
 
     if (!result) {
-      return response.status(404).json({ message: 'Products not found' });
+      return response.status(404).json({ message: 'Product not found' });
     }
 
-    return response.status(200).send({ message: 'Products deleted successfully' });
+    return response.status(200).send({ message: 'Product deleted successfully' });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
 
-// GET route for retrieving Products based on search criteria, pagination, and sorting
-router.get("/searchProducts", async (req, res) => {
+// GET route for retrieving products based on search criteria, pagination, and sorting
+router.get('/searchProducts', async (req, res) => {
   try {
-    // Destructuring the request query with default values
-    const { page = 1, limit = 7, search = "", sort = "ProductNo" } = req.query;
+    const { page = 1, limit = 7, search = '', sort = 'ProductNo' } = req.query;
     const skip = (parseInt(page) - 1) * parseInt(limit);
-    // Regular expression for case-insensitive search
+
     const query = {
       $or: [
-        { ProductNo: { $regex: new RegExp(search, 'i') } }, // Using RegExp instead of directly passing $regex
-        {image: { $regex: new RegExp(search, 'i') }},
+        { ProductNo: { $regex: new RegExp(search, 'i') } },
+        { image: { $regex: new RegExp(search, 'i') } },
+        { Description: { $regex: new RegExp(search, 'i') } }, 
         { ProductName: { $regex: new RegExp(search, 'i') } },
         { Category: { $regex: new RegExp(search, 'i') } },
         { Quantity: { $regex: new RegExp(search, 'i') } },
@@ -142,17 +203,17 @@ router.get("/searchProducts", async (req, res) => {
         { FarmerEmail: { $regex: new RegExp(search, 'i') } },
       ],
     };
-    // Using await to ensure that sorting and pagination are applied correctly
+
     const products = await Products.find(query)
-      .sort({ [sort]: 1 }) // Sorting based on the specified field
+      .sort({ [sort]: 1 })
       .skip(skip)
       .limit(parseInt(limit));
+
     res.status(200).json({ count: products.length, data: products });
   } catch (err) {
     console.error(err.message);
-    res.status(500).json({ error: true, message: "Internal Server Error" });
+    res.status(500).json({ error: true, message: 'Internal Server Error' });
   }
 });
-
 
 export default router;

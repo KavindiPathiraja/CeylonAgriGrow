@@ -12,6 +12,7 @@ const EditProducts = () => {
   // State variables for managing form data and loading state
   const [ProductNo, setProductNo] = useState('');
   const [ProductName, setProductName] = useState('');
+  const [Description, setDescription] = useState('');
   const [Category, setCategory] = useState('');
   const [Quantity, setQuantity] = useState('');
   const [SellingPrice, setSellingPrice] = useState('');
@@ -31,6 +32,7 @@ const EditProducts = () => {
       .then((response) => {
         setProductNo(response.data.ProductNo);
         setProductName(response.data.ProductName);
+        setDescription(response.data.Description);
         setCategory(response.data.Category);
         setQuantity(response.data.Quantity);
         setSellingPrice(response.data.SellingPrice);
@@ -51,6 +53,7 @@ const EditProducts = () => {
       // Creating data object from form inputs
       const data = {
         ProductName,
+        Description,
         Category,
         Quantity,
         SellingPrice,
@@ -135,6 +138,16 @@ const EditProducts = () => {
           />
           {currentImage && <img src={currentImage} alt="Current Product" className="mt-2 w-32 h-32 object-cover" />} {/* Display current image */}
         </div>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Description</label>
+          <textarea
+            value={Description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            rows="4" // You can adjust the number of rows as needed
+          />
+        </div>
+
         <div className="my-4">
           <label className='text-lg font-semibold text-gray-700'>Category</label>
           <select
