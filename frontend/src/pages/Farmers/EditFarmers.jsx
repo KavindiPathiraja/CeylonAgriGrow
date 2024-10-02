@@ -4,6 +4,9 @@ import BackButton from "../../components/BackButton";
 import Spinner from "../../components/Spinner";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { app } from "../../config/firebase";
+import Swal from 'sweetalert2';
 
 // Functional component for EditFarmers
 const EditFarmers = () => {
@@ -14,10 +17,11 @@ const EditFarmers = () => {
   const [Email, setEmail] = useState('');
   const [Address, setAddress] = useState('');
   const [Password, setPassword] = useState('');
-
+  const [image, setImage] = useState(null); // State for image
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
+  const storage = getStorage(app);
 
   useEffect(() => {
     setLoading(true);
@@ -40,37 +44,60 @@ const EditFarmers = () => {
 
   // Event handler for editing the Farmers
   const handleEditFarmers = () => {
-    // Creating data object from form inputs
-    const data = {
-      FarmerName,
-      ContactNo,
-      Email,
-      Address,
-      Password,
-    
-    };
     setLoading(true);
+    
+    const uploadImageAndSubmit = (downloadURL) => {
+      // Creating data object from form inputs
+      const data = {
+        FarmerName,
+        ContactNo,
+        Email,
+        Address,
+        Password,
+        image: downloadURL || null, // Include the image URL if uploaded
+      };
 
-    // Making a PUT request to edit the Farmers data
-    axios
-      .put(`http://localhost:5556/farmers/${id}`, data)
-      .then(() => {
-        // Resetting loading state and navigating to the home page
-        setLoading(false);
-        navigate('/farmers/details/:id');
-      })
-      .catch((error) => {
-        // Handling errors by resetting loading state, showing an alert, and logging the error
-        setLoading(false);
-        alert('An error happened. Please check console');
-        console.log(error);
-      });
+      // Making a PUT request to edit the Farmers data
+      axios
+        .put(`http://localhost:5556/farmers/${id}`, data)
+        .then(() => {
+          // Resetting loading state and navigating to the farmer details page
+          setLoading(false);
+          navigate(`/farmers/allFarmers`);
+        })
+        .catch((error) => {
+          // Handling errors by resetting loading state, showing an alert, and logging the error
+          setLoading(false);
+          alert('An error happened. Please check console');
+          console.log(error);
+        });
+    };
+
+    if (image) {
+      const storageRef = ref(storage, `farmer_images/${image.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, image);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => { },
+        (error) => {
+          console.error(error);
+          setLoading(false);
+          Swal.fire('Error', 'Failed to upload image. Please try again.', 'error');
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(uploadImageAndSubmit);
+        }
+      );
+    } else {
+      uploadImageAndSubmit(null); // No image uploaded
+    }
   };
 
   // JSX for rendering the edit Farmers form
   return (
     <div className='p-6 bg-gray-100 min-h-screen'>
-      <BackButton destination='/farmers/details/:id' />
+      <BackButton destination={`/farmers/details/${id}`} />
       <h1 className="text-3xl my-4 text-green-800">Edit Farmer</h1>
       {loading ? <Spinner /> : ''}
       <div className="flex flex-col border-2 border-green-500 rounded-lg p-6 mx-auto bg-white shadow-lg w-4/5 max-w-3xl">
@@ -127,6 +154,17 @@ const EditFarmers = () => {
             value={Password}
             onChange={(e) => setPassword(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
+          />
+        </div>
+        <div className="my-4">
+          <label htmlFor="image" className="text-lg font-semibold text-gray-700">Image (Optional)</label>
+          <input
+            id="image"
+            name="image"
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImage(e.target.files[0])}
+            className="border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
           />
         </div>
         <button className='p-2 bg-green-600 text-white rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-500' onClick={handleEditFarmers}>
