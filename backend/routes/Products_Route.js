@@ -9,6 +9,7 @@ router.post('/', async (request, response) => {
     if (
       
       !request.body.ProductName ||
+      !request.body.image ||
       !request.body.Category ||
       !request.body.Quantity ||
       !request.body.SellingPrice ||
@@ -17,12 +18,13 @@ router.post('/', async (request, response) => {
 
     ) {
       return response.status(400).send({
-        message: 'Send all required fields:  ProductName, Category, Quantity, SellingPrice, FarmerName, FarmerEmail',
+        message: 'Send all required fields:  ProductName, image, Category, Quantity, SellingPrice, FarmerName, FarmerEmail',
       });
     }
     const newProducts = {
       
       ProductName: request.body.ProductName,
+      image: request.body.image,
       Category: request.body.Category,
       Quantity: request.body.Quantity,
       SellingPrice: request.body.SellingPrice,
@@ -75,6 +77,7 @@ router.put('/:id', async (request, response) => {
     if (
       
       !request.body.ProductName ||
+      !request.body.image ||
       !request.body.Category ||
       !request.body.Quantity ||
       !request.body.SellingPrice ||
@@ -83,7 +86,7 @@ router.put('/:id', async (request, response) => {
 
     ) {
       return response.status(400).send({
-        message: 'Send all required fields: ProductNo, ProductName, Category, Quantity, SellingPrice, FarmerName, FarmerEmail',
+        message: 'Send all required fields: ProductNo, ProductName,image, Category, Quantity, SellingPrice, FarmerName, FarmerEmail',
       });
     }
 
@@ -130,6 +133,7 @@ router.get("/searchProducts", async (req, res) => {
     const query = {
       $or: [
         { ProductNo: { $regex: new RegExp(search, 'i') } }, // Using RegExp instead of directly passing $regex
+        {image: { $regex: new RegExp(search, 'i') }},
         { ProductName: { $regex: new RegExp(search, 'i') } },
         { Category: { $regex: new RegExp(search, 'i') } },
         { Quantity: { $regex: new RegExp(search, 'i') } },

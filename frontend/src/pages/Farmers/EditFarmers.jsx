@@ -10,7 +10,6 @@ import Swal from 'sweetalert2';
 
 // Functional component for EditFarmers
 const EditFarmers = () => {
-  // State variables for managing form data and loading state
   const [FarmerID, setFarmerID] = useState('');
   const [FarmerName, setFarmerName] = useState('');
   const [ContactNo, setContactNo] = useState('');
@@ -33,7 +32,7 @@ const EditFarmers = () => {
         setEmail(response.data.Email);
         setAddress(response.data.Address);
         setPassword(response.data.Password);
-
+        setImage(response.data.image || null); // Set the image URL if available
         setLoading(false);
       }).catch((error) => {
         setLoading(false);
@@ -42,38 +41,33 @@ const EditFarmers = () => {
       });
   }, [id]);
 
-  // Event handler for editing the Farmers
   const handleEditFarmers = () => {
     setLoading(true);
     
     const uploadImageAndSubmit = (downloadURL) => {
-      // Creating data object from form inputs
       const data = {
         FarmerName,
         ContactNo,
         Email,
         Address,
         Password,
-        image: downloadURL || null, // Include the image URL if uploaded
+        image: downloadURL || image, // Include existing image URL if no new image uploaded
       };
 
-      // Making a PUT request to edit the Farmers data
       axios
         .put(`http://localhost:5556/farmers/${id}`, data)
         .then(() => {
-          // Resetting loading state and navigating to the farmer details page
           setLoading(false);
-          navigate(`/farmers/allFarmers`);
+          navigate(`/farmers/details/:id`);
         })
         .catch((error) => {
-          // Handling errors by resetting loading state, showing an alert, and logging the error
           setLoading(false);
           alert('An error happened. Please check console');
           console.log(error);
         });
     };
 
-    if (image) {
+    if (image && typeof image === 'object') { // Check if a new image is being uploaded
       const storageRef = ref(storage, `farmer_images/${image.name}`);
       const uploadTask = uploadBytesResumable(storageRef, image);
 
@@ -90,14 +84,13 @@ const EditFarmers = () => {
         }
       );
     } else {
-      uploadImageAndSubmit(null); // No image uploaded
+      uploadImageAndSubmit(null); // No new image uploaded
     }
   };
 
-  // JSX for rendering the edit Farmers form
   return (
     <div className='p-6 bg-gray-100 min-h-screen'>
-      <BackButton destination={`/farmers/details/${id}`} />
+      <BackButton destination={`/farmers/details/:id`} />
       <h1 className="text-3xl my-4 text-green-800">Edit Farmer</h1>
       {loading ? <Spinner /> : ''}
       <div className="flex flex-col border-2 border-green-500 rounded-lg p-6 mx-auto bg-white shadow-lg w-4/5 max-w-3xl">
@@ -157,7 +150,8 @@ const EditFarmers = () => {
           />
         </div>
         <div className="my-4">
-          <label htmlFor="image" className="text-lg font-semibold text-gray-700">Image (Optional)</label>
+          <label htmlFor="image" className="text-lg font-semibold text-gray-700">Image</label>
+          {image && <img src={image} alt="Farmer" className="h-20 w-20 object-cover my-2" />} {/* Display existing image */}
           <input
             id="image"
             name="image"
