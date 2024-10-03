@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home'
 import CreateCrop from './pages/CreateCrop';
 import EditCrop from './pages/EditCrop';
 import ShowCrop from './pages/ShowCrop';
@@ -36,11 +35,26 @@ import CreateMyProducts from './pages/Farmers/CreateMyProducts';
 import EditMyProducts from './pages/Farmers/EditMyProducts';
 import DeleteMyProducts from './pages/Farmers/DeleteMyProducts';
 
+import CreateCard from "./pages/Card/CreateCard";
+import ItemCard from "./pages/Cart/ItemCard";
+import Main from "./pages/Cart/Main";
+import ItemDis from "./pages/Cart/ItemDis";
+import Cart from "./pages/Cart/Cart";
+import Checkout from "./pages/Cart/Checkout";
+import MyOrder from "./pages/Cart/MyOrder";
+import AllOrders from "./pages/Cart/AllOrders";
+import DeleteOrder from "./pages/Cart/DeleteOrder";
+
+import ReadOneHome from "./pages/ReadOneHome";
+import HCard from './pages/HomeCard/Hcard';
+
 import Home from './pages/Home';
 
 const App = () => {
   return (
     <Routes>
+
+      <Route path="/ReadOneHome/:FarmerID" element={<ReadOneHome />} />
 
       <Route path='/crops/create' element={<CreateCrop />} />
       <Route path='/crops/details/:id' element={<ShowCrop />} />
@@ -81,6 +95,18 @@ const App = () => {
       <Route path='/myProducts/edit/:id' element={<EditMyProducts />}/>
       <Route path='/myProducts/delete/:id' element={<DeleteMyProducts />}/>
       
+      <Route path="/card/create/:FarmerID" element={<CreateCard />} />
+
+      <Route path="/itemcard/create" element={<ItemCard />} />
+      <Route path="/cart/main" element={<Main />} />
+      <Route path="/itemdis/:ProductNo/:FarmerID" element={<ItemDis />} />
+      <Route path="/cart/:FarmerID" element={<Cart />} />
+      <Route path="/checkout/:FarmerID" element={<Checkout />} />
+      <Route path="/my-orders/:FarmerID" element={<MyOrder />} />
+      <Route path="/allorders" element={<AllOrders />} />
+      <Route path="/deleteorder/:orderId" element={<DeleteOrder />} />
+
+      <Route path="/Hcard" element={<HCard />} />
 
     </Routes>
   );

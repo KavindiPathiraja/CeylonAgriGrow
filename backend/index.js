@@ -11,6 +11,9 @@ import geminiRouter from './routes/geminiApi.js'; // Import Gemini AI route
 // Importing routes
 import Products_Route from './routes/Products_Route.js';
 import Farmers_Route from './routes/Farmers_Route.js';
+import Card_Route from './routes/Card_Route.js';
+
+import Order_Route from './routes/Order_Route.js';
 
 //Import crop routes
 import cropsRouter from "./routes/cropsRoute.js"; 
@@ -32,7 +35,8 @@ app.use('/generate-response', geminiRouter);
 app.use('/products', Products_Route);
 app.use('/farmers',Farmers_Route);
 app.use('/crops', cropsRouter); 
-
+app.use('/card',Card_Route);
+app.use('/order',Order_Route);
 
 
 // Connecting to the MongoDB database

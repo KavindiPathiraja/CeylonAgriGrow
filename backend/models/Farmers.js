@@ -16,8 +16,9 @@ const farmerSchema = mongoose.Schema(
     },
     Email: {
         type: String,
-        required: true,
-    },
+        unique: true, // Enforces uniqueness at the database level
+        required: [true, 'Email is required'],
+      },
     Address: {
         type: String,
         required: true,
@@ -45,7 +46,7 @@ farmerSchema.pre('save', async function (next) {
     try{
         if (this.isNew) {
             const doc = await FCounterr.findOneAndUpdate(
-                { _id: 'FarmerID ' }, 
+                { _id: 'FarmerID' }, 
                 { $inc: { seq: 1 } }, 
                 { new: true, upsert: true });
             this.FarmerID  = 'FarmerID' + doc.seq; // Modified to 'FarmerID '
