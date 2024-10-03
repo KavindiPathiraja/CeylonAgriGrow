@@ -3,13 +3,13 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [email, setEmail] = useState("");
+  const [FarmerID, setFarmerID] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const credentials = { Email: email, Password: password };
+    const credentials = { FarmerID: FarmerID, Password: password };
 
     try {
       const response = await axios.post("http://localhost:5556/farmers/Login", credentials);
@@ -17,7 +17,8 @@ function Login() {
 
       if (userData) {
         localStorage.setItem('farmerId', userData._id); // Store farmer ID in local storage
-        navigate(`/farmers/details/${userData._id}`);
+        navigate(`/ReadOneHome/${FarmerID}`);
+        //navigate(`/farmers/details/${userData._id}`);
         alert(`Welcome back, ${userData.FarmerName}!`);
       }
        else {
@@ -35,12 +36,12 @@ function Login() {
         <h2 className="text-2xl font-bold text-center mb-6">Log in to your account</h2>
         <form id="login-form" onSubmit={onLogin}>
           <div className="mb-6">
-            <label htmlFor="email" className="block text-gray-700">Email</label>
+            <label htmlFor="FarmerID" className="block text-gray-700">FarmerID</label>
             <input
               type="text"
-              name="email"
-              id="email"
-              onChange={(e) => setEmail(e.target.value)}
+              name="FarmerID"
+              id="FarmerID"
+              onChange={(e) => setFarmerID(e.target.value)}
               required
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-opacity-50"
             />
