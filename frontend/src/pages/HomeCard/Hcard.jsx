@@ -58,7 +58,7 @@ const HCard = ({ FarmerID }) => {
           key={product.ProductNo}
           className="w-72 shadow-lg rounded-lg bg-neutral-50 p-4 transform transition-transform duration-300 hover:-translate-y-2"
         >
-          <Link to={`/itemdis/${product.ProductNo}/${FarmerID}`} className="flex flex-col items-center">
+          <Link to={`/itemdis/${product.ProductNo}/${FarmerID}/itemdis/${product.ProductNo}/${FarmerID}`} className="flex flex-col items-center">
             <img
               src={product.image}
               alt={product.ProductName}

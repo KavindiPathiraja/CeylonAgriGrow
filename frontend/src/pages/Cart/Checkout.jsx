@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import BackButton from "../../components/BackButton";
 
 const Checkout = () => {
-    const { FarmerID } = useParams();  // Extract ProductNo and FarmerID from URL
     const location = useLocation();
     const navigate = useNavigate();
-    const { products,  total } = location.state || {};
+    const { products, userId: FarmerID, total } = location.state || {};
 
     const [loading, setLoading] = useState(false);
     const [customerInfo, setCustomerInfo] = useState({
@@ -32,7 +31,7 @@ const Checkout = () => {
         const fetchCustomerInfo = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`http://localhost:5556/farmers/details/${FarmerID}`);
+                const response = await axios.get(`http://localhost:5556/farmers/${FarmerID}`);
                 const { FarmerName, Email, ContactNo } = response.data;
                 setCustomerInfo({
                     FarmerName: FarmerName || "",
@@ -41,15 +40,11 @@ const Checkout = () => {
                 });
             } catch (error) {
                 console.error("Error fetching customer information:", error);
-                const errorMessage = error.response?.status === 404
-                    ? "Customer not found. Please check the Farmer ID."
-                    : "Failed to fetch customer information. Please try again later.";
-                Swal.fire("Error", errorMessage, "error");
+                Swal.fire("Error", "Failed to fetch customer information. Please try again later.", "error");
             } finally {
                 setLoading(false);
             }
         };
-        
 
         if (FarmerID) {
             fetchCustomerInfo();
@@ -148,7 +143,7 @@ const Checkout = () => {
             Swal.fire("Success", `Order placed successfully! Order ID: ${response.data.orderId}`, "success")
                 .then(() => {
                     // Reset form state here if necessary
-                    navigate(`/farmers/get/${FarmerID}`);
+                    navigate(`/ReadOneHome/${FarmerID}`);
                 });
         } catch (error) {
             Swal.fire("Error", "Failed to place order. Please try again.", "error");

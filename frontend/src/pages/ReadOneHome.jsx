@@ -1,32 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from './Navbar';
 import Carousel from './CropsPrediction/Carousel';
-import { useNavigate, useParams,Link } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import HCard from './HomeCard/Hcard';
 
-
-
 const ReadOneHome = () => {
-  //const [userData, setUserData] = useState({});
   const { FarmerID } = useParams(); // Extract FarmerID from the route
-  //const navigate = useNavigate();
-
-  // Fetch customer data based on FarmerID
-  // useEffect(() => {
-  //   if (FarmerID) {
-  //     fetchData();
-  //   }
-  // }, [FarmerID]);
-
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await axios.get(`http://localhost:5556/farmers/${FarmerID}`);
-  //     setUserData(response.data);
-  //   } catch (error) {
-  //     console.error('Error fetching user data:', error);
-  //   }
-  // };
 
   return (
     <div style={styles.container}>
@@ -41,6 +21,8 @@ const ReadOneHome = () => {
         <li style={styles.navItem}><Link to="/">Fertilizer</Link></li>
         <li style={styles.navItem}><Link to="/Pest&Disease/PredictDisease">Diseases</Link></li>
         <li style={styles.navItem}><Link to="/products/allProducts">Products</Link></li>
+        <li style={styles.navItem}><Link to={`/farmers/details/${FarmerID}`}>Profile</Link></li>
+        <li style={styles.navItem}><Link to={`/my-orders/${FarmerID}`}>My Orders</Link></li>
       </ul>
 
       <div style={styles.boxContainer}>
@@ -76,15 +58,13 @@ const ReadOneHome = () => {
           </p>
         </div>
       </div>
-       {/* Products section */}
+      
+      {/* Products section */}
       <div id="products" className="bg-gray-200 py-16 px-8 md:px-16 min-h-screen w-[100%] rounded-t-[20%]">
-      <h3 className="text-5xl font-light text-pink-500 mb-16 text-center">Store</h3>
-      <HCard FarmerID={FarmerID} />
+        <h3 className="text-5xl font-light text-pink-500 mb-16 text-center">Store</h3>
+        <HCard FarmerID={FarmerID} />
+      </div>
     </div>
-
-    </div>
-
-   
   );
 };
 

@@ -70,7 +70,7 @@ const MyOrder = () => {
                         className="border border-gray-300 p-4 mb-4 rounded-lg shadow-md relative"
                     >
                         <h2 className="text-xl font-semibold mb-2">
-                            Order ID: {order._id}
+                            Order ID: {order.orderId}
                         </h2>
                         <p className="text-gray-600 mt-2">
                             Order Date: {new Date(order.createdAt).toLocaleDateString()}
@@ -89,33 +89,33 @@ const MyOrder = () => {
                                     <p className="text-gray-700 font-medium mt-2">
                                         {product.title}
                                     </p>
+                                    <p className="text-gray-600">
+                                        Price: ${product.SellingPrice.toFixed(2)} {/* Ensure this matches your data structure */}
+                                    </p>
                                 </div>
                             ))}
                         </div>
                         <p className="text-gray-800 font-semibold mt-4">
-                            Total Cost: $
-                            {order.products
-                                .reduce(
-                                    (total, product) => total + product.SellingPrice * product.Quantity,
-                                    0
-                                )
-                                .toFixed(2)}
+                            <p className="text-gray-600">
+                            Total Cost: : ${order.total.toFixed(2)} {/* Ensure this matches your data structure */}
+                            </p>
                         </p>
 
                         {expandedOrders[order._id] && (
                             <div className="mt-4">
                                 <div className="flex flex-row items-start justify-between gap-8 border-t pt-4">
-                                    <div className="flex-1 pr-4 border-r border-gray-300">
-                                        <h3 className="text-lg font-semibold mb-2">Products:</h3>
-                                        <ul className="list-disc pl-5 mb-2">
-                                            {order.products.map((product) => (
-                                                <li key={product.ProductNo} className="text-gray-700">
-                                                    {product.ProductName} - Qty: {product.Quantity} - Price: $
-                                                    {(product.SellingPrice * product.Quantity).toFixed(2)}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
+                                <div className="flex-1 pr-4 border-r border-gray-300">
+                                    <h3 className="text-lg font-semibold mb-2">Products:</h3>
+                                    
+                                        {order.products.map((product) => (
+                                                <p className="text-gray-700 font-medium mt-2">
+                                                    {product.ProductName} - Price: ${product.SellingPrice.toFixed(2)} {/* Ensure this matches your data structure */}
+                                                </p>
+                                           
+                                        ))}
+                                    
+                                </div>
+
 
                                     <div className="flex-1 px-4 border-r border-gray-300">
                                         <h3 className="text-lg font-semibold mb-2">
