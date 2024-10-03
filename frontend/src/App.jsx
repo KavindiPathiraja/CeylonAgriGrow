@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-
+import Home from './pages/Home'
 import CreateCrop from './pages/CreateCrop';
 import EditCrop from './pages/EditCrop';
 import ShowCrop from './pages/ShowCrop';
@@ -14,7 +14,6 @@ import DiseaseTable from './pages/Disease/diseaseTable'
 import DiseaseList from './pages/Disease/diseaseList'
 import UpdateDisease from './pages/Disease/updateDisease'
 import SelectCrop from './pages/Disease/selectCropPage'
-import CropDiseases from './pages/Disease/CropDiseases'
 import SingleDisease from './pages/Disease/SingleDisease'
 import DiseasePrediction from './pages/Disease/DiseasePredictionForm'
 
@@ -54,12 +53,13 @@ const App = () => {
 
       <Route path='/Pest&Disease/diseaseTable/addNew' element={<AddDisease />}/>
       <Route path='/Pest&Disease/diseaseTable' element={<DiseaseTable />}/>
-      <Route path='/Pest&Disease/diseaseList' element={<DiseaseList />}/>
+     
       <Route path='/Pest&Disease/diseaseTable/UpdateDisease/:id' element={<UpdateDisease />}/>
       <Route path='/Pest&Disease/selectCrop' element={<SelectCrop />}/>
       <Route path='/Pest&Disease/PredictDisease' element={<DiseasePrediction />}/>
-      <Route path='/Pest&Disease/FindDiseases/:Crop' element={<CropDiseases />}/>
-      <Route path='/Diseaselist/:id' element={<SingleDisease />}/>
+      <Route path='/Pest&Disease/selectCrop/:cropType' element={<DiseaseList />}/>
+      <Route path='/DiseaseList/:id' element={<SingleDisease />}/>
+    
 
 
       <Route path='/products/allProducts' element={<ShowProduct />}/>

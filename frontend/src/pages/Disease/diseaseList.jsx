@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
 import axios from "axios";  // Import axios
-
-// components
+import { useParams } from "react-router-dom";
+import BackgroundImg from '../../assets/field.jpg';  // Import the background image
 import DiseaseDetails from './dieases'; // Ensure this path is correct
 
 const SetDiseases = () => {
     const [diseases, setDiseases] = useState([]);
     const [search, setSearch] = useState('');
     const [sortType, setSortType] = useState(''); // New state for sorting
+    const { cropType } = useParams();  // Get crop type from URL params
 
     useEffect(() => {
-        const fetchDiseases = async () => {
+        const fetchDiseasesByCropType = async () => {
             try {
-                const response = await axios.get('http://localhost:5556/diseases/all');
+                const response = await axios.get(`http://localhost:5556/diseases/crop/${cropType}`);  // Fetch diseases by crop type
                 
                 if (response.status === 200) {
-                    setDiseases(response.data);  // Access data using response.data
+                    setDiseases(response.data);  // Set diseases based on crop type
                 } else {
                     console.error('Failed to fetch diseases');
                 }
@@ -26,10 +27,10 @@ const SetDiseases = () => {
             }
         };
     
-        fetchDiseases();
-    }, []);
+        fetchDiseasesByCropType();
+    }, [cropType]);  // The effect runs whenever the crop type changes
 
-    // Sorting logic
+    // Sorting and searching logic
     const sortedDiseases = () => {
         let filteredDiseases = diseases.filter((disease) => 
             search.toLowerCase() === '' || 
@@ -38,7 +39,7 @@ const SetDiseases = () => {
 
         if (sortType) {
             filteredDiseases = filteredDiseases.sort((a, b) => 
-                (a.type > b.type) ? 1 : -1 // Sort by type field
+                (a.Type > b.Type) ? 1 : -1 // Sort by Type field
             );
         }
 
@@ -46,7 +47,10 @@ const SetDiseases = () => {
     };
 
     return (
-        <div className="flex flex-col items-center p-4">
+        
+        <div className="flex flex-col items-center p-4 min-h-screen flex items-start justify-center pt-12 bg-cover bg-center relative"
+        style={{ backgroundImage: `url(${BackgroundImg})` }}
+        >
             <input 
                 onChange={(e) => setSearch(e.target.value)}
                 type="text"

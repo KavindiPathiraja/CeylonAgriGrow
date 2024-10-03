@@ -32,5 +32,7 @@ router.route('/:id').get(DiseaseController.getDiseaseById);
 router.route('/:id').delete(DiseaseController.deleteDisease);
 router.route('/:id').put(upload.single('photo'), DiseaseController.updateDisease);
 router.put('/:id', upload.single('photo'), DiseaseController.updateDisease);
+router.route('/crop/:cropType').get(DiseaseController.getDiseasesByCropType);
+
 
 export default router;

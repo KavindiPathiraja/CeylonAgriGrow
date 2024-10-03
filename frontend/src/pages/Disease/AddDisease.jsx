@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import BackgroundImg from '../../assets/pest.jpg';  // Import the background image
+import Gif from '../../assets/ladybug.gif';  // Import the GIF
 const DiseaseForm = () => {
     const [formData, setFormData] = useState({
         diseaseName: '',
@@ -69,7 +70,13 @@ const DiseaseForm = () => {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <div className="flex justify-end items-center min-h-screen bg-gray-100 pr-8 min-h-screen flex items-start  pt-12 bg-cover bg-center relative"
+        style={{ backgroundImage: `url(${BackgroundImg})` }}
+        > {/* Adjusted to justify end and add padding */}
+
+        <div className="flex justify-center my-4" style={{paddingBottom:"550px" , paddingLeft:'200px'}}>
+          <img src={Gif} alt="Ladybug" className="w-24 h-24" />
+        </div>
             <form
                 onSubmit={handleSubmit}
                 encType='multipart/form-data'
