@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Home'
 import CreateCrop from './pages/CreateCrop';
 import EditCrop from './pages/EditCrop';
 import ShowCrop from './pages/ShowCrop';
