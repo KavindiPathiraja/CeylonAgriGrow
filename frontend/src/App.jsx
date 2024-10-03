@@ -35,6 +35,9 @@ import CreateMyProducts from './pages/Farmers/CreateMyProducts';
 import EditMyProducts from './pages/Farmers/EditMyProducts';
 import DeleteMyProducts from './pages/Farmers/DeleteMyProducts';
 
+
+
+
 import CreateCard from "./pages/Card/CreateCard";
 import ItemCard from "./pages/Cart/ItemCard";
 import Main from "./pages/Cart/Main";
@@ -49,6 +52,7 @@ import ReadOneHome from "./pages/ReadOneHome";
 import HCard from './pages/HomeCard/Hcard';
 
 import Home from './pages/Home';
+
 
 const App = () => {
   return (
@@ -67,7 +71,6 @@ const App = () => {
 
       <Route path='/Pest&Disease/diseaseTable/addNew' element={<AddDisease />}/>
       <Route path='/Pest&Disease/diseaseTable' element={<DiseaseTable />}/>
-     
       <Route path='/Pest&Disease/diseaseTable/UpdateDisease/:id' element={<UpdateDisease />}/>
       <Route path='/Pest&Disease/selectCrop' element={<SelectCrop />}/>
       <Route path='/Pest&Disease/PredictDisease' element={<DiseasePrediction />}/>
