@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import Spinner from '../components/Spinner';
+import React, { useState } from 'react';
+import Spinner from '../../components/Spinner';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
-import BackButton from '../components/BackButton';
+import { useNavigate } from 'react-router-dom';
+import backgroundImage from '../../assets/table_bg.jpg'; // Import the background image
+import BackButton from '../../components/BackButton';
+
 const provinces = {
   Eastern: ['Ampara', 'Batticaloa', 'Trincomalee'],
   'North Central': ['Anuradhapura', 'Polonnaruwa'],
@@ -15,7 +17,7 @@ const provinces = {
   'North Western': ['Kurunegala', 'Puttalam'],
 };
 
-const EditCrop = () => {
+const CreateCrops = () => {
   const [province, setProvince] = useState('');
   const [district, setDistrict] = useState('');
   const [landArea, setLandArea] = useState('');
@@ -23,38 +25,13 @@ const EditCrop = () => {
   const [soilType, setSoilType] = useState('');
   const [soilPhAcidic, setSoilPhAcidic] = useState('');
   const [rainfall, setRainfall] = useState('');
-  const [pastCrop, setPastCrop] = useState('');
+  const [pastCrop, setPastCrop] = useState(''); // New state for past crop
   const [labour, setLabour] = useState('');
   const [dateOfPlanting, setDateOfPlanting] = useState('');
   const [loading, setLoading] = useState(false);
-  const [loadingData, setLoadingData] = useState(true);
   const navigate = useNavigate();
-  const { id } = useParams(); // Get the crop ID from URL params
 
-  useEffect(() => {
-    // Fetch crop data by ID
-    axios.get(`http://localhost:5556/crops/getcrops/${id}`)
-      .then(response => {
-        const crop = response.data;
-        setProvince(crop.province || '');
-        setDistrict(crop.district || '');
-        setLandArea(crop.landarea || '');
-        setDistanceWater(crop.distancewater || '');
-        setSoilType(crop.soiltype || '');
-        setSoilPhAcidic(crop.soilph || '');
-        setRainfall(crop.rainfall || '');
-        setPastCrop(crop.pastCrop || '');
-        setLabour(crop.labour || '');
-        setDateOfPlanting(crop.dateOfPlanting ? new Date(crop.dateOfPlanting).toISOString().split('T')[0] : '');
-        setLoadingData(false);
-      })
-      .catch(error => {
-        setLoadingData(false);
-        console.error('Error fetching crop data:', error);
-      });
-  }, [id]);
-
-  const handleUpdateCrop = () => {
+  const handleSaveCrop = () => {
     const data = {
       province,
       district,
@@ -63,17 +40,25 @@ const EditCrop = () => {
       soiltype: soilType,
       soilph: soilPhAcidic,
       rainfall,
-      pastCrop,
+      pastCrop, 
       labour: Number(labour),
       dateOfPlanting,
     };
+    
     setLoading(true);
+    
     axios
-      .put(`http://localhost:5556/crops/upcrops/${id}`, data)
-      .then(() => {
+      .post('http://localhost:5556/crops/addcrops', data)
+      .then((response) => {
         setLoading(false);
-        alert('Crop updated successfully');
-        navigate('/crops/getall'); // Navigate to the list after updating
+        const cropPrediction = response.data.cropPrediction;
+        alert(`Predicted Crops:\n${cropPrediction}`); 
+        
+        // Optional: Save predicted crops to your database
+        axios.post('http://localhost:5556/crops/savepredicted', {
+          predictedCrops: cropPrediction,
+        });
+        navigate('/crops/getall');
       })
       .catch((error) => {
         setLoading(false);
@@ -81,29 +66,28 @@ const EditCrop = () => {
         console.log(error);
       });
   };
-
-  if (loadingData) {
-    return <Spinner />;
-  }
-
+  
   return (
-    <div className='p-4'>
-      <h1 className='text-3xl my-4'>Edit Crop</h1>
-      <BackButton destination='crops/getall'/>
-      {loading && <Spinner />}
-      <div className='border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto'>
-        <div className='flex flex-wrap'>
-          {/* First Column */}
-          <div className='w-full md:w-1/2 pr-4'>
+    <div
+      className="page-container"
+      style={{ backgroundImage: `url(${backgroundImage})`, backgroundColor: '#4CAF50' }} // Background set to green
+    >
+      <div className="p-4">
+        <h1 className="text-3xl my-4 text-white">Create Crop</h1> {/* Text changed to white for contrast */}
+        <BackButton destination='/crops/getall'/>
+        {loading ? <Spinner /> : ''}
+        <div className="border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto bg-white">
+          {/* All form elements in one column */}
+          <div className="flex flex-col">
             {/* Province dropdown */}
-            <div className='my-4'>
-              <label className='text-xl mr-4 text-gray-500'>Province</label>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Province</label>
               <select
                 value={province}
                 onChange={(e) => setProvince(e.target.value)}
-                className='border-2 border-gray-500 px-4 py-2 w-full'
+                className="border-2 border-gray-500 px-4 py-2 w-full"
               >
-                <option value=''>Select Province</option>
+                <option value="">Select Province</option>
                 {Object.keys(provinces).map((prov) => (
                   <option key={prov} value={prov}>
                     {prov}
@@ -114,14 +98,14 @@ const EditCrop = () => {
 
             {/* District dropdown */}
             {province && (
-              <div className='my-4'>
-                <label className='text-xl mr-4 text-gray-500'>District</label>
+              <div className="my-4">
+                <label className="text-xl mr-4 text-gray-500">District</label>
                 <select
                   value={district}
                   onChange={(e) => setDistrict(e.target.value)}
-                  className='border-2 border-gray-500 px-4 py-2 w-full'
+                  className="border-2 border-gray-500 px-4 py-2 w-full"
                 >
-                  <option value=''>Select District</option>
+                  <option value="">Select District</option>
                   {provinces[province].map((dist) => (
                     <option key={dist} value={dist}>
                       {dist}
@@ -132,13 +116,13 @@ const EditCrop = () => {
             )}
 
             {/* Land Area */}
-            <div className='my-4'>
-              <label className='text-xl mr-4 text-gray-500'>Land Area</label>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Land Area</label>
               <div>
-                <label className='mr-4'>
+                <label className="mr-4">
                   <input
-                    type='radio'
-                    value='Over 3 Ha'
+                    type="radio"
+                    value="Over 3 Ha"
                     checked={landArea === 'Over 3 Ha'}
                     onChange={(e) => setLandArea(e.target.value)}
                   />
@@ -146,8 +130,8 @@ const EditCrop = () => {
                 </label>
                 <label>
                   <input
-                    type='radio'
-                    value='Less than 3 Ha'
+                    type="radio"
+                    value="Less than 3 Ha"
                     checked={landArea === 'Less than 3 Ha'}
                     onChange={(e) => setLandArea(e.target.value)}
                   />
@@ -157,13 +141,13 @@ const EditCrop = () => {
             </div>
 
             {/* Distance to water */}
-            <div className='my-4'>
-              <label className='text-xl mr-4 text-gray-500'>Distance to Water</label>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Distance to Water</label>
               <div>
-                <label className='mr-4'>
+                <label className="mr-4">
                   <input
-                    type='radio'
-                    value='Over 2 km'
+                    type="radio"
+                    value="Over 2 km"
                     checked={distanceWater === 'Over 2 km'}
                     onChange={(e) => setDistanceWater(e.target.value)}
                   />
@@ -171,8 +155,8 @@ const EditCrop = () => {
                 </label>
                 <label>
                   <input
-                    type='radio'
-                    value='Less than 2 km'
+                    type="radio"
+                    value="Less than 2 km"
                     checked={distanceWater === 'Less than 2 km'}
                     onChange={(e) => setDistanceWater(e.target.value)}
                   />
@@ -180,27 +164,24 @@ const EditCrop = () => {
                 </label>
               </div>
             </div>
-          </div>
 
-          {/* Second Column */}
-          <div className='w-full md:w-1/2 pl-4'>
             {/* Soil Type */}
-            <div className='my-4'>
-              <label className='text-xl mr-4 text-gray-500'>Soil Type</label>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Soil Type</label>
               <div>
-                <label className='mr-4'>
+                <label className="mr-4">
                   <input
-                    type='radio'
-                    value='Sandy'
+                    type="radio"
+                    value="Sandy"
                     checked={soilType === 'Sandy'}
                     onChange={(e) => setSoilType(e.target.value)}
                   />
                   Sandy
                 </label>
-                <label className='mr-4'>
+                <label className="mr-4">
                   <input
-                    type='radio'
-                    value='Clayey'
+                    type="radio"
+                    value="Clayey"
                     checked={soilType === 'Clayey'}
                     onChange={(e) => setSoilType(e.target.value)}
                   />
@@ -208,8 +189,8 @@ const EditCrop = () => {
                 </label>
                 <label>
                   <input
-                    type='radio'
-                    value='Loamy'
+                    type="radio"
+                    value="Loamy"
                     checked={soilType === 'Loamy'}
                     onChange={(e) => setSoilType(e.target.value)}
                   />
@@ -219,13 +200,13 @@ const EditCrop = () => {
             </div>
 
             {/* Soil pH is Acidic? */}
-            <div className='my-4'>
-              <label className='text-xl mr-4 text-gray-500'>Soil pH is Acidic?</label>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Soil pH is Acidic?</label>
               <div>
-                <label className='mr-4'>
+                <label className="mr-4">
                   <input
-                    type='radio'
-                    value='Yes'
+                    type="radio"
+                    value="Yes"
                     checked={soilPhAcidic === 'Yes'}
                     onChange={(e) => setSoilPhAcidic(e.target.value)}
                   />
@@ -233,8 +214,8 @@ const EditCrop = () => {
                 </label>
                 <label>
                   <input
-                    type='radio'
-                    value='No'
+                    type="radio"
+                    value="No"
                     checked={soilPhAcidic === 'No'}
                     onChange={(e) => setSoilPhAcidic(e.target.value)}
                   />
@@ -244,22 +225,22 @@ const EditCrop = () => {
             </div>
 
             {/* Rainfall */}
-            <div className='my-4'>
-              <label className='text-xl mr-4 text-gray-500'>Rainfall</label>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Rainfall</label>
               <div>
-                <label className='mr-4'>
+                <label className="mr-4">
                   <input
-                    type='radio'
-                    value='Frequent'
+                    type="radio"
+                    value="Frequent"
                     checked={rainfall === 'Frequent'}
                     onChange={(e) => setRainfall(e.target.value)}
                   />
                   Frequent
                 </label>
-                <label className='mr-4'>
+                <label className="mr-4">
                   <input
-                    type='radio'
-                    value='Mediate'
+                    type="radio"
+                    value="Mediate"
                     checked={rainfall === 'Mediate'}
                     onChange={(e) => setRainfall(e.target.value)}
                   />
@@ -267,66 +248,63 @@ const EditCrop = () => {
                 </label>
                 <label>
                   <input
-                    type='radio'
-                    value='Drought'
-                    checked={rainfall === 'Drought'}
+                    type="radio"
+                    value="Low"
+                    checked={rainfall === 'Low'}
                     onChange={(e) => setRainfall(e.target.value)}
                   />
-                  Drought
+                  Low
                 </label>
               </div>
             </div>
-          </div>
 
-          {/* Full width fields */}
-          <div className='w-full'>
             {/* Past Crop */}
-            <div className='my-4'>
-              <label className='text-xl mr-4 text-gray-500'>Past Crop</label>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Past Crop</label>
               <input
-                type='text'
+                type="text"
                 value={pastCrop}
                 onChange={(e) => setPastCrop(e.target.value)}
-                className='border-2 border-gray-500 px-4 py-2 w-full'
-                placeholder='Enter past crop'
+                className="border-2 border-gray-500 px-4 py-2 w-full"
+                placeholder="Enter past crop(s) grown"
               />
             </div>
 
             {/* Labour */}
-            <div className='my-4'>
-              <label className='text-xl mr-4 text-gray-500'>Labour</label>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Labour</label>
               <input
-                type='number'
+                type="number"
                 value={labour}
                 onChange={(e) => setLabour(e.target.value)}
-                className='border-2 border-gray-500 px-4 py-2 w-full'
-                placeholder='Enter number of laborers'
+                className="border-2 border-gray-500 px-4 py-2 w-full"
+                placeholder="Enter number of labourers"
               />
             </div>
 
             {/* Date of Planting */}
-            <div className='my-4'>
-              <label className='text-xl mr-4 text-gray-500'>Date of Planting</label>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Date of Planting</label>
               <input
-                type='date'
+                type="date"
                 value={dateOfPlanting}
                 onChange={(e) => setDateOfPlanting(e.target.value)}
-                className='border-2 border-gray-500 px-4 py-2 w-full'
+                className="border-2 border-gray-500 px-4 py-2 w-full"
               />
             </div>
+
+            {/* Save Button */}
+            <button
+              onClick={handleSaveCrop}
+              className="bg-sky-400 hover:bg-sky-500 text-white font-bold py-2 px-4 rounded mt-4"
+            >
+              Save
+            </button>
           </div>
         </div>
-
-        {/* Save Button */}
-        <button
-          onClick={handleUpdateCrop}
-          className='bg-blue-500 text-white px-6 py-3 rounded-md mx-auto block mt-4 hover:bg-blue-600'
-        >
-          Update Crop
-        </button>
       </div>
     </div>
   );
 };
 
-export default EditCrop;
+export default CreateCrops;
