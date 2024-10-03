@@ -5,25 +5,27 @@ import { Link } from 'react-router-dom';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
-import ReportFarmer from './ReportFarmers'; // Import the new report component
+import ReportFarmer from './ReportFarmers';
 
 const ShowFarmer = () => {
-    const [farmers, setFarmers] = useState([]); // Ensure farmers starts as an empty array
-    const [loading, setLoading] = useState(false);
-    const [searchQuery, setSearchQuery] = useState(""); // State for search query
+    const [farmers, setFarmers] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         const fetchFarmers = async () => {
-            setLoading(true);
             try {
-                const response = await axios.get('http://localhost:5556/farmers'); // Update the API endpoint for farmers
-                if (response.data && response.data.data) {
-                    setFarmers(response.data.data); // Set farmers only if data exists
+                const response = await axios.get('http://localhost:5556/farmers');
+                // Adjusted to set farmers directly since response is an array
+                if (Array.isArray(response.data)) {
+                    setFarmers(response.data); // Set farmers directly as it is an array
                 } else {
                     console.error("Invalid data format:", response.data);
                 }
             } catch (error) {
                 console.error("Error fetching farmers:", error);
+                setError("Failed to fetch farmers.");
             } finally {
                 setLoading(false);
             }
@@ -32,12 +34,10 @@ const ShowFarmer = () => {
         fetchFarmers();
     }, []);
 
-    // Handle search input change
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value.toLowerCase());
     };
 
-    // Filter farmers based on search query
     const filteredFarmers = farmers.filter(farmer =>
         Object.values(farmer).some(value =>
             value.toString().toLowerCase().includes(searchQuery)
@@ -51,8 +51,9 @@ const ShowFarmer = () => {
             </li>
             <h1 className="show-Farmers-title text-3xl my-4 text-green-800">Farmer's Marketplace</h1>
             <div className='flex flex-col md:flex-row justify-between items-center mb-6'>
-                {/* Search input field */}
+                <label htmlFor="search" className="sr-only">Search farmers</label>
                 <input
+                    id="search"
                     type="text"
                     placeholder="Search farmers..."
                     className='text-lg my-4 p-2 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
@@ -62,13 +63,14 @@ const ShowFarmer = () => {
                     <Link to='/farmers/create' className="flex items-center">
                         <MdOutlineAddBox className='text-green-800 text-4xl' />
                     </Link>
-                    {/* Render the ReportFarmer component for generating PDF */}
                     <ReportFarmer filteredFarmers={filteredFarmers} className="flex items-center" />
                 </div>
             </div>
 
             {loading ? (
                 <Spinner />
+            ) : error ? (
+                <div className="text-red-600">{error}</div>
             ) : (
                 <table className='w-full border border-green-500 rounded-lg bg-white'>
                     <thead>
@@ -79,7 +81,6 @@ const ShowFarmer = () => {
                             <th className='p-4 border border-green-300'>Contact No</th>
                             <th className='p-4 border border-green-300'>Email</th>
                             <th className='p-4 border border-green-300'>Address</th>
-                            <th className='p-4 border border-green-300'>Password</th>
                             <th className='p-4 border border-green-300'>Operations</th>
                         </tr>
                     </thead>
@@ -94,7 +95,6 @@ const ShowFarmer = () => {
                                 <td className='p-4 border border-green-300'>{farmer.ContactNo}</td>
                                 <td className='p-4 border border-green-300'>{farmer.Email}</td>
                                 <td className='p-4 border border-green-300'>{farmer.Address}</td>
-                                <td className='p-4 border border-green-300'>{farmer.Password}</td>
                                 <td className='p-4 border border-green-300'>
                                     <div className='flex justify-center gap-4'>
                                         <Link to={`/farmers/details/${farmer._id}`}>
