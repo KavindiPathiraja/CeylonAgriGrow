@@ -3,6 +3,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
 import Spinner from "../../components/Spinner";
+import { jsPDF } from "jspdf";
 
 const MyOrder = () => {
     const { FarmerID } = useParams(); // Get FarmerID from URL params
@@ -44,7 +45,7 @@ const MyOrder = () => {
     const handleDeleteOrder = async (orderId) => {
         try {
             await axios.delete(`http://localhost:5556/order/${orderId}`);
-            setOrders((prevOrders) => prevOrders.filter((order) => order._id !== orderId));
+            setOrders((prevOrders) => prevOrders.filter((order) => order.orderId !== orderId));
             Swal.fire("Success", "Order deleted successfully", "success");
         } catch (error) {
             console.error("Error deleting order:", error);
@@ -53,7 +54,75 @@ const MyOrder = () => {
     };
 
     const handleDownloadBill = (order) => {
-        Swal.fire("Download", "Bill download feature is not implemented yet.", "info");
+        const doc = new jsPDF();
+
+        // Set bill header
+        doc.setFontSize(18);
+        doc.setFont("helvetica", "bold");
+        doc.text("Online Store - Order Receipt", 105, 20, null, null, "center");
+
+        // Order Information
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "normal");
+        doc.text(`Order ID: ${order.orderId}`, 20, 40);
+        doc.text(`Order Date: ${new Date(order.createdAt).toLocaleDateString()}`, 20, 50);
+        doc.text(`Farmer Name: ${order.customerInfo.FarmerName || 'N/A'}`, 20, 60);
+        doc.text(`Email: ${order.customerInfo.Email || 'N/A'}`, 20, 70);
+        doc.text(`Mobile: ${order.customerInfo?.ContactNo || 'N/A'}`, 20, 80);
+
+        // Delivery Information
+        if (order.deliveryInfo?.address) {
+            doc.setFontSize(14);
+            doc.setFont("helvetica", "bold");
+            doc.text("Delivery Information:", 20, 95);
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "normal");
+            doc.text(`Address: ${order.deliveryInfo.address}`, 20, 105);
+            doc.text(`City: ${order.deliveryInfo.city}`, 20, 115);
+            doc.text(`Postal Code: ${order.deliveryInfo.postalCode}`, 20, 125);
+        }
+
+        // Products Table Header
+        doc.setFontSize(14);
+        doc.setFont("helvetica", "bold");
+        doc.text("Products", 20, 140);
+        doc.setLineWidth(0.5);
+        doc.line(20, 145, 190, 145); // Horizontal line below the header
+
+        // Table Columns
+        doc.setFontSize(12);
+        let yPosition = 155;
+        doc.text("No.", 20, yPosition);
+        doc.text("Product Name", 40, yPosition);
+        doc.text("Price (USD)", 120, yPosition);
+        doc.text("Quantity", 160, yPosition);
+
+        // Products Table Content
+        doc.setFont("helvetica", "normal");
+        yPosition += 10;
+
+        order.products.forEach((product, index) => {
+            doc.text(`${index + 1}`, 20, yPosition);
+            doc.text(`${product.ProductName}`, 40, yPosition);
+            doc.text(`$${product.SellingPrice.toFixed(2)}`, 120, yPosition);
+            doc.text(`${product.quantity}`, 160, yPosition);
+            yPosition += 10;
+        });
+
+        // Line after products
+        doc.setLineWidth(0.5);
+        doc.line(20, yPosition, 190, yPosition);
+        yPosition += 10;
+
+        // Total Cost and Payment Method
+        doc.setFontSize(14);
+        doc.setFont("helvetica", "bold");
+        doc.text(`Total Cost: $${order.total.toFixed(2)}`, 20, yPosition);
+        yPosition += 10;
+        doc.text(`Payment Method: ${order.paymentMethod}`, 20, yPosition);
+
+        // Save PDF
+        doc.save(`Order_Bill_${order.orderId}.pdf`);
     };
 
     if (loading) {
@@ -90,32 +159,29 @@ const MyOrder = () => {
                                         {product.title}
                                     </p>
                                     <p className="text-gray-600">
-                                        Price: ${product.SellingPrice.toFixed(2)} {/* Ensure this matches your data structure */}
+                                        Price: ${product.SellingPrice.toFixed(2)}
+                                    </p>
+                                    <p className="text-gray-600">
+                                        Quantity: {product.quantity}
                                     </p>
                                 </div>
                             ))}
                         </div>
                         <p className="text-gray-800 font-semibold mt-4">
-                            <p className="text-gray-600">
-                            Total Cost: : ${order.total.toFixed(2)} {/* Ensure this matches your data structure */}
-                            </p>
+                            Total Cost: ${order.total.toFixed(2)}
                         </p>
 
                         {expandedOrders[order._id] && (
                             <div className="mt-4">
                                 <div className="flex flex-row items-start justify-between gap-8 border-t pt-4">
-                                <div className="flex-1 pr-4 border-r border-gray-300">
-                                    <h3 className="text-lg font-semibold mb-2">Products:</h3>
-                                    
+                                    <div className="flex-1 pr-4 border-r border-gray-300">
+                                        <h3 className="text-lg font-semibold mb-2">Products:</h3>
                                         {order.products.map((product) => (
-                                                <p className="text-gray-700 font-medium mt-2">
-                                                    {product.ProductName} - Price: ${product.SellingPrice.toFixed(2)} {/* Ensure this matches your data structure */}
-                                                </p>
-                                           
+                                            <p className="text-gray-700 font-medium mt-2" key={product.ProductNo}>
+                                                {product.ProductName} - Price: ${product.SellingPrice.toFixed(2)}, Quantity: {product.quantity}
+                                            </p>
                                         ))}
-                                    
-                                </div>
-
+                                    </div>
 
                                     <div className="flex-1 px-4 border-r border-gray-300">
                                         <h3 className="text-lg font-semibold mb-2">
@@ -142,42 +208,41 @@ const MyOrder = () => {
                                                 <h3 className="text-lg font-semibold mb-2">
                                                     Delivery Information:
                                                 </h3>
-                                                <p>N/A</p>
+                                                <p>No delivery information available.</p>
+                                                <p>Delivery Method: Self Pickup</p>
                                             </div>
                                         )}
                                     </div>
                                 </div>
-
-                                <p className="text-gray-600 mt-2">
-                                    Payment Method: {order.paymentMethod}
-                                </p>
-                                <div className="flex space-x-2 mt-4">
-                                    <button
-                                        onClick={() => handleDeleteOrder(order._id)}
-                                        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
-                                    >
-                                        Delete
-                                    </button>
-                                    <button
-                                        onClick={() => handleDownloadBill(order)}
-                                        className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded"
-                                    >
-                                        Download Bill
-                                    </button>
-                                </div>
                             </div>
                         )}
 
-                        <button
-                            onClick={() => handleToggleExpand(order._id)}
-                            className="absolute top-4 right-4 bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded"
-                        >
-                            {expandedOrders[order._id] ? "Show Less" : "Show More"}
-                        </button>
+                        <div className="flex mt-4 justify-end gap-3">
+                            <button
+                                className="py-2 px-4 bg-pink-500 text-white rounded-lg"
+                                onClick={() => handleToggleExpand(order._id)}
+                            >
+                                {expandedOrders[order._id] ? "Hide Details" : "Expand Details"}
+                            </button>
+                            <button
+                                className="py-2 px-4 bg-red-500 text-white rounded-lg"
+                                onClick={() => handleDeleteOrder(order.orderId)}
+                            >
+                                Delete Order
+                            </button>
+                            <button
+                                className="py-2 px-4 bg-green-500 text-white rounded-lg"
+                                onClick={() => handleDownloadBill(order)}
+                            >
+                                Download Bill
+                            </button>
+                        </div>
                     </div>
                 ))
             ) : (
-                <p className="text-center">No orders found</p>
+                <p className="text-xl font-semibold text-gray-600">
+                    No orders available.
+                </p>
             )}
         </div>
     );
