@@ -8,22 +8,28 @@ import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
 import ReportFarmer from './ReportFarmers'; // Import the new report component
 
 const ShowFarmer = () => {
-    const [farmers, setFarmers] = useState([]);
+    const [farmers, setFarmers] = useState([]); // Ensure farmers starts as an empty array
     const [loading, setLoading] = useState(false);
     const [searchQuery, setSearchQuery] = useState(""); // State for search query
 
     useEffect(() => {
-        setLoading(true);
-        axios
-            .get('http://localhost:5556/farmers') // Update the API endpoint for farmers
-            .then((response) => {
-                setFarmers(response.data.data);
+        const fetchFarmers = async () => {
+            setLoading(true);
+            try {
+                const response = await axios.get('http://localhost:5556/farmers'); // Update the API endpoint for farmers
+                if (response.data && response.data.data) {
+                    setFarmers(response.data.data); // Set farmers only if data exists
+                } else {
+                    console.error("Invalid data format:", response.data);
+                }
+            } catch (error) {
+                console.error("Error fetching farmers:", error);
+            } finally {
                 setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-                setLoading(false);
-            });
+            }
+        };
+
+        fetchFarmers();
     }, []);
 
     // Handle search input change
