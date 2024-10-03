@@ -71,7 +71,6 @@ const App = () => {
 
       <Route path='/Pest&Disease/diseaseTable/addNew' element={<AddDisease />}/>
       <Route path='/Pest&Disease/diseaseTable' element={<DiseaseTable />}/>
-     
       <Route path='/Pest&Disease/diseaseTable/UpdateDisease/:id' element={<UpdateDisease />}/>
       <Route path='/Pest&Disease/selectCrop' element={<SelectCrop />}/>
       <Route path='/Pest&Disease/PredictDisease' element={<DiseasePrediction />}/>
