@@ -25,6 +25,10 @@ export default {
         'img2': "url('public/img2.jpg')"
       }
     },
+    boxShadow: {
+      'custom-bottom': '0px 50px 110px -15px brown',
+      'bottom-soft': '-15px 14px 33px 8px #663333',
+    },
   },
   plugins: [],
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import AnimationComponent from './Animation';
 import AnimationComponent1 from './Farmers';
 import Header from '../components/header';
+import Footer from '../components/footer';
 
 const Home = () => {
   return (
@@ -39,38 +40,39 @@ const Home = () => {
         </div>
       </div>
       <div>
-        <div className='bg-slate-300 h-96'>
+        <div className='bg-slate-300 h-[450px]'>
           <div className='text-center text-2xl font-bold mt-14 pt-9 mb-16'>Our Unique Features for Farmers</div>
           <div className='flex justify-center items-center w-11/12 m-auto mb-9'>
             <div className='w-1/3 ml-8'>
-              <div className='mb-6'>lorem Ipsum</div>
+              <div className='mb-6 font-bold'>Fertilizer Genarator</div>
               <div>Lorem ipsum dolor sit amet, consing eli do eiod, Lorem ipsum dolor sit amet</div>
             </div>
             <div className='w-1/3 ml-8'>
-              <div className='mb-6'>lorem Ipsum</div>
+              <div className='mb-6 font-bold'>Crop Prediction</div>
               <div>Lorem ipsum dolor sit amet, consing eli do eiod, Lorem ipsum dolor sit amet</div>
             </div>
             <div className='w-1/3 ml-8'>
-              <div className='mb-6'>lorem Ipsum</div>
+              <div className='mb-6 font-bold'>Pest & Decises Management</div>
               <div>Lorem ipsum dolor sit amet, consing eli do eiod, Lorem ipsum dolor sit amet</div>
             </div>
           </div>
           <div className='flex justify-center items-center w-11/12 m-auto mb-9'>
             <div className='w-1/3 ml-8'>
-              <div className='mb-6'>lorem Ipsum</div>
+              <div className='mb-6 font-bold'>Marketplace</div>
               <div>Lorem ipsum dolor sit amet, consing eli do eiod, Lorem ipsum dolor sit amet</div>
             </div>
             <div className='w-1/3 ml-8'>
-              <div className='mb-6'>lorem Ipsum</div>
+              <div className='mb-6 font-bold'>Crop Managenemt</div>
               <div>Lorem ipsum dolor sit amet, consing eli do eiod, Lorem ipsum dolor sit amet</div>
             </div>
             <div className='w-1/3 ml-8'>
-              <div className='mb-6'>lorem Ipsum</div>
+              <div className='mb-6 font-bold'>Report Geanration</div>
               <div>Lorem ipsum dolor sit amet, consing eli do eiod, Lorem ipsum dolor sit amet</div>
             </div>
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
