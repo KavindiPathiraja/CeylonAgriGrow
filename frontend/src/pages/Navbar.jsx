@@ -61,7 +61,7 @@ const NavBar = () => {
           </Link>
         </li>
         <li style={styles.navItem}>
-          <Link to="/Pest&Disease/selectCrop" style={styles.link}>
+          <Link to="/Pest&Disease/PredictDisease" style={styles.link}>
             Diseases
           </Link>
         </li>
