@@ -41,6 +41,8 @@ const ReadOneHome = () => {
         <li style={styles.navItem}><Link to="/">Fertilizer</Link></li>
         <li style={styles.navItem}><Link to="/Pest&Disease/PredictDisease">Diseases</Link></li>
         <li style={styles.navItem}><Link to="/products/allProducts">Products</Link></li>
+        <li style={styles.navItem}><Link to="/farmers/details/:FarmerID">Profile</Link></li>
+        <li style={styles.navItem}><Link to="/my-orders/:FarmerID">My Products</Link></li>
       </ul>
 
       <div style={styles.boxContainer}>
