@@ -21,7 +21,7 @@ const EditItems = () => {
     });
 
     useEffect(() => {
-        axios.get('http://localhost:5000/myCrop/' + id).then((response) => {
+        axios.get('http://localhost:5556/myCrop/' + id).then((response) => {
             const crops = response.data;
             setCropData(crops);
         }).catch((err) => {
@@ -40,7 +40,7 @@ const EditItems = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put('http://localhost:5000/crop/update/' + id, cropData)
+            const response = await axios.put('http://localhost:5556/crop/update/' + id, cropData)
             if (response.data.success) {
                 navigate('/allCrops');
                 alert(response.data.message);

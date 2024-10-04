@@ -9,7 +9,7 @@ const AllCrops = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:5000/myCrops').then((response) => {
+        axios.get('http://localhost:5556/myCrops').then((response) => {
             const crops = response.data;
             setCrops(crops);
         }).catch((err) => {
@@ -19,7 +19,7 @@ const AllCrops = () => {
 
     const deleteCrop = async (id) => {
         try {
-            await axios.delete('http://localhost:5000/crop/delete/' + id);
+            await axios.delete('http://localhost:5556/crop/delete/' + id);
         } catch (error) {
             console.log(error);
         }

@@ -18,7 +18,7 @@ function AddCrop() {
     const handlesubmit = async (e) => {
         e.preventDefault();
         try {
-            const crop = await axios.post("http://localhost:5000/addCrop", {
+            const crop = await axios.post("http://localhost:5556/addCrop", {
                 cropName,
                 growthStage,
                 soilType,
