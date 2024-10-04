@@ -92,7 +92,7 @@ const ReadDiseases = () => {
           <div className="text-lg font-semibold">No Records</div>
         ) : (
           <div ref={generatePDF} className="w-full max-w-6xl">
-            <h1 className="text-2xl font-bold mb-4">Disease Details</h1>
+            <h1 className="text-2xl font-bold mb-4">Pest & Disease Details</h1>
             <table className="min-w-full bg-white bg-opacity-50 border border-gray-300 rounded-lg shadow-md">
               <thead className="bg-gray-100 bg-opacity-70">
                 <tr>

@@ -125,18 +125,31 @@ const Checkout = () => {
     const handlePlaceOrder = async () => {
         if (!validateForm()) return; // Existing validation for customer and delivery info
         if (paymentMethod === 'Card' && !validateCardInfo()) return; // Validate card info
-
+    
         setLoading(true);
+        
+        // Map the products to include the necessary fields
+        const formattedProducts = products.map(product => ({
+            ProductNo: product.ProductNo,
+            ProductName: product.title, // Assuming you have a title field in your product
+            image: product.image,
+            Description: product.description, // Assuming you have a description field in your product
+            quantity: product.Quantity, // Save the quantity
+            SellingPrice: product.SellingPrice,
+            FarmerName: customerInfo.FarmerName, // If needed
+            FarmerEmail: customerInfo.Email, // If needed
+        }));
+    
         const orderData = {
             FarmerID,
-            products,
+            products: formattedProducts, // Use formatted products
             total: total || 0,
             customerInfo,
             deliveryInfo,
             paymentMethod,
             cardInfo,
         };
-
+    
         try {
             const response = await axios.post("http://localhost:5556/order", orderData);
             localStorage.removeItem("cart"); // Changed from `removeproduct` to `removeItem`
@@ -151,10 +164,7 @@ const Checkout = () => {
             setLoading(false);
         }
     };
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+    
 
     return (
         <div>

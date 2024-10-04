@@ -36,6 +36,9 @@ import CreateMyProducts from './pages/Farmers/CreateMyProducts';
 import EditMyProducts from './pages/Farmers/EditMyProducts';
 import DeleteMyProducts from './pages/Farmers/DeleteMyProducts';
 
+
+
+
 import CreateCard from "./pages/Card/CreateCard";
 import ItemCard from "./pages/Cart/ItemCard";
 import Main from "./pages/Cart/Main";
@@ -61,6 +64,7 @@ import SignUp from './pages/SignUp';
 import Home from './pages/Home';
 import Home1 from './pages/Home1';
 
+
 const App = () => {
   return (
     <>
@@ -79,11 +83,14 @@ const App = () => {
         <Route path='/Pest&Disease/diseaseTable/addNew' element={<AddDisease />} />
         <Route path='/Pest&Disease/diseaseTable' element={<DiseaseTable />} />
 
+        <Route path='/Pest&Disease/diseaseTable/addNew' element={<AddDisease />} />
+        <Route path='/Pest&Disease/diseaseTable' element={<DiseaseTable />} />
         <Route path='/Pest&Disease/diseaseTable/UpdateDisease/:id' element={<UpdateDisease />} />
         <Route path='/Pest&Disease/selectCrop' element={<SelectCrop />} />
         <Route path='/Pest&Disease/PredictDisease' element={<DiseasePrediction />} />
         <Route path='/Pest&Disease/selectCrop/:cropType' element={<DiseaseList />} />
         <Route path='/DiseaseList/:id' element={<SingleDisease />} />
+
 
         <Route path='/home' element={<Home />} />
 
