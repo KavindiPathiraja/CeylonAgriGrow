@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
+import Swal from 'sweetalert2';
 import Spinner from "../../components/Spinner";
 import ReportProduct from "../Products/ReportProduct";
 
@@ -11,7 +12,7 @@ const ShowFarmer = () => {
     const [farmer, setFarmer] = useState(null);
     const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState([]);
-    const [filteredProducts, setFilteredProducts] = useState([]); 
+    const [filteredProducts, setFilteredProducts] = useState([]);
     const [productsLoading, setProductsLoading] = useState(true);
     const navigate = useNavigate();
 
@@ -29,26 +30,42 @@ const ShowFarmer = () => {
             }
         };
 
-        const fetchFarmerProducts = async () => {
-            setProductsLoading(true);
-            try {
-                const response = await axios.get(`http://localhost:5556/products?farmerId=${farmerId}`);
-                const allProducts = response.data.data || [];
-                setProducts(allProducts);
+        fetchFarmerDetails();
+    }, [farmerId]);
 
-                const farmerEmail = farmer?.Email; 
-                const filtered = allProducts.filter(product => product.FarmerEmail === farmerEmail);
-                setFilteredProducts(filtered);
-                setProductsLoading(false);
-            } catch (error) {
-                console.error("Error fetching products:", error);
-                setProductsLoading(false);
+    useEffect(() => {
+        const fetchFarmerProducts = async () => {
+            if (farmer) {
+                setProductsLoading(true);
+                try {
+                    const response = await axios.get(`http://localhost:5556/products?farmerId=${farmerId}`);
+                    const allProducts = response.data.data || [];
+                    setProducts(allProducts);
+
+                    const filtered = allProducts.filter(product => product.FarmerEmail === farmer.Email);
+                    setFilteredProducts(filtered);
+                    setProductsLoading(false);
+
+                    // Check for products with quantity less than 10
+                    filtered.forEach((product) => {
+                        if (product.Quantity < 10) {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Low Stock Alert',
+                                text: `The quantity of product "${product.ProductName}" is below 10. Please restock.`,
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    });
+                } catch (error) {
+                    console.error("Error fetching products:", error);
+                    setProductsLoading(false);
+                }
             }
         };
 
-        fetchFarmerDetails();
         fetchFarmerProducts();
-    }, [farmerId, farmer?.Email]);
+    }, [farmer, farmerId]);
 
     const handleEditProduct = (productId) => {
         navigate(`/myProducts/edit/${productId}`);
@@ -59,7 +76,7 @@ const ShowFarmer = () => {
         if (confirmDelete) {
             try {
                 await axios.delete(`http://localhost:5556/products/${productId}`);
-                setFilteredProducts(filteredProducts.filter(product => product._id !== productId)); 
+                setFilteredProducts(filteredProducts.filter(product => product._id !== productId));
                 alert("Product deleted successfully.");
             } catch (error) {
                 console.error("Error deleting product:", error);
@@ -131,7 +148,7 @@ const ShowFarmer = () => {
                                     <td className='p-4 border border-green-300'>
                                         <img src={product.image} alt="Product Pic" className="w-16 h-16 object-cover rounded-full" />
                                     </td>
-                                        <td className='p-2 border border-green-300'>
+                                    <td className='p-2 border border-green-300'>
                                         <div className="h-24 overflow-auto">
                                             {product.Description}
                                         </div>
@@ -156,7 +173,7 @@ const ShowFarmer = () => {
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="7" className='p-4 text-center'>No products found.</td>
+                                <td colSpan="8" className='p-4 text-center'>No products found.</td>
                             </tr>
                         )}
                     </tbody>

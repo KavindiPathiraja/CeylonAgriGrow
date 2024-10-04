@@ -90,7 +90,8 @@ const EditFarmers = () => {
 
   return (
     <div className='p-6 bg-gray-100 min-h-screen'>
-      <BackButton destination={`/farmers/details/:id`} />
+      
+      <BackButton destination={`/farmers/details/${id}`} />
       <h1 className="text-3xl my-4 text-green-800">Edit Farmer</h1>
       {loading ? <Spinner /> : ''}
       <div className="flex flex-col border-2 border-green-500 rounded-lg p-6 mx-auto bg-white shadow-lg w-4/5 max-w-3xl">
