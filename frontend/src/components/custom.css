@@ -168,3 +168,24 @@ span:nth-child(18) {
     animation: fadeInUp 3s ease-out;
     /* Smooth 2-second entrance */
 }
+
+/* Fade and Scale Animation */
+@keyframes fadeScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+        /* Start small */
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        /* End at normal size */
+    }
+}
+
+/* Apply animation to the element */
+.animate-fade-scale {
+    animation: fadeScale 0.6s ease-in-out forwards;
+    /* Duration and easing */
+}

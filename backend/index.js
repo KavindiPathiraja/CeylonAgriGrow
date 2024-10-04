@@ -19,7 +19,7 @@ import Order_Route from './routes/Order_Route.js';
 import cropsRouter from "./routes/cropsRoute.js";
 
 // fertilizer function
-// import cropRoutes from "./routes/cropRoute.js";
+import cropRoutesF from "./routes/cropRoute.js";
 import userRoutes from "./routes/userRoute.js";
 import authRoutes from "./routes/authRoute.js";
 
@@ -42,7 +42,7 @@ app.use('/farmers', Farmers_Route);
 app.use('/crops', cropsRouter);
 app.use('/card', Card_Route);
 app.use('/order', Order_Route);
-app.use('/', cropRoutes);
+app.use('/', cropRoutesF);
 app.use('/', authRoutes);
 app.use('/', userRoutes);
 

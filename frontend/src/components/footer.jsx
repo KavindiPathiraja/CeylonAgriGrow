@@ -5,9 +5,9 @@ const Footer = () => {
         <footer class="w-full py-14">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="max-w-3xl mx-auto">
-                    <a class="flex justify-center ">
+                    <div class="flex justify-center text-primary text-4xl font-Carnero -mt-4">
                         Celoyn AgriGrow
-                    </a>
+                    </div>
                     <ul class="text-lg flex items-center justify-center flex-col gap-7 md:flex-row md:gap-12 transition-all duration-500 py-8 mb-10 border-b border-gray-200">
                         <li><a href="#" class="text-gray-800 hover:text-gray-900">Ceylon</a></li>
                         <li><a href="#" class=" text-gray-800 hover:text-gray-900">Products</a></li>

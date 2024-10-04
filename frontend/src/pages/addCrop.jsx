@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./add service.css";
 import { toast } from "react-hot-toast";
+import Header from "../components/header";
+import Footer from "../components/footer";
 
 function AddCrop() {
     const [cropName, setCropName] = useState("");
@@ -54,8 +56,9 @@ function AddCrop() {
 
     return (
         <>
+            <Header />
             <div className="bg-[url('/bg.jpg')] bg-cover h-screen">
-                <div className="flex justify-center bg-primary w-2/5 m-auto pt-8 pb-8 rounded-lg opacity-90">
+                <div className="flex justify-center bg-primary w-2/5 m-auto pt-8 pb-8 rounded-lg opacity-90 mt-12">
                     <form className="w-full max-w-lg" onSubmit={handlesubmit}>
                         <div className="flex flex-wrap -mx-3 mb-6">
                             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -148,6 +151,7 @@ function AddCrop() {
                     </form>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }
