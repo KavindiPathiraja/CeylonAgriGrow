@@ -22,3 +22,22 @@
   font-family: 'Pacifico';
   src: url(./assets/Pacifico.ttf);
 }
+
+@font-face {
+  font-family: 'Alpino';
+  src: url(./assets/Alpino-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Zodiak';
+  src: url(./assets/Zodiak-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Zodiak-Bold';
+  src: url(./assets/Zodiak-Bold.ttf);
+}
+
+body {
+  font-family: 'Zodiak', sans-serif;
+}

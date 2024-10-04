@@ -42,7 +42,7 @@ app.use('/farmers', Farmers_Route);
 app.use('/crops', cropsRouter);
 app.use('/card', Card_Route);
 app.use('/order', Order_Route);
-// app.use('/', cropRoutes);
+app.use('/', cropRoutes);
 app.use('/', authRoutes);
 app.use('/', userRoutes);
 
