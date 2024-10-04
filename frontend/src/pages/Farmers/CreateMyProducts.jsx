@@ -80,7 +80,8 @@ const CreateProducts = () => {
 
     return (
         <div className="p-6 bg-gray-100 min-h-screen">
-            <BackButton destination='/farmers/details/:id' />
+            
+      <BackButton destination={`/farmers/details/${id}`} />
             <h1 className="text-3xl my-4 text-green-800">Create Products</h1>
             {loading && <Spinner />}
             {error && <p className="text-red-600">{error}</p>}

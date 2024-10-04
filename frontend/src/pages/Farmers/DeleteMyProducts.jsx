@@ -31,7 +31,8 @@ const DeleteProduct = () => {
   return (
     <div className='p-6 bg-gray-100 min-h-screen'>
       {/* Back button to navigate back */}
-      <BackButton destination='/farmers/details/:id'/>
+      
+      <BackButton destination={`/farmers/details/${id}`} />
       <h1 className='text-3xl my-4 text-red-800'>Delete Product</h1>
       {/* Display a spinner while the delete operation is in progress */}
       {loading ? <Spinner /> : ''}
