@@ -22,7 +22,7 @@ const CropTypeDropdown = ({ onSelectCropType }) => {
             <select 
                 onChange={(e) => onSelectCropType(e.target.value)} 
                 defaultValue="" 
-                className="w-1000 h-12 px-4 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
+                className="w-[300%] h-[4.2rem] px-4 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
             >
                 <option value="" disabled>Select Crop Type</option>
                 {cropTypes.map((cropType, index) => (
