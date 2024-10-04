@@ -23,10 +23,13 @@ const Home1 = () => {
                     <span>manage</span>
                     <span>their</span>
                     <span>Crops</span>
+                    <span>Diseces</span>
                     <span>&</span>
                     <span>Pesticieds</span>
+                    <span>Crop Predictions &</span>
+                    <span>Marketplace</span>
                 </div>
-                <div className='text-3xl font-Pacifico text-white tracking-wider text-center pt-32 subheading-animation'>
+                <div className='text-3xl font-Pacifico text-white tracking-wider text-center pt-44 subheading-animation'>
                     Discover Our Services
                 </div>
             </div>
@@ -51,16 +54,16 @@ const Home1 = () => {
             <div className="flex justify-center">
                 <img src='public/aboutus.jpg' className='w-2/5 rounded-md'></img>
                 <div className='text-center w-2/5 ml-5'>
-                    <div className='text-2xl font-Zodiak-Bold mb-4'>About US</div>
-                    <p>
+                    <div className='text-3xl font-Zodiak-Bold mb-4'>About US</div>
+                    <p className='text-lg'>
                         "Our platform is dedicated to helping farmers make smarter, more informed decisions. We provide tailored fertilizer recommendations, accurate crop predictions, and real-time insights on pest and disease management. Our mission is to support farmers in maximizing their yields, improving productivity, and promoting sustainable farming practices through easy-to-use, technology-driven solutions."
                     </p>
                     <div className='bg-primary w-2/4 h-11 rounded-md m-auto mt-9 font-semibold flex justify-center items-center text-white'>Read More</div>
                 </div>
             </div>
             <div>
-                <div className='bg-secondary h-[650px]'>
-                    <div className='text-center text-2xl font-Zodiak-Bold mt-14 pt-9 mb-16'>Our Unique Features for Farmers</div>
+                <div className='bg-secondary h-[600px]'>
+                    <div className='text-center text-3xl font-Zodiak-Bold mt-14 pt-9 mb-16'>Our Unique Features for Farmers</div>
                     <div className='flex justify-center items-center w-11/12 m-auto mb-9'>
                         <div className='w-1/3 ml-8 animate-fade-scale'> {/* Added the animation class */}
                             <img src='public/fertilizer1.png' className='w-20 h-20 m-auto mb-3'></img>

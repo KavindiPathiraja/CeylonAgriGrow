@@ -9,7 +9,7 @@ const Header = () => {
                     <div className='w-2/5 logo'>
                         <div className='text-secondary text-4xl font-Carnero -mt-4'><a href='/'>Ceylon Agri Grow</a></div>
                     </div>
-                    <div className='menu menu1 w-1/2'>
+                    <div className='menu menu1 w-1/2 text-lg'>
                         <ul className='flex'>
                             <li className='ml-7 font-Zodiak-Bold'><a href='/myCrops'>Fertilizer</a></li>
                             <li className='ml-7 font-Zodiak-Bold'><a href='/Pest&Disease/PredictDisease'>Pest & Decises</a></li>

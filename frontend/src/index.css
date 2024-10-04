@@ -30,12 +30,12 @@
 
 @font-face {
   font-family: 'Zodiak';
-  src: url(./assets/Zodiak-Regular.ttf);
+  src: url(./assets/CabinetGrotesk-Medium.ttf);
 }
 
 @font-face {
   font-family: 'Zodiak-Bold';
-  src: url(./assets/Zodiak-Bold.ttf);
+  src: url(./assets/CabinetGrotesk-Bold.ttf);
 }
 
 body {
