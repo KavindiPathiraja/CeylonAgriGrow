@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import Spinner from '../components/Spinner';
-import backgroundImage from '../assets/table_bg.jpg'; // Import the background image
-import BackButton from '../components/BackButton';
+import Spinner from '../../components/Spinner';
+import backgroundImage from '../../assets/table_bg.jpg'; // Import the background image
+import BackButton from '../../components/BackButton';
 
 const ShowCrop = () => {
   const [crop, setCrop] = useState({});
@@ -13,9 +13,9 @@ const ShowCrop = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:5556/crops/getcrops/${id}`)
+      .get(`http://localhost:5556/crops/getcrops/${id}`) // Fixed the backticks
       .then((response) => {
-        setCrop(response.data);
+        setCrop(response.data.crops); // Adjusted to match the new response structure
         setLoading(false);
       })
       .catch((error) => {
@@ -36,54 +36,54 @@ const ShowCrop = () => {
     >
       <div className='flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4 bg-white shadow-lg'>
         <h1 className='text-3xl mb-4 text-center'>Show Crop Details</h1>
-        <BackButton destination='crops/getall'/>
+        <BackButton destination='/crops/getall'/>
         {loading ? (
           <Spinner />
         ) : (
           <>
             <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>Id</span>
-              <span>{crop._id}</span>
+              <span className='text-xl mr-4 text-gray-500'>Id:</span>
+              <span>{id}</span> {/* Displaying the ID directly as it was not included in the API response */}
             </div>
             <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>Province</span>
+              <span className='text-xl mr-4 text-gray-500'>Province:</span>
               <span>{crop.province}</span>
             </div>
             <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>District</span>
+              <span className='text-xl mr-4 text-gray-500'>District:</span>
               <span>{crop.district}</span>
             </div>
             <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>Land Area</span>
+              <span className='text-xl mr-4 text-gray-500'>Land Area:</span>
               <span>{crop.landarea}</span>
             </div>
             <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>Distance to Water</span>
+              <span className='text-xl mr-4 text-gray-500'>Distance to Water:</span>
               <span>{crop.distancewater}</span>
             </div>
             <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>Soil Type</span>
+              <span className='text-xl mr-4 text-gray-500'>Soil Type:</span>
               <span>{crop.soiltype}</span>
             </div>
             <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>Soil pH</span>
+              <span className='text-xl mr-4 text-gray-500'>Soil pH:</span>
               <span>{crop.soilph}</span>
             </div>
             <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>Rainfall</span>
+              <span className='text-xl mr-4 text-gray-500'>Rainfall:</span>
               <span>{crop.rainfall}</span>
             </div>
             <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>Past Crop</span>
+              <span className='text-xl mr-4 text-gray-500'>Past Crop:</span>
               <span>{crop.pastCrop}</span>
             </div>
             <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>Labour</span>
+              <span className='text-xl mr-4 text-gray-500'>Labour:</span>
               <span>{crop.labour}</span>
             </div>
             <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>Date of Planting</span>
-              <span>{new Date(crop.dateOfPlanting).toString()}</span>
+              <span className='text-xl mr-4 text-gray-500'>Date of Planting:</span>
+              <span>{new Date(crop.dateOfPlanting).toLocaleDateString()}</span> {/* Changed to a more user-friendly format */}
             </div>
           </>
         )}

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import CreateCrop from './pages/CreateCrop';
-import EditCrop from './pages/EditCrop';
-import ShowCrop from './pages/ShowCrop';
-import DeleteCrop from './pages/DeleteCrop';
-import AllCrop from './pages/AllCrop';
-import ReportCrop from './pages/ReportCrop';
+import CreateCrop from './pages/CropsPrediction/CreateCrop';
+import EditCrop from './pages/CropsPrediction/EditCrop';
+import ShowCrop from './pages/CropsPrediction/ShowCrop';
+import DeleteCrop from './pages/CropsPrediction/DeleteCrop';
+import AllCrop from './pages/CropsPrediction/AllCrop';
+import ReportCrop from './pages/CropsPrediction/ReportCrop';
 
 
 import AddDisease from './pages/Disease/AddDisease'

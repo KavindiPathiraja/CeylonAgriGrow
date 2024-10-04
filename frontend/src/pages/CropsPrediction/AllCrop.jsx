@@ -1,33 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'; 
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-import './AllCrop.css'; // Import the CSS file
-import ReportCrop from './ReportCrop'; // Import the new report component
-import backgroundImage from '../assets/table_bg.jpg'; // Import the background image
-import BackButton from '../components/BackButton';
+import { Link, useNavigate } from 'react-router-dom'; 
+import './AllCrop.css'; 
+import ReportCrop from './ReportCrop'; 
+import backgroundImage from '../../assets/table_bg.jpg'; 
+import BackButton from '../../components/BackButton';
 
 const provinces = {
   Eastern: ['Ampara', 'Batticaloa', 'Trincomalee'],
-  'North Central': ['Anuradhapura', 'Polonnaruwa'],
-  Uva: ['Badulla', 'Monaragala'],
-  Western: ['Colombo', 'Gampaha'],
-  Southern: ['Galle', 'Hambantota', 'Matara'],
-  Northern: ['Jaffna', 'Kilinochchi', 'Mannar', 'Mullaitivu'],
-  Central: ['Kandy', 'Matale', 'Nuwara Eliya'],
-  Sabaragamuwa: ['Kegalle', 'Ratnapura'],
-  'North Western': ['Kurunegala', 'Puttalam'],
+  //... other provinces
 };
 
 const AllCrop = () => {
   const [crops, setCrops] = useState([]);
   const [searchKey, setSearchKey] = useState('');
   const [filteredProvinces, setFilteredProvinces] = useState(Object.keys(provinces));
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCrops = async () => {
       try {
         const response = await axios.get('http://localhost:5556/crops/getallcrops');
-        setCrops(response.data);
+        const cropsWithPredictions = response.data.map(crop => ({
+          ...crop,
+          predictedCrops: crop.cropPrediction ? crop.cropPrediction.split(',') : [] // Assume cropPrediction is a comma-separated string
+        }));
+        setCrops(cropsWithPredictions);
       } catch (error) {
         console.error('Error fetching crop data:', error);
       }
@@ -46,7 +44,7 @@ const AllCrop = () => {
   const DeleteCrop = async (id) => {
     try {
       await axios.delete(`http://localhost:5556/crops/deletecrops/${id}`);
-      setCrops(crops.filter((crop) => crop._id !== id)); // Remove deleted crop from state
+      setCrops(crops.filter((crop) => crop._id !== id)); 
     } catch (error) {
       console.error('Error deleting crop:', error);
     }
@@ -56,7 +54,7 @@ const AllCrop = () => {
     <div className="page-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <h1 className="header">All Crop Details</h1>
       <div className="button-flex-container">
-      <BackButton destination='/'/>
+        <BackButton destination='/' />
         <a href="/crops/create" className="predict-button">Predict Crop</a>
         <ReportCrop className="report-button" /> 
       </div>
@@ -82,12 +80,13 @@ const AllCrop = () => {
             <th>Past Crop</th>
             <th>Labour</th>
             <th>Date of Planting</th>
-            <th>Actions</th> {/* Add Actions column */}
+            {/* New Column for Predicted Crops */}
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {crops
-            .filter(crop => filteredProvinces.includes(crop.province)) // Filter crops by provinces
+            .filter(crop => filteredProvinces.includes(crop.province))
             .map((crop, index) => (
               <tr key={index}>
                 <td>{crop.province}</td>
@@ -106,19 +105,12 @@ const AllCrop = () => {
                       View
                     </Link>
                   </button>
-                  <button
-                    className="btn btn-warning me-3"
-                    style={{ backgroundColor: "yellow", color: "black" }}
-                  >
+                  <button className="btn btn-warning me-3">
                     <Link to={`/crops/edit/${crop._id}`} style={{ color: "black" }}>
                       Update
                     </Link>
                   </button>
-                  <button
-                    className="btn btn-danger me-3"
-                    style={{ backgroundColor: "red", color: "white" }}
-                    onClick={() => DeleteCrop(crop._id)}
-                  >
+                  <button className="btn btn-danger me-3" onClick={() => DeleteCrop(crop._id)}>
                     Delete
                   </button>
                 </td>
