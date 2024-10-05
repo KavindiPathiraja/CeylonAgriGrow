@@ -61,7 +61,7 @@ const AnimatedSVG = () => {
                     </svg>
                 </div>
                 <div className='w-8/12 ml-5'>
-                    <h1 className='text-5xl font-Carnero mb-5'>Scroll down to see the animation</h1>
+                    <h1 className='text-5xl font-Carnero mb-5'>Learn more about Farming</h1>
                     <p>
                         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur voluptas error omnis sint et rerum beatae, hic quaerat tempora placeat eligendi, vitae pariatur nisi quidem? Harum quas numquam tempore nam!
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas eos quae autem assumenda deleniti dignissimos quasi blanditiis fuga accusamus quo est ipsa sed nisi, temporibus atque inventore ipsam. Corrupti, autem.
