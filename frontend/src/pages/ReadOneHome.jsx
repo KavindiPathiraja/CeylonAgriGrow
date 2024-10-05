@@ -42,10 +42,7 @@ const ReadOneHome = () => {
           </div>
         ))}
       </div>
-
-      <div className='mt-9 h-28'>
-        <div className='text-center'>Lorem ipsum dolor sit consect eiusmod</div>
-      </div>
+      
       <div className="flex justify-center">
         <img src='/aboutus.jpg' className='w-2/5 rounded-md' alt="About Us" />
         <div className='text-center w-2/5 ml-5'>
