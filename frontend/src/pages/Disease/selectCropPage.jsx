@@ -38,7 +38,7 @@ const SomeComponent = () => {
                 </div>
                 <p className="mt-4 text-4xl">Selected Crop Type: {selectedCropType}</p>
                 <button 
-                    className="mt-8 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    className="mt-8 bg-primary hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
                     onClick={handleClick}
                 >
                     Find
