@@ -44,21 +44,18 @@ const CreateCrops = () => {
       labour: Number(labour),
       dateOfPlanting,
     };
-    
+  
     setLoading(true);
-    
+  
+    // Step 1: Post the crop data and get the prediction
     axios
       .post('http://localhost:5556/crops/addcrops', data)
       .then((response) => {
         setLoading(false);
         const cropPrediction = response.data.cropPrediction;
-        alert(`Predicted Crops:\n${cropPrediction}`); 
-        
-        // Optional: Save predicted crops to your database
-        axios.post('http://localhost:5556/crops/savepredicted', {
-          predictedCrops: cropPrediction,
-        });
-        navigate('/crops/getall');
+  
+        // Step 2: Navigate to the PredictedCrop page with prediction data
+        navigate('/crops/predicted', { state: { cropPrediction } });
       })
       .catch((error) => {
         setLoading(false);
@@ -66,6 +63,8 @@ const CreateCrops = () => {
         console.log(error);
       });
   };
+  
+  
   
   return (
     <div
