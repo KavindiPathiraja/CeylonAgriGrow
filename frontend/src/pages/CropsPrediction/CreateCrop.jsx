@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import backgroundImage from '../../assets/table_bg.jpg'; // Import the background image
 import BackButton from '../../components/BackButton';
+import header from '../../components/header';
+import footer from '../../components/footer';
 
 const provinces = {
   Eastern: ['Ampara', 'Batticaloa', 'Trincomalee'],
@@ -75,12 +77,12 @@ const CreateCrops = () => {
         <h1 className="text-3xl my-4 text-white">Create Crop</h1> {/* Text changed to white for contrast */}
         <BackButton destination='/crops/getall'/>
         {loading ? <Spinner /> : ''}
-        <div className="border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto bg-white">
+        <div className="border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto bg-primary">
           {/* All form elements in one column */}
           <div className="flex flex-col">
             {/* Province dropdown */}
             <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Province</label>
+              <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2">Province</label>
               <select
                 value={province}
                 onChange={(e) => setProvince(e.target.value)}
@@ -98,7 +100,7 @@ const CreateCrops = () => {
             {/* District dropdown */}
             {province && (
               <div className="my-4">
-                <label className="text-xl mr-4 text-gray-500">District</label>
+                <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2">District</label>
                 <select
                   value={district}
                   onChange={(e) => setDistrict(e.target.value)}
@@ -116,9 +118,9 @@ const CreateCrops = () => {
 
             {/* Land Area */}
             <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Land Area</label>
+              <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2">Land Area</label>
               <div>
-                <label className="mr-4">
+                <label className="mr-4 text-white">
                   <input
                     type="radio"
                     value="Over 3 Ha"
@@ -127,7 +129,7 @@ const CreateCrops = () => {
                   />
                   Over 3 Ha
                 </label>
-                <label>
+                <label className="mr-4 text-white">
                   <input
                     type="radio"
                     value="Less than 3 Ha"
@@ -141,9 +143,9 @@ const CreateCrops = () => {
 
             {/* Distance to water */}
             <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Distance to Water</label>
+              <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2">Distance to Water</label>
               <div>
-                <label className="mr-4">
+                <label className="mr-4 text-white">
                   <input
                     type="radio"
                     value="Over 2 km"
@@ -152,7 +154,7 @@ const CreateCrops = () => {
                   />
                   Over 2 km
                 </label>
-                <label>
+                <label className="mr-4 text-white">
                   <input
                     type="radio"
                     value="Less than 2 km"
@@ -166,9 +168,9 @@ const CreateCrops = () => {
 
             {/* Soil Type */}
             <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Soil Type</label>
+              <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2">Soil Type</label>
               <div>
-                <label className="mr-4">
+                <label className="mr-4 text-white">
                   <input
                     type="radio"
                     value="Sandy"
@@ -177,7 +179,7 @@ const CreateCrops = () => {
                   />
                   Sandy
                 </label>
-                <label className="mr-4">
+                <label className="mr-4 text-white">
                   <input
                     type="radio"
                     value="Clayey"
@@ -186,7 +188,7 @@ const CreateCrops = () => {
                   />
                   Clayey
                 </label>
-                <label>
+                <label className="mr-4 text-white">
                   <input
                     type="radio"
                     value="Loamy"
@@ -200,9 +202,9 @@ const CreateCrops = () => {
 
             {/* Soil pH is Acidic? */}
             <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Soil pH is Acidic?</label>
+              <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2">Soil pH is Acidic?</label>
               <div>
-                <label className="mr-4">
+                <label className="mr-4 text-white">
                   <input
                     type="radio"
                     value="Yes"
@@ -211,7 +213,7 @@ const CreateCrops = () => {
                   />
                   Yes
                 </label>
-                <label>
+                <label className="mr-4 text-white">
                   <input
                     type="radio"
                     value="No"
@@ -225,9 +227,9 @@ const CreateCrops = () => {
 
             {/* Rainfall */}
             <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Rainfall</label>
+              <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2">Rainfall</label>
               <div>
-                <label className="mr-4">
+                <label className="mr-4 text-white">
                   <input
                     type="radio"
                     value="Frequent"
@@ -236,7 +238,7 @@ const CreateCrops = () => {
                   />
                   Frequent
                 </label>
-                <label className="mr-4">
+                <label className="mr-4 text-white">
                   <input
                     type="radio"
                     value="Mediate"
@@ -245,7 +247,7 @@ const CreateCrops = () => {
                   />
                   Mediate
                 </label>
-                <label>
+                <label className="mr-4 text-white">
                   <input
                     type="radio"
                     value="Low"
@@ -259,7 +261,7 @@ const CreateCrops = () => {
 
             {/* Past Crop */}
             <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Past Crop</label>
+              <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2">Cultivated Past Crop</label>
               <input
                 type="text"
                 value={pastCrop}
@@ -271,7 +273,7 @@ const CreateCrops = () => {
 
             {/* Labour */}
             <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Labour</label>
+              <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2">Estimated Labour Invested</label>
               <input
                 type="number"
                 value={labour}
@@ -283,7 +285,7 @@ const CreateCrops = () => {
 
             {/* Date of Planting */}
             <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Date of Planting</label>
+              <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2">Date of Planting</label>
               <input
                 type="date"
                 value={dateOfPlanting}
