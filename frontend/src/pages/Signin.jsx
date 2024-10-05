@@ -14,12 +14,22 @@ function Login() {
   const [FarmerID, setFarmerID] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false); // Added loading state
+  const [isAdmin, setIsAdmin] = useState(false); // New state to toggle between farmer and admin login
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const credentials = { FarmerID, Password: password };
+    
+    let credentials;
+    
+    if (isAdmin) {
+      // Admin login credentials
+      credentials = { FarmerID: 'admin', Password: 'admin' };
+    } else {
+      // Farmer login credentials
+      credentials = { FarmerID, Password: password };
+    }
 
     setLoading(true); // Set loading to true when starting login
 
@@ -29,8 +39,14 @@ function Login() {
 
       if (userData) {
         localStorage.setItem('farmerId', userData._id); // Store farmer ID in local storage
-        navigate(`/ReadOneHome/${FarmerID}`);
-        alert(`Welcome back, ${userData.FarmerName}!`);
+        
+        if (isAdmin) {
+          navigate(`/admin`); // Navigate to admin dashboard
+        } else {
+          navigate(`/ReadOneHome/${FarmerID}`);
+        }
+
+        alert(`Welcome back, ${userData.FarmerName || 'Admin'}!`);
       } else {
         alert("Invalid credentials");
       }
@@ -43,67 +59,66 @@ function Login() {
   };
 
   return (
-    <>
-      <div className="container2">
-        <div className="user_login">
-          <h2>Login To Your Account</h2>
-          <form onSubmit={onLogin}>
-            <p className="p">Farmer ID</p> {/* Updated label */}
-            <input
-              type="text"
-              name="FarmerID"
-              id="FarmerID"
-              onChange={(e) => setFarmerID(e.target.value)}
-              required
-            />
-            <p className="p">Password</p>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <br />
-            <Link to="/forgotpassword">
-              <p className="trouble">Forgot password?</p>
-            </Link>
-            <button className="btn" disabled={loading}>
-              {loading ? "Loading..." : "Sign In"}
-            </button>
-          </form>
-          <p className="info">
-            Don't Have an Account{" "}
-            <Link to="/farmers/create">
-              <b>Sign Up</b>
-            </Link>{" "}
-            here
-          </p>
-          <div className="signin">-— or Sign in with —-</div>
-          <span id="Signinbtn">
-            <div id="customBtn">
-              <span className="icon2"></span>
-              <span className="buttonText">Google</span>
-            </div>
-            <div id="customBtn1">
-              <span className="icon1"></span>
-              <span className="buttonText1">Facebook</span>
-            </div>
-          </span>
-
-          <p className="info">
-        Don't Have an Account{" "}
-        <Link to="/farmers/create">
-          <b>Sign Up</b>
-        </Link>{" "}
-        here
-      </p>
-        </div>
+    <div className="container2">
+      <div className="user_login">
+        <h2>{isAdmin ? "Admin Login" : "Farmer Login"}</h2>
+        <form onSubmit={onLogin}>
+          <p className="p">Farmer ID</p> {/* Updated label */}
+          <input
+            type="text"
+            name="FarmerID"
+            id="FarmerID"
+            onChange={(e) => setFarmerID(e.target.value)}
+            required
+          />
+          <p className="p">Password</p>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <br />
+          <Link to="/forgotpassword">
+            <p className="trouble">Forgot password?</p>
+          </Link>
+          <button className="btn" disabled={loading}>
+            {loading ? "Loading..." : "Sign In"}
+          </button>
+        </form>
+        <p className="info">
+          Don't Have an Account{" "}
+          <Link to="/farmers/create">
+            <b>Sign Up</b>
+          </Link>{" "}
+          here
+        </p>
+        <div className="signin">-— or Sign in with —-</div>
+        <span id="Signinbtn">
+          <div id="customBtn">
+            <span className="icon2"></span>
+            <span className="buttonText">Google</span>
+          </div>
+          <div id="customBtn1">
+            <span className="icon1"></span>
+            <span className="buttonText1">Facebook</span>
+          </div>
+        </span>
+        <p className="info">
+          Don't Have an Account{" "}
+          <Link to="/farmers/create">
+            <b>Sign Up</b>
+          </Link>{" "}
+          here
+        </p>
         
+        <button onClick={() => setIsAdmin(!isAdmin)} className="toggle-btn">
+          Switch to {isAdmin ? "Farmer" : "Admin"} Login
+        </button>
       </div>
-      
-    </>
+    </div>
   );
-};
+}
 
 export default Login; // Changed export to match the function name
