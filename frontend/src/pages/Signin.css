@@ -1,18 +1,13 @@
-body {
-  font-family: "JetBrains Mono", monospace;
-  margin: 0; /* Remove default margin */
-  height: 100vh; /* Set body height to full viewport */
-  background: url("/img2.jpg") no-repeat center center fixed; /* Set background image */
-  background-size: cover; /* Ensure the image covers the entire body */
-}
-
 .container2 {
   display: flex;
   justify-content: center; /* Center the login form horizontally */
   align-items: center; /* Center the login form vertically */
   height: 100vh; /* Make container full height */
   width: 100%; /* Full width of the viewport */
-  
+  margin: 0; /* Remove default margin */
+  height: 100vh; /* Set body height to full viewport */
+  background: url("/img2.jpg") no-repeat center center fixed; /* Set background image */
+  background-size: cover; /* Ensure the image covers the entire body */
   margin: 0; /* Remove margins */
   padding: 0; /* Remove padding */
 }
