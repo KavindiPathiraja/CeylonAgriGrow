@@ -9,7 +9,7 @@ import ShowCrop from './pages/CropsPrediction/ShowCrop';
 import DeleteCrop from './pages/CropsPrediction/DeleteCrop';
 import AllCrop from './pages/CropsPrediction/AllCrop';
 import ReportCrop from './pages/CropsPrediction/ReportCrop';
-
+import PredictedCrop from './pages/CropsPrediction/Predictedcrop';
 // Disease Pages
 import AddDisease from './pages/Disease/AddDisease';
 import DiseaseTable from './pages/Disease/diseaseTable';
@@ -85,6 +85,7 @@ const App = () => {
         <Route path='/crops/getall' element={<AllCrop />} />
         <Route path='/crops/report' element={<ReportCrop />} />
         <Route path='/crops/delete/:id' element={<DeleteCrop />} />
+        <Route path='/crops/predicted' element={<PredictedCrop/>}/>
 
         {/* Disease Routes */}
         <Route path='/Pest&Disease/diseaseTable/addNew' element={<AddDisease />} />
