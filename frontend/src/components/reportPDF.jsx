@@ -47,7 +47,7 @@ const ReportPDF = ({ crops }) => (
 
 const PDF = ({ crops }) => {
     return (
-        <div className="pdf-download bg-white h-10 w-56 rounded-md text-center m-auto flex justify-center items-center">
+        <div className="pdf-download bg-white h-10 w-56 rounded-md text-center flex justify-center items-center absolute top-28 left-3">
             <PDFDownloadLink document={<ReportPDF crops={crops} />} fileName="crops_report.pdf" className='items-center'>
                 {({ loading }) => (loading ? 'Generating PDF...' : 'Download Crops Report PDF')}
             </PDFDownloadLink>
