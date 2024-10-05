@@ -54,7 +54,7 @@ const Home1 = () => {
             </div>
 
             <div className='mt-9 h-28'>
-                <div className='text-center'>Lorem ipsum dolor sit consect eiusmod</div>
+                <div className='text-center'>In collabaration with Ceylon Agriculture Deapartment</div>
             </div>
             <div className="flex justify-center">
                 <img src='public/aboutus.jpg' className='w-2/5 rounded-md' alt="About Us" />
@@ -89,7 +89,7 @@ const Home1 = () => {
                         <div className='w-1/3 ml-8'>
 
                             <img src='public/pest.png' className='w-20 h-20 m-auto mb-3'></img>
-                            <div className='mb-6 font-Zodiak-Bold text-center'>Pest & Decises Management</div>
+                            <div className='mb-6 font-Zodiak-Bold text-center'>Pest & Diseases Management</div>
                             <div className='text-center'>This feature helps identify potential pest infestations and plant diseases, providing solutions for early intervention.</div>
                         </div>
                     </div>
@@ -107,7 +107,7 @@ const Home1 = () => {
                         </div>
                         <div className='w-1/3 ml-8'>
                             <img src='public/report.png' className='w-20 h-20 m-auto mb-3'></img>
-                            <div className='mb-6 font-Zodiak-Bold text-center'>Report Geanration</div>
+                            <div className='mb-6 font-Zodiak-Bold text-center'>Report Generation</div>
                             <div className='text-center'>The Report Generation feature creates detailed reports on farming activities, productivity, and resource usage to support informed decision-making.</div>
                         </div>
                     </div>
