@@ -83,15 +83,17 @@ function Login() {
               <span className="buttonText1">Facebook</span>
             </div>
           </span>
-        </div>
-      </div>
-      <p className="info">
+          <p className="info">
         Don't Have an Account{" "}
         <Link to="/farmers/create">
           <b>Sign Up</b>
         </Link>{" "}
         here
       </p>
+        </div>
+        
+      </div>
+      
     </>
   );
 };
