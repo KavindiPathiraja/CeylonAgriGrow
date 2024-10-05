@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Signin.css";
 import axios from "axios";
@@ -11,58 +10,59 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import OAuth from "../components/OAuth";
 
-const SignIn = () => {
-  const [formData, setformData] = useState({});
-  const { loading, error } = useSelector((state) => state.user);
-  const [users, setUsers] = useState([]);
-  const [id, setId] = useState();
+function Login() {
+  const [FarmerID, setFarmerID] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false); // Added loading state
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleChange = (e) => {
-    setformData({ ...formData, [e.target.id]: e.target.value });
-  };
 
-  const handleSubmit = async (e) => {
+  const onLogin = async (e) => {
     e.preventDefault();
+    const credentials = { FarmerID, Password: password };
+
+    setLoading(true); // Set loading to true when starting login
+
     try {
-      dispatch(signInStart());
-      const res = await fetch("http://localhost:5556/signin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      if (data.success === false) {
-        dispatch(signInFailure(data));
-        return;
+      const response = await axios.post("http://localhost:5556/farmers/Login", credentials);
+      const userData = response.data;
+
+      if (userData) {
+        localStorage.setItem('farmerId', userData._id); // Store farmer ID in local storage
+        navigate(`/ReadOneHome/${FarmerID}`);
+        alert(`Welcome back, ${userData.FarmerName}!`);
+      } else {
+        alert("Invalid credentials");
       }
-      dispatch(signInSuccess(data));
-      navigate("/");
     } catch (error) {
-      dispatch(signInFailure(error));
+      console.error("Login failed:", error.response?.data?.message || error.message);
+      alert("Login failed: " + (error.response?.data?.message || error.message));
+    } finally {
+      setLoading(false); // Set loading to false after the request completes
     }
   };
+
   return (
     <>
       <div className="container2">
         <div className="user_login">
           <h2>Login To Your Account</h2>
-          <form onSubmit={handleSubmit}>
-            <p className="p">Email</p>
+          <form onSubmit={onLogin}>
+            <p className="p">Farmer ID</p> {/* Updated label */}
             <input
-              type="email"
-              placeholder="Enter Your Email"
-              id="email"
-              onChange={handleChange}
+              type="text"
+              name="FarmerID"
+              id="FarmerID"
+              onChange={(e) => setFarmerID(e.target.value)}
+              required
             />
-            <p className="p">password</p>
+            <p className="p">Password</p>
             <input
               type="password"
+              name="password"
               id="password"
-              placeholder="Enter a Password"
-              onChange={handleChange}
+              onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <br />
             <Link to="/forgotpassword">
@@ -83,17 +83,19 @@ const SignIn = () => {
               <span className="buttonText1">Facebook</span>
             </div>
           </span>
-        </div>
-      </div>
-      <p className="info">
-        Doesn't Have an Account{" "}
-        <Link to="/signup">
+          <p className="info">
+        Don't Have an Account{" "}
+        <Link to="/farmers/create">
           <b>Sign Up</b>
         </Link>{" "}
         here
       </p>
+        </div>
+        
+      </div>
+      
     </>
   );
 };
 
-export default SignIn;
+export default Login; // Changed export to match the function name
