@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './AllCrops.css';
+import PDF from '../components/reportPDF';
 
 const AllCrops = () => {
 
@@ -51,6 +52,7 @@ const AllCrops = () => {
                         </div>
                     ))}
                 </div>
+                <PDF crops={crops} />
             </div>
         </>
     );
