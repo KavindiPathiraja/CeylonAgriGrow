@@ -3,6 +3,7 @@
     "@google/generative-ai": "^0.21.0",
     "@react-pdf/renderer": "^4.0.0",
     "@reduxjs/toolkit": "^2.2.7",
+    "apexcharts": "^3.54.0",
     "react-hot-toast": "^2.4.1",
     "react-loading": "^2.0.3",
     "react-modal": "^3.16.1",
