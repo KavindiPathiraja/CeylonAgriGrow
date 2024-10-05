@@ -52,9 +52,10 @@ const ReadDiseases = () => {
       await axios.delete(`http://localhost:5556/diseases/${id}`);
       setDiseases(diseases.filter(disease => disease._id !== id)); // Update state directly
       alert('Deletion successful');
+      window.location.reload();  // This will refresh the page
     } catch (error) {
       console.error('Error deleting disease:', error);
-      navigate('/Pest&Disease/diseaseList');
+      navigate('/Pest&Disease/diseaseTable');
     }
   };
 
