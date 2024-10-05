@@ -4,28 +4,27 @@ import AnimationComponent1 from './Farmers';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import '../components/custom.css';
+import FertilizerRecommender from '../assets/FertilizerRecommender.jpg';
 
 const Home1 = () => {
-
     return (
         <>
             <Header />
             <div className="bg-[url('/home1.jpg')] bg-cover h-screen overflow-hidden bg-zoom-out">
-
                 <div className='font-semibold text-4xl w-3/5 text-center m-auto pt-32 text-primary leading-tight font-Zodiak-Bold h1'>
                     <span>Welcome</span>
                     <span>to</span>
                     <span>Ceylon</span>
                     <span>AgriGrow</span>
                     <span>Where</span>
-                    <span>Faramers</span>
+                    <span>Farmers</span>
                     <span>can</span>
                     <span>manage</span>
                     <span>their</span>
                     <span>Crops</span>
                     <span>Diseases</span>
                     <span>&</span>
-                    <span>Pesticieds</span>
+                    <span>Pesticides</span>
                     <span>Crop Predictions &</span>
                     <span>Marketplace</span>
                 </div>
@@ -34,7 +33,12 @@ const Home1 = () => {
                 </div>
             </div>
             <div className='flex justify-center items-center -mt-52'>
-                <div className='w-1/5 h-96 bg-primary mr-6 rounded-md border border-white card animate-fadeIn'>
+                <div className='w-1/5 h-96 bg-primary mr-6 rounded-md border border-white card animate-fadeIn'
+                    style={{
+                        backgroundImage: `url(${FertilizerRecommender})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center'
+                    }}>
                     <h4 className='text-white text-center font-semibold text-xl mt-11'>Fertilizer Recomender</h4>
                 </div>
                 <div className='w-1/5 h-96 bg-primary mr-6 rounded-md border border-white card animate-fadeIn'>
@@ -52,9 +56,9 @@ const Home1 = () => {
                 <div className='text-center'>Lorem ipsum dolor sit consect eiusmod</div>
             </div>
             <div className="flex justify-center">
-                <img src='public/aboutus.jpg' className='w-2/5 rounded-md'></img>
+                <img src='public/aboutus.jpg' className='w-2/5 rounded-md' alt="About Us" />
                 <div className='text-center w-2/5 ml-5'>
-                    <div className='text-3xl font-Zodiak-Bold mb-4'>About US</div>
+                    <div className='text-3xl font-Zodiak-Bold mb-4'>About Us</div>
                     <p className='text-lg'>
                         "Our platform is dedicated to helping farmers make smarter, more informed decisions. We provide tailored fertilizer recommendations, accurate crop predictions, and real-time insights on pest and disease management. Our mission is to support farmers in maximizing their yields, improving productivity, and promoting sustainable farming practices through easy-to-use, technology-driven solutions."
                     </p>
@@ -65,18 +69,19 @@ const Home1 = () => {
                 <div className='bg-secondary h-[600px]'>
                     <div className='text-center text-3xl font-Zodiak-Bold mt-14 pt-9 mb-16'>Our Unique Features for Farmers</div>
                     <div className='flex justify-center items-center w-11/12 m-auto mb-9'>
-                        <div className='w-1/3 ml-8 animate-fade-scale'> {/* Added the animation class */}
-                            <img src='public/fertilizer1.png' className='w-20 h-20 m-auto mb-3'></img>
+                        <div className='w-1/3 ml-8 animate-fade-scale'>
+                            <img src='public/fertilizer1.png' className='w-20 h-20 m-auto mb-3' alt="Fertilizer Generator" />
                             <div className='mb-6 font-Zodiak-Bold text-center'>Fertilizer Generator</div>
                             <div className='text-center'>The Fertilizer Generator recommends optimal fertilizers based on soil type, crop needs, and nutrient levels, ensuring efficient crop growth.</div>
                         </div>
 
                         <div className='w-1/3 ml-8'>
-                            <img src='public/wheat.png' className='w-20 h-20 m-auto mb-3'></img>
+                            <img src='public/wheat.png' className='w-20 h-20 m-auto mb-3' alt="Crop Prediction" />
                             <div className='mb-6 font-Zodiak-Bold text-center'>Crop Prediction</div>
                             <div className='text-center'>The Crop Prediction function analyzes factors like soil, rainfall, and region to suggest the most suitable crops for planting.</div>
                         </div>
                         <div className='w-1/3 ml-8'>
+
                             <img src='public/pest.png' className='w-20 h-20 m-auto mb-3'></img>
                             <div className='mb-6 font-Zodiak-Bold text-center'>Pest & Decises Management</div>
                             <div className='text-center'>This feature helps identify potential pest infestations and plant diseases, providing solutions for early intervention.</div>
@@ -84,11 +89,12 @@ const Home1 = () => {
                     </div>
                     <div className='flex justify-center items-center w-11/12 m-auto mb-9'>
                         <div className='w-1/3 ml-8'>
-                            <img src='public/market.png' className='w-20 h-20 m-auto mb-3'></img>
+                            <img src='public/market.png' className='w-20 h-20 m-auto mb-3' alt="Marketplace" />
                             <div className='mb-6 font-Zodiak-Bold text-center'>Marketplace</div>
                             <div className='text-center'>The Marketplace allows farmers to buy and sell agricultural products and tools, facilitating a seamless exchange within the community.</div>
                         </div>
                         <div className='w-1/3 ml-8'>
+
                             <img src='public/crops-analytics.png' className='w-20 h-20 m-auto mb-3'></img>
                             <div className='mb-6 font-Zodiak-Bold text-center'>Crop Managenemt</div>
                             <div className='text-center'> Crop Management provides tools to monitor crop growth, track farming activities, and optimize yield through data-driven decisions.</div>
@@ -104,8 +110,6 @@ const Home1 = () => {
             <Footer />
         </>
     );
-}
+};
 
-
-
-export default Home1
+export default Home1;

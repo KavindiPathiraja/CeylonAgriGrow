@@ -144,15 +144,16 @@ const CreateFarmers = () => {
           <button className="btn" onClick={handleSaveFarmers} disabled={loading}>
             {loading ? <Spinner /> : 'Create Farmer'}
           </button>
-        </div>
-      </div>
-      <p className="info">
+          <p className="info">
         Already Have an Account{" "}
         <Link to="/signin">
           <b>Sign Up</b>
         </Link>{" "}
         here
       </p>
+        </div>
+      </div>
+     
     </>
   );
 };
