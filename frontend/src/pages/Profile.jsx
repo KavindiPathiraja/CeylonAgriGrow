@@ -6,7 +6,7 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-import { app } from "../firebase";
+import { app } from "../config/firebase";
 import {
   updateUserStart,
   updateUserFailure,
@@ -65,7 +65,7 @@ const Profile = () => {
     try {
       dispatch(updateUserStart());
       const res = await fetch(
-        `http://localhost:5000/update/${editingUser._id}`,
+        `http://localhost:5556/update/${editingUser._id}`,
         {
           method: "POST",
           headers: {

@@ -85,7 +85,7 @@ const EditProducts = () => {
 
       uploadTask.on(
         "state_changed",
-        (snapshot) => {},
+        (snapshot) => { },
         (error) => {
           console.error(error);
           setLoading(false);

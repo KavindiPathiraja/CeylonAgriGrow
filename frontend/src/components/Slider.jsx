@@ -19,7 +19,7 @@ const Slider = () => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:5000/myCrops")
+            .get("http://localhost:5556/myCrops")
             .then((response) => {
                 const crops = response.data;
                 setMyCrops(crops);

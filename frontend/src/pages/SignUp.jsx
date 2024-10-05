@@ -18,7 +18,7 @@ const SignUp = () => {
     try {
       setloading(true);
       seterror(false);
-      const res = await fetch("http://localhost:5000/signup", {
+      const res = await fetch("http://localhost:5556/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

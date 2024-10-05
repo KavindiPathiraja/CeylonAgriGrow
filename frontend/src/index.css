@@ -1,8 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @media print {
-    .no-print {
-      display: none;
-    }
-  };
+  .no-print {
+    display: none;
+  }
+}
+
+@font-face {
+  font-family: 'Carnero';
+  src: url(./assets/CarneroBold.ttf);
+}
+
+@font-face {
+  font-family: 'Playwrite';
+  src: url(./assets/Playwrite.ttf);
+}
+
+@font-face {
+  font-family: 'Pacifico';
+  src: url(./assets/Pacifico.ttf);
+}
+
+@font-face {
+  font-family: 'Alpino';
+  src: url(./assets/Alpino-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Zodiak';
+  src: url(./assets/CabinetGrotesk-Medium.ttf);
+}
+
+@font-face {
+  font-family: 'Zodiak-Bold';
+  src: url(./assets/CabinetGrotesk-Bold.ttf);
+}
+
+body {
+  font-family: 'Zodiak', sans-serif;
+}

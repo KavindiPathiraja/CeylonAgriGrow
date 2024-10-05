@@ -21,7 +21,7 @@ export const resetPassword = createAsyncThunk(
   "auth/resetpassword",
   async (formData, { rejectWithValue }) => {
     try {
-      const response = await fetch("http://localhost:5000/resetpassword", {
+      const response = await fetch("http://localhost:5556/resetpassword", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export const forgotPassword = createAsyncThunk(
       const emailString = email.email;
 
       const response = await fetch(
-        "http://localhost:5000/forgotpassword",
+        "http://localhost:5556/forgotpassword",
         {
           method: "POST",
           headers: {

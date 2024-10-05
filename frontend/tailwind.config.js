@@ -14,7 +14,10 @@ export default {
       fontFamily: {
         'Carnero': ['Carnero', 'sans-serif'],
         'Playwrite': ['Playwrite', 'sans-serif'],
-        'Pacifico': ['Pacifico', 'sans-serif']
+        'Pacifico': ['Pacifico', 'sans-serif'],
+        'Alpino': ['Alpino', 'sans-serif'],
+        'Zodiak': ['Zodiak', 'sans-serif'],
+        'Zodiak-Bold': ['Zodiak-Bold', 'sans-serif']
       },
       backgroundImage: {
         'addCropBG': "url('public/bg.jpg')",

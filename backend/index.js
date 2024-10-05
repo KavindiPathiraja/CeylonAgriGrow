@@ -1,5 +1,5 @@
 import express from 'express';
-import { PORT,mongoDBURL } from "./config.js";
+import { PORT, mongoDBURL } from "./config.js";
 import mongoose from 'mongoose';
 import cors from 'cors';
 import diseaseRouter from './routes/diseaseRoute.js';
@@ -16,7 +16,12 @@ import Card_Route from './routes/Card_Route.js';
 import Order_Route from './routes/Order_Route.js';
 
 //Import crop routes
-import cropsRouter from "./routes/cropsRoute.js"; 
+import cropsRouter from "./routes/cropsRoute.js";
+
+// fertilizer function
+import cropRoutesF from "./routes/cropRoute.js";
+import userRoutes from "./routes/userRoute.js";
+import authRoutes from "./routes/authRoute.js";
 
 
 // Creating an instance of the Express application
@@ -33,10 +38,13 @@ app.use('/generate-response', geminiRouter);
 
 // Using routes for endpoints
 app.use('/products', Products_Route);
-app.use('/farmers',Farmers_Route);
-app.use('/crops', cropsRouter); 
-app.use('/card',Card_Route);
-app.use('/order',Order_Route);
+app.use('/farmers', Farmers_Route);
+app.use('/crops', cropsRouter);
+app.use('/card', Card_Route);
+app.use('/order', Order_Route);
+app.use('/', cropRoutesF);
+app.use('/', authRoutes);
+app.use('/', userRoutes);
 
 
 // Connecting to the MongoDB database
