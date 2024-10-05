@@ -29,10 +29,16 @@ const ReportPDF = ({ crops }) => (
             {crops.map((crop, index) => (
                 <View key={index} style={styles.section}>
                     <Text style={styles.text}>Crop Name: {crop.CropName}</Text>
+                    <Text style={styles.text}>Sciencetific Name: {crop.ScientificName}</Text>
                     <Text style={styles.text}>Soil Type: {crop.SoilType}</Text>
                     <Text style={styles.text}>Rainfall: {crop.RainFall}</Text>
                     <Text style={styles.text}>Temperature: {crop.Temperature}</Text>
+                    <Text style={styles.text}>Location: {crop.Location}</Text>
+                    <Text style={styles.text}>Crop Area: {crop.CropArea}</Text>
                     <Text style={styles.text}>Growth Stage: {crop.GrowthStage}</Text>
+                    <Text style={styles.text}>Soil pH Level: {crop.SoilpHLevel}</Text>
+                    <Text style={styles.text}>Irrigation Type: {crop.IrrigationType}</Text>
+
                 </View>
             ))}
         </Page>
@@ -41,8 +47,8 @@ const ReportPDF = ({ crops }) => (
 
 const PDF = ({ crops }) => {
     return (
-        <div className="pdf-download bg-white h-10 w-56 rounded-md text-center m-auto">
-            <PDFDownloadLink document={<ReportPDF crops={crops} />} fileName="crops_report.pdf" className='text-center'>
+        <div className="pdf-download bg-white h-10 w-56 rounded-md text-center m-auto flex justify-center items-center">
+            <PDFDownloadLink document={<ReportPDF crops={crops} />} fileName="crops_report.pdf" className='items-center'>
                 {({ loading }) => (loading ? 'Generating PDF...' : 'Download Crops Report PDF')}
             </PDFDownloadLink>
         </div>

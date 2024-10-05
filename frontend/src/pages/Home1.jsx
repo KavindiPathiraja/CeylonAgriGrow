@@ -40,15 +40,19 @@ const Home1 = () => {
                         backgroundPosition: 'center'
                     }}>
                     <h4 className='text-white text-center font-semibold text-xl mt-11'>Fertilizer Recomender</h4>
+                    <img src='public/fertilizer1-modified.png' className='w-2/3 m-auto mt-10'></img>
                 </div>
                 <div className='w-1/5 h-96 bg-primary mr-6 rounded-md border border-white card animate-fadeIn'>
                     <h4 className='text-white text-center font-semibold text-xl mt-11'>Pest & Disease Management</h4>
+                    <img src='public/pest-modified.png' className='w-2/3 m-auto mt-10'></img>
                 </div>
                 <div className='w-1/5 h-96 bg-primary mr-6 rounded-md border border-white card animate-fadeIn'>
                     <h4 className='text-white text-center font-semibold text-xl mt-11'>Crop Prediction</h4>
+                    <img src='public/wheat-modified.png' className='w-2/3 m-auto mt-10'></img>
                 </div>
                 <div className='w-1/5 h-96 bg-primary mr-6 rounded-md border border-white card animate-fadeIn'>
                     <h4 className='text-white text-center font-semibold text-xl mt-11'>Farmers' Marketplace</h4>
+                    <img src='public/market-modified.png' className='w-2/3 m-auto mt-10'></img>
                 </div>
             </div>
 

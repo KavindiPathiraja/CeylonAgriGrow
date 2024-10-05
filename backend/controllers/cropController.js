@@ -1,9 +1,9 @@
-import Crops from "../models/crop.js";
+import Cropsf from "../models/crop.js";
 
 export const AddNewCrop = async (req, res) => {
     try {
         const { _id, cropName, image, growthStage, soilType, rainFall, temperature, soilpHLevel, cropArea, irrigationType, scientificName, location } = req.body;
-        const crop = await Crops.create({
+        const crop = await Cropsf.create({
             CropID: _id,
             CropName: cropName,
             Img: image,
@@ -36,7 +36,7 @@ export const UpdateCrop = async (req, res) => {
     const id = req.params.id
     const { CropName, Img, GrowthStage, SoilType, RainFall, Temperature, SoilpHLevel, CropArea, IrrigationType, ScientificName, Location } = req.body
     try {
-        const data = await Crops.findByIdAndUpdate({ _id: id }, {
+        const data = await Cropsf.findByIdAndUpdate({ _id: id }, {
             CropName: CropName,
             Img: Img,
             GrowthStage: GrowthStage,
@@ -59,7 +59,7 @@ export const UpdateCrop = async (req, res) => {
 export const DeleteCrop = async (req, res) => {
     try {
         const id = req.params.id;
-        await Crops.findByIdAndDelete({ _id: id });
+        await Cropsf.findByIdAndDelete({ _id: id });
 
     } catch (error) {
         console.log(error);
@@ -68,7 +68,7 @@ export const DeleteCrop = async (req, res) => {
 
 export const getAllCrops = async (req, res) => {
     try {
-        const myCrops = await Crops.find({});
+        const myCrops = await Cropsf.find({});
         res.json(myCrops);
     } catch (error) {
         console.log(error);
@@ -79,7 +79,7 @@ export const getAllCrops = async (req, res) => {
 export const getSingleCrops = async (req, res) => {
     try {
         const id = req.params.id;
-        const myCrop = await Crops.findById(id);
+        const myCrop = await Cropsf.findById(id);
         res.json(myCrop);
     } catch (error) {
         console.log(error);
