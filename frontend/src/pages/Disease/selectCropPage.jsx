@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import CropTypeDropdown from '../../components/DropDown'; // Adjust path as needed
 import { useNavigate } from "react-router-dom";
-import BackgroundImg from '../../assets/plant-growing-from-soil.jpg';  // Import the background image
+import BackgroundImg from '../../assets/young-wheat-green-field.jpg';  // Import the background image
 
 const SomeComponent = () => {
     const navigate = useNavigate();
