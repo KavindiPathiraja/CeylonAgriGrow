@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import BackgroundImg from '../../assets/pest.jpg';  // Import the background image
 import Gif from '../../assets/ladybug.gif';  // Import the GIF
+import Swal from 'sweetalert2';
 const DiseaseForm = () => {
     const [formData, setFormData] = useState({
         diseaseName: '',
@@ -44,7 +45,7 @@ const DiseaseForm = () => {
         axios.post('http://localhost:5556/diseases/add', data)
             .then(res => {
                 console.log(res);
-                alert("Disease Added Successfully");
+                Swal.fire("Pest Or Disease Added Successfully!");
                 setFormData({
                     diseaseName: '',
                     cropType: '',

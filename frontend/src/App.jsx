@@ -64,6 +64,7 @@ import SignUp from './pages/SignUp';
 import Home from './pages/Home';
 import Home1 from './pages/Home1';
 
+import AdminDashboard from './pages/AdminDashBoard';
 const App = () => {
   return (
     <>
@@ -75,6 +76,7 @@ const App = () => {
         <Route path='/signup' element={<SignUp />} />
         <Route path='/farmers/Login' element={<Login />} />
         <Route path='/home' element={<Home />} />
+        <Route path='/admin' element={<AdminDashboard/>}/>
         
         {/* Crop Prediction Routes */}
         <Route path='/crops/create' element={<CreateCrop />} />
