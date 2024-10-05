@@ -5,29 +5,28 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 const Login = () => {
+  const [FarmerID, setFarmerID] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const [data, setData] = useState({
-    email: "",
-    password: "",
-  });
 
-  const loginUser = async (e) => {
+  const onLogin = async (e) => {
     e.preventDefault();
-    const { email, password } = data;
+    const credentials = { FarmerID: FarmerID, Password: password };
+
     try {
-      const { data } = await axios.post("http://localhost:5556/login", {
-        email,
-        password,
-      });
-      if (data.error) {
-        toast.error(data.error);
+      const response = await axios.post("http://localhost:5556/farmers/Login", credentials);
+      const userData = response.data;
+
+      if (userData) {
+        localStorage.setItem("farmerId", userData._id); // Store farmer ID in local storage
+        navigate(`/ReadOneHome/${FarmerID}`);
+        toast.success(`Welcome back, ${userData.FarmerName}!`);
       } else {
-        setData({});
-        navigate("/");
-        toast.success("Welcome " + email);
+        toast.error("Invalid credentials");
       }
     } catch (error) {
-      console.log(error);
+      console.error("Login failed:", error.response?.data?.message || error.message);
+      toast.error("Login failed: " + (error.response?.data?.message || error.message));
     }
   };
 
@@ -36,27 +35,37 @@ const Login = () => {
       <div className="container">
         <div className="user_login">
           <h2>Login To Your Account</h2>
-          <form onSubmit={loginUser}>
-            <p className="p">Email</p>
+          <form onSubmit={onLogin}>
+            <p className="p">FarmerID</p>
             <input
-              type="email"
-              placeholder="Enter Your Email"
-              value={data.email}
-              onChange={(e) => setData({ ...data, email: e.target.value })}
+              type="text"
+              name="FarmerID"
+              id="FarmerID"
+              onChange={(e) => setFarmerID(e.target.value)}
+              required
             />
-            <p className="p">password</p>
+            <p className="p">Password</p>
             <input
               type="password"
-              placeholder="Enter a Password"
-              value={data.password}
-              onChange={(e) => setData({ ...data, password: e.target.value })}
+              name="password"
+              id="password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <br />
-            <p className="trouble">Having trouble Sign in?</p>
-            <button type="submit" className="btn">
-              Login
-            </button>
+            <p className="trouble">Having trouble signing in?</p>
+            <div className="mb-6">
+              <input
+                type="submit"
+                name="submit"
+                value="Log In"
+                className="w-full py-2 px-4 bg-green-500 text-white font-semibold rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+              />
+            </div>
           </form>
+          <div className="text-center text-gray-600">
+            <span>Don't have an account? <Link to="/farmers/create" className="text-blue-500 hover:underline">Sign up</Link></span>
+          </div>
           <div className="signin">-— or Sign in with —-</div>
           <span id="Signinbtn">
             <div id="customBtn">
@@ -70,13 +79,6 @@ const Login = () => {
           </span>
         </div>
       </div>
-      <p className="info">
-        Doesn't Have an Account{" "}
-        <Link to="/register">
-          <b>Sign Up</b>
-        </Link>{" "}
-        here
-      </p>
     </>
   );
 };
