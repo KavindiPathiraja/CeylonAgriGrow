@@ -17,6 +17,6 @@ const cropSchema = new mongoose.Schema({
     timestamps: true
 });
 
-const Crops = mongoose.model("Crops", cropSchema);
+const Cropsf = mongoose.model("Cropsf", cropSchema);
 
-export default Crops;
+export default Cropsf;
