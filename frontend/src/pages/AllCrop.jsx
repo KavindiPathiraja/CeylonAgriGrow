@@ -56,9 +56,9 @@ const AllCrop = () => {
     <div className="page-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <h1 className="header">All Crop Details</h1>
       <div className="button-flex-container">
-      <BackButton destination='/'/>
+        <BackButton destination='/' />
         <a href="/crops/create" className="predict-button">Predict Crop</a>
-        <ReportCrop className="report-button" /> 
+        <ReportCrop className="report-button" />
       </div>
       <div className="search-container">
         <input

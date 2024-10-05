@@ -66,19 +66,19 @@ const AnimatedSVG = () => {
                         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur voluptas error omnis sint et rerum beatae, hic quaerat tempora placeat eligendi, vitae pariatur nisi quidem? Harum quas numquam tempore nam!
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas eos quae autem assumenda deleniti dignissimos quasi blanditiis fuga accusamus quo est ipsa sed nisi, temporibus atque inventore ipsam. Corrupti, autem.
                     </p>
-                    <button className="mt-4 bg-lime-400 hover:bg-lime-500 text-grey-300 font-bold py-2 px-4 border-b-4 border-lime-800 hover:border-lime-900 rounded mr-4" type="submit">
+                    <button className="mt-4 bg-secondary hover:bg-zinc-300 text-grey-300 font-bold py-2 px-4 border-b-4 border-lime-800 hover:border-lime-900 rounded mr-4" type="submit">
                         Learn More
                     </button>
-                    <Link to="/allCrops">
-                        <button className="mt-4 bg-lime-400 hover:bg-lime-500 text-grey-300 font-bold py-2 px-4 border-b-4 border-lime-800 hover:border-lime-900 rounded mr-4 ml-4" type="submit">
+                    <a href="/allCrops">
+                        <button className="mt-4 bg-secondary hover:bg-zinc-300 text-grey-300 font-bold py-2 px-4 border-b-4 border-lime-800 hover:border-lime-900 rounded mr-4 ml-4" type="submit">
                             See All My Crops
                         </button>
-                    </Link>
-                    <Link to="/addCrop">
-                        <button className="mt-4 bg-lime-400 hover:bg-lime-500 text-grey-300 font-bold py-2 px-4 border-b-4 border-lime-800 hover:border-lime-900 rounded mr-4 ml-4" type="submit">
+                    </a>
+                    <a href="/addCrop">
+                        <button className="mt-4 bg-secondary hover:bg-zinc-300 text-grey-300 font-bold py-2 px-4 border-b-4 border-lime-800 hover:border-lime-900 rounded mr-4 ml-4" type="submit">
                             Add new Crop
                         </button>
-                    </Link>
+                    </a>
                 </div>
             </div>
             {/* <div className='flex justify-center'>

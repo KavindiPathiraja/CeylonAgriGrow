@@ -41,3 +41,8 @@
 body {
   font-family: 'Zodiak', sans-serif;
 }
+
+a:hover {
+  color: #000000;
+  cursor: pointer;
+}
