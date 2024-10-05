@@ -4,7 +4,7 @@ import AnimationComponent1 from './Farmers';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import '../components/custom.css';
-import FertilizerRecommender from '../assets/FertilizerRecommender.jpg';
+
 
 const Home1 = () => {
     return (
@@ -33,12 +33,7 @@ const Home1 = () => {
                 </div>
             </div>
             <div className='flex justify-center items-center -mt-52'>
-                <div className='w-1/5 h-96 bg-primary mr-6 rounded-md border border-white card animate-fadeIn'
-                    style={{
-                        backgroundImage: `url(${FertilizerRecommender})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center'
-                    }}>
+                <div className='w-1/5 h-96 bg-primary mr-6 rounded-md border border-white card animate-fadeIn'>
                     <h4 className='text-white text-center font-semibold text-xl mt-11'>Fertilizer Recomender</h4>
                     <img src='public/fertilizer1-modified.png' className='w-2/3 m-auto mt-10'></img>
                 </div>
