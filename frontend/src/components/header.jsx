@@ -19,7 +19,7 @@ const Header = () => {
                     </div>
                     <div className='search'>
                         <div className='w-12'>
-                            <a href='/profile'><img src='public/farmer(2).png' /></a>
+                            <a href='/signin'><img src='public/farmer(2).png' /></a>
                         </div>
                     </div>
                 </div>

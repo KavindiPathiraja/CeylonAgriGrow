@@ -1,61 +1,59 @@
-import React, { useState, useEffect } from 'react';
-import NavBar from './Navbar';
-import Carousel from './CropsPrediction/Carousel';
-import { useNavigate, useParams, Link } from 'react-router-dom';
-import axios from 'axios';
+import React from 'react';
+import AnimationComponent from './Animation';
+import AnimationComponent1 from './Farmers';
+import Header from '../components/header1';
+import Footer from '../components/footer';
+import '../components/custom.css';
+import { useParams } from 'react-router-dom';
 import HCard from './HomeCard/Hcard';
 
 const ReadOneHome = () => {
   const { FarmerID } = useParams(); // Extract FarmerID from the route
 
   return (
-    <div style={styles.container}>
-      <NavBar />
-      <Carousel />
-      <p style={styles.description}>
-        This is a simple home page built with React. Explore more by navigating through the links!
-      </p>
-
-      <ul style={styles.navList}>
-        <li style={styles.navItem}><Link to="/">Crop</Link></li>
-        <li style={styles.navItem}><Link to="/">Fertilizer</Link></li>
-        <li style={styles.navItem}><Link to="/Pest&Disease/PredictDisease">Diseases</Link></li>
-        <li style={styles.navItem}><Link to="/products/allProducts">Products</Link></li>
-        <li style={styles.navItem}><Link to={`/farmers/details/${FarmerID}`}>Profile</Link></li>
-        <li style={styles.navItem}><Link to={`/my-orders/${FarmerID}`}>My Orders</Link></li>
-      </ul>
-
-      <div style={styles.boxContainer}>
-        {/* Crop Prediction Box */}
-        <div style={styles.box}>
-          <h3 style={styles.boxTitle}>Crop Prediction</h3>
-          <p style={styles.boxDescription}>
-            Predict the best crops to grow based on soil type, rainfall, and climate conditions.
-          </p>
+    <>
+      <Header />
+      <div className="bg-[url('/home1.jpg')] bg-cover h-screen overflow-hidden bg-zoom-out">
+        <div className='font-semibold text-4xl w-3/5 text-center m-auto pt-32 text-primary leading-tight font-Zodiak-Bold h1'>
+          <span>Welcome</span>
+          <span>to</span>
+          <span>Ceylon</span>
+          <span>AgriGrow</span>
+          <span>Where</span>
+          <span>Farmers</span>
+          <span>can</span>
+          <span>manage</span>
+          <span>their</span>
+          <span>Crops</span>
+          <span>Diseases</span>
+          <span>&</span>
+          <span>Pesticides</span>
+          <span>Crop Predictions &</span>
+          <span>Marketplace</span>
         </div>
-
-        {/* Fertilizer Recommender Box */}
-        <div style={styles.box}>
-          <h3 style={styles.boxTitle}>Fertilizer Recommender</h3>
-          <p style={styles.boxDescription}>
-            Get recommendations on the best fertilizers based on crop type and soil condition.
-          </p>
+        <div className='text-3xl font-Pacifico text-white tracking-wider text-center pt-44 subheading-animation'>
+          Discover Our Services
         </div>
+      </div>
+      <div className='flex justify-center items-center -mt-52'>
+        {['Fertilizer Recommender', 'Pest & Disease Management', 'Crop Prediction', "Farmers' Marketplace"].map((service, index) => (
+          <div key={index} className='w-1/5 h-96 bg-primary mr-6 rounded-md border border-white card animate-fadeIn'>
+            <h4 className='text-white text-center font-semibold text-xl mt-11'>{service}</h4>
+          </div>
+        ))}
+      </div>
 
-        {/* Pest and Diseases Tracking Box */}
-        <div style={styles.box}>
-          <h3 style={styles.boxTitle}>Pest and Diseases Tracking</h3>
-          <p style={styles.boxDescription}>
-            Identify and track pests and diseases affecting your crops to take timely action.
+      <div className='mt-9 h-28'>
+        <div className='text-center'>Lorem ipsum dolor sit consect eiusmod</div>
+      </div>
+      <div className="flex justify-center">
+        <img src='/aboutus.jpg' className='w-2/5 rounded-md' alt="About Us" />
+        <div className='text-center w-2/5 ml-5'>
+          <div className='text-3xl font-Zodiak-Bold mb-4'>About US</div>
+          <p className='text-lg'>
+            "Our platform is dedicated to helping farmers make smarter, more informed decisions. We provide tailored fertilizer recommendations, accurate crop predictions, and real-time insights on pest and disease management. Our mission is to support farmers in maximizing their yields, improving productivity, and promoting sustainable farming practices through easy-to-use, technology-driven solutions."
           </p>
-        </div>
-
-        {/* Farmers Marketplace Box */}
-        <div style={styles.box}>
-          <h3 style={styles.boxTitle}>Farmers Marketplace</h3>
-          <p style={styles.boxDescription}>
-            Buy and sell farm products in a simple and efficient online marketplace.
-          </p>
+          <div className='bg-primary w-2/4 h-11 rounded-md m-auto mt-9 font-semibold flex justify-center items-center text-white'>Read More</div>
         </div>
       </div>
       
@@ -64,55 +62,29 @@ const ReadOneHome = () => {
         <h3 className="text-5xl font-light text-pink-500 mb-16 text-center">Store</h3>
         <HCard FarmerID={FarmerID} />
       </div>
-    </div>
-  );
-};
 
-// Styles for the Home component
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '100vh',
-    backgroundColor: '#f0f8ff',
-    color: '#333',
-    textAlign: 'center',
-    padding: '20px',
-  },
-  description: {
-    fontSize: '1.2rem',
-    marginBottom: '30px',
-    maxWidth: '600px',
-  },
-  boxContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    gap: '20px',
-    flexWrap: 'wrap',
-  },
-  box: {
-    backgroundColor: '#fff',
-    padding: '20px',
-    borderRadius: '10px',
-    border: '2px solid #013220', // Dark green border
-    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-    maxWidth: '250px',
-    textAlign: 'left',
-    marginBottom: '20px',
-  },
-  boxTitle: {
-    fontSize: '1.5rem',
-    marginBottom: '10px',
-    color: '#013220',
-    borderBottom: '2px solid #013220', // Dark green border below title
-    paddingBottom: '5px',
-  },
-  boxDescription: {
-    fontSize: '1rem',
-    color: '#666',
-  },
-};
+      <div className='bg-secondary h-[600px]'>
+        <div className='text-center text-3xl font-Zodiak-Bold mt-14 pt-9 mb-16'>Our Unique Features for Farmers</div>
+        <div className='flex justify-center items-center w-11/12 m-auto mb-9'>
+          {[
+            { img: '/fertilizer1.png', title: 'Fertilizer Generator' },
+            { img: '/wheat.png', title: 'Crop Prediction' },
+            { img: '/pest.png', title: 'Pest & Diseases Management' },
+            { img: '/market.png', title: 'Marketplace' },
+            { img: '/crops-analytics.png', title: 'Crop Management' },
+            { img: '/report.png', title: 'Report Generation' }
+          ].map((feature, index) => (
+            <div key={index} className='w-1/3 ml-8'>
+              <img src={feature.img} className='w-20 h-20 m-auto mb-3' alt={feature.title} />
+              <div className='mb-6 font-Zodiak-Bold text-center'>{feature.title}</div>
+              <div className='text-center'>Lorem ipsum dolor sit amet, consing eli do eiod, Lorem ipsum dolor sit amet</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <Footer />
+    </>
+  );
+}
 
 export default ReadOneHome;

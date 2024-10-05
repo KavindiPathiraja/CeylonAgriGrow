@@ -130,10 +130,9 @@ const App = () => {
         <Route path="/ReadOneHome/:FarmerID" element={<ReadOneHome />} />
         <Route path="/Hcard" element={<HCard />} />
         <Route path='/addCrop' element={<AddCrop />} />
-        <Route element={<PrivateRoute />}>
+        
           <Route path='/myCrops' element={<MyCrops />} />
           <Route path="/profile" element={<Profile />} />
-        </Route>
         <Route path='/allCrops' element={<AllCrops />} />
         <Route path='/updateCrop/:id' element={<EditItems />} />
       </Routes>

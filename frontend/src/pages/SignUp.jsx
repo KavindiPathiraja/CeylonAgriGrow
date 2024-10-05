@@ -64,7 +64,7 @@ const CreateFarmers = () => {
         .then(() => {
           setLoading(false);
           Swal.fire('Success', 'Farmer created successfully!', 'success').then(() => {
-            navigate('/farmers/Login');
+            navigate('/signin');
           });
         })
         .catch((error) => {

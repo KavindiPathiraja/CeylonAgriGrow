@@ -72,6 +72,13 @@ function Login() {
               {loading ? "Loading..." : "Sign In"}
             </button>
           </form>
+          <p className="info">
+            Don't Have an Account{" "}
+            <Link to="/farmers/create">
+              <b>Sign Up</b>
+            </Link>{" "}
+            here
+          </p>
           <div className="signin">-— or Sign in with —-</div>
           <span id="Signinbtn">
             <div id="customBtn">
@@ -83,6 +90,7 @@ function Login() {
               <span className="buttonText1">Facebook</span>
             </div>
           </span>
+
           <p className="info">
         Don't Have an Account{" "}
         <Link to="/farmers/create">
