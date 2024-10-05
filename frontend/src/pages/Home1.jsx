@@ -23,7 +23,7 @@ const Home1 = () => {
                     <span>manage</span>
                     <span>their</span>
                     <span>Crops</span>
-                    <span>Diseces</span>
+                    <span>Diseases</span>
                     <span>&</span>
                     <span>Pesticieds</span>
                     <span>Crop Predictions &</span>
@@ -68,35 +68,35 @@ const Home1 = () => {
                         <div className='w-1/3 ml-8 animate-fade-scale'> {/* Added the animation class */}
                             <img src='public/fertilizer1.png' className='w-20 h-20 m-auto mb-3'></img>
                             <div className='mb-6 font-Zodiak-Bold text-center'>Fertilizer Generator</div>
-                            <div className='text-center'>Lorem ipsum dolor sit amet, consing eli do eiod, Lorem ipsum dolor sit amet</div>
+                            <div className='text-center'>The Fertilizer Generator recommends optimal fertilizers based on soil type, crop needs, and nutrient levels, ensuring efficient crop growth.</div>
                         </div>
 
                         <div className='w-1/3 ml-8'>
                             <img src='public/wheat.png' className='w-20 h-20 m-auto mb-3'></img>
                             <div className='mb-6 font-Zodiak-Bold text-center'>Crop Prediction</div>
-                            <div className='text-center'>Lorem ipsum dolor sit amet, consing eli do eiod, Lorem ipsum dolor sit amet</div>
+                            <div className='text-center'>The Crop Prediction function analyzes factors like soil, rainfall, and region to suggest the most suitable crops for planting.</div>
                         </div>
                         <div className='w-1/3 ml-8'>
                             <img src='public/pest.png' className='w-20 h-20 m-auto mb-3'></img>
                             <div className='mb-6 font-Zodiak-Bold text-center'>Pest & Decises Management</div>
-                            <div className='text-center'>Lorem ipsum dolor sit amet, consing eli do eiod, Lorem ipsum dolor sit amet</div>
+                            <div className='text-center'>This feature helps identify potential pest infestations and plant diseases, providing solutions for early intervention.</div>
                         </div>
                     </div>
                     <div className='flex justify-center items-center w-11/12 m-auto mb-9'>
                         <div className='w-1/3 ml-8'>
                             <img src='public/market.png' className='w-20 h-20 m-auto mb-3'></img>
                             <div className='mb-6 font-Zodiak-Bold text-center'>Marketplace</div>
-                            <div className='text-center'>Lorem ipsum dolor sit amet, consing eli do eiod, Lorem ipsum dolor sit amet</div>
+                            <div className='text-center'>The Marketplace allows farmers to buy and sell agricultural products and tools, facilitating a seamless exchange within the community.</div>
                         </div>
                         <div className='w-1/3 ml-8'>
                             <img src='public/crops-analytics.png' className='w-20 h-20 m-auto mb-3'></img>
                             <div className='mb-6 font-Zodiak-Bold text-center'>Crop Managenemt</div>
-                            <div className='text-center'>Lorem ipsum dolor sit amet, consing eli do eiod, Lorem ipsum dolor sit amet</div>
+                            <div className='text-center'> Crop Management provides tools to monitor crop growth, track farming activities, and optimize yield through data-driven decisions.</div>
                         </div>
                         <div className='w-1/3 ml-8'>
                             <img src='public/report.png' className='w-20 h-20 m-auto mb-3'></img>
                             <div className='mb-6 font-Zodiak-Bold text-center'>Report Geanration</div>
-                            <div className='text-center'>Lorem ipsum dolor sit amet, consing eli do eiod, Lorem ipsum dolor sit amet</div>
+                            <div className='text-center'>The Report Generation feature creates detailed reports on farming activities, productivity, and resource usage to support informed decision-making.</div>
                         </div>
                     </div>
                 </div>
