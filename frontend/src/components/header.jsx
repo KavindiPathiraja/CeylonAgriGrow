@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import "./slider.css";
 
 const Header = () => {
@@ -12,14 +12,14 @@ const Header = () => {
                     <div className='menu menu1 w-1/2 text-lg'>
                         <ul className='flex'>
                             <li className='ml-7 font-Zodiak-Bold'><a href='/myCrops'>Fertilizer</a></li>
-                            <li className='ml-7 font-Zodiak-Bold'><a href='/Pest&Disease/PredictDisease'>Pest & Decises</a></li>
+                            <li className='ml-7 font-Zodiak-Bold'><a href='/Pest&Disease/PredictDisease'>Pest & Diseases</a></li>
                             <li className='ml-7 font-Zodiak-Bold'><a href='/crops/getall'>Crop Prediction</a></li>
-                            <li className='ml-7 font-Zodiak-Bold'><a href='/products/allProducts'>MarketPlace</a></li>
+                            <li className='ml-7 font-Zodiak-Bold'><a href='#products'>Marketplace</a></li>
                         </ul>
                     </div>
                     <div className='search'>
                         <div className='w-12'>
-                            <a href='/signin'><img src='public/farmer(2).png' /></a>
+                            <a href='/signin'><img src='public/farmer(2).png' alt='Sign In' /></a>
                         </div>
                     </div>
                 </div>
@@ -28,4 +28,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default Header;

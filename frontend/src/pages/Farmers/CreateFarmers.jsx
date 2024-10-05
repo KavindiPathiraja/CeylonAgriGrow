@@ -66,7 +66,7 @@ const CreateFarmers = () => {
           // Resetting loading state and navigating to the all Farmers page
           setLoading(false);
           Swal.fire('Success', 'Farmer created successfully!', 'success').then(() => {
-            navigate('/farmers/Login');
+            navigate('/farmers/allfarmers');
           });
         })
         .catch((error) => {

@@ -25,8 +25,8 @@ const Header = () => {
                             <Link to='/crops/getall'>Crop Prediction</Link>
                         </li>
                         <li className='ml-7 font-Zodiak-Bold'>
-                        <Link to={``}>MarketPlace</Link>
-                        </li>
+                            <a href='#products'>Marketplace</a>
+                            </li>
                     </ul>
                 </div>
                 <div className='search'>

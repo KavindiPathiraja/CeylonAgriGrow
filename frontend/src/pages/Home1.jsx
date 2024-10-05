@@ -4,6 +4,8 @@ import AnimationComponent1 from './Farmers';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import '../components/custom.css';
+import HCard from './HomeCard/Hcard';
+
 
 
 const Home1 = () => {
@@ -63,6 +65,11 @@ const Home1 = () => {
                     </p>
                     <div className='bg-primary w-2/4 h-11 rounded-md m-auto mt-9 font-semibold flex justify-center items-center text-white'>Read More</div>
                 </div>
+            </div>
+            {/* Products section */}
+            <div id="products" className="bg-gray-200 py-16 px-8 md:px-16 min-h-screen w-[100%] rounded-t-[20%]">
+                <h3 className="text-5xl font-light text-pink-500 mb-16 text-center">Store</h3>
+                <HCard />
             </div>
             <div>
                 <div className='bg-secondary h-[600px]'>
