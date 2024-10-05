@@ -46,6 +46,7 @@ const AllCrops = () => {
         <>
             <Header />
             <div className="bg-[url('/12.jpg')] bg-cover h-screen">
+                <PDF crops={crops} className="m-3" />
                 <div className="h-12 text-right">
                     <input
                         type="text"
@@ -54,9 +55,9 @@ const AllCrops = () => {
                         placeholder="Search Crop"
                     ></input>
                 </div>
-                <div className='single_crop p-5'>
+                <div className='single_crop p-5 flex-wrap gap-6 mt-6'>
                     {search.map((crop) => (
-                        <div className="crop p-5 border-2 border-primary shadow-md bg-secondary text-white" key={crop._id}>
+                        <div className="crop p-5 border-2 w-80 h-64 border-primary shadow-md bg-secondary text-white" key={crop._id}>
                             <h3 className='text-center font-Carnero text-xl mb-3'>{crop.CropName}</h3>
                             <p>Soil Type: {crop.SoilType}</p>
                             <p>Rainfall: {crop.RainFall}</p>
@@ -73,7 +74,7 @@ const AllCrops = () => {
                         </div>
                     ))}
                 </div>
-                <PDF crops={crops} />
+
             </div>
             <Footer />
         </>
