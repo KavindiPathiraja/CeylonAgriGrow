@@ -4,7 +4,7 @@ import AnimationComponent1 from './Farmers';
 import Header from '../components/header1';
 import Footer from '../components/footer';
 import '../components/custom.css';
-import { useParams } from 'react-router-dom';
+import { useParams ,Link} from 'react-router-dom';
 import HCard from './HomeCard/Hcard';
 
 const ReadOneHome = () => {
@@ -60,6 +60,7 @@ const ReadOneHome = () => {
       {/* Products section */}
       <div id="products" className="bg-gray-200 py-16 px-8 md:px-16 min-h-screen w-[100%] rounded-t-[20%]">
         <h3 className="text-5xl font-light text-pink-500 mb-16 text-center">Store</h3>
+        
         <HCard FarmerID={FarmerID} />
       </div>
 

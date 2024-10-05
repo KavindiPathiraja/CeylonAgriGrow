@@ -27,10 +27,16 @@ const Header = () => {
                         <li className='ml-7 font-Zodiak-Bold'>
                             <a href='#products'>Marketplace</a>
                             </li>
+                            <Link to={`/my-orders/${FarmerID}`} className="flex items-center">
+                        <span className='text-green-800 text-xl'>My Orders</span>
+                    </Link>
                     </ul>
+                    
                 </div>
                 <div className='search'>
+
                     <div className='w-12'>
+                        
                         <Link to={`/farmers/details/${FarmerID}`}>
                             <img src='/farmer(2).png' alt='Farmer Icon' />
                         </Link>

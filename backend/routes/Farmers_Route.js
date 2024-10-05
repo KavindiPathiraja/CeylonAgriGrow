@@ -140,4 +140,28 @@ router.get('/email/:Email', async (req, res) => {
     }
 });
 
+// Route for updating a Farmer by ID or FarmerID using PUT
+router.put('/:identifier', async (req, res) => {
+    try {
+        const { identifier } = req.params;
+
+        // Check if the identifier is a valid MongoDB ObjectId
+        if (mongoose.Types.ObjectId.isValid(identifier)) {
+            const farmer = await Farmers.findByIdAndUpdate(identifier, req.body, { new: true });
+            if (!farmer) return res.status(404).send('Farmer not found');
+            return res.status(200).send(farmer);
+        }
+
+        // If not a valid ObjectId, try searching by FarmerID
+        const farmerByFarmerID = await Farmers.findOneAndUpdate({ FarmerID: identifier }, req.body, { new: true });
+        if (!farmerByFarmerID) return res.status(404).send('Farmer not found');
+        return res.status(200).send(farmerByFarmerID);
+        
+    } catch (error) {
+        console.error(error);
+        res.status(400).send({ message: 'Error updating Farmer: ' + error.message });
+    }
+});
+
+
 export default router;
