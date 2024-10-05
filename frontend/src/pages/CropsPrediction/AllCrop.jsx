@@ -78,7 +78,7 @@ const AllCrop = () => {
           <BackButton destination='/' />
           <a href="/crops/create" className="predict-button">Predict Crop</a>
           <ReportCrop className="report-button" /> 
-          <Link to="/crops/charts" className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-green-700">
+          <Link to="/crops/charts" className="mt-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-700">
       Go to Crop Charts
     </Link>
         </div>
