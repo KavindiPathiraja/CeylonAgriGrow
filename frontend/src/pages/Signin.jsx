@@ -24,8 +24,16 @@ function Login() {
     let credentials;
     
     if (isAdmin) {
-      // Admin login credentials
-      credentials = { FarmerID: 'admin', Password: 'admin' };
+      // Check if admin login credentials are correct
+      if (FarmerID === 'admin' && password === 'admin') {
+        // Directly navigate to admin page without API call
+        navigate('/admin');
+        alert(`Welcome back, Admin!`);
+        return;
+      } else {
+        alert("Invalid admin credentials");
+        return;
+      }
     } else {
       // Farmer login credentials
       credentials = { FarmerID, Password: password };
@@ -39,14 +47,8 @@ function Login() {
 
       if (userData) {
         localStorage.setItem('farmerId', userData._id); // Store farmer ID in local storage
-        
-        if (isAdmin) {
-          navigate(`/admin`); // Navigate to admin dashboard
-        } else {
-          navigate(`/ReadOneHome/${FarmerID}`);
-        }
-
-        alert(`Welcome back, ${userData.FarmerName || 'Admin'}!`);
+        navigate(`/ReadOneHome/${FarmerID}`);
+        alert(`Welcome back, ${userData.FarmerName}!`);
       } else {
         alert("Invalid credentials");
       }
