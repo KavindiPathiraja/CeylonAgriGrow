@@ -6,6 +6,9 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { app } from "../../config/firebase";
+import Swal from 'sweetalert2'; // Import SweetAlert for alerts
+import Header from "../../components/header1"; // Import header
+import Footer from "../../components/footer"; // Import footer
 
 // Functional component for EditProducts
 const EditProducts = () => {
@@ -42,7 +45,7 @@ const EditProducts = () => {
         setLoading(false);
       }).catch((error) => {
         setLoading(false);
-        alert('An error happened. Please check console');
+        Swal.fire('Error', 'An error happened. Please check console', 'error'); // Use SweetAlert for error handling
         console.log(error);
       });
   }, [id]);
@@ -69,12 +72,14 @@ const EditProducts = () => {
         .then(() => {
           // Resetting loading state and navigating to the home page
           setLoading(false);
-          navigate('/farmers/details/:id');
+          Swal.fire('Success', 'Product updated successfully!', 'success').then(() => {
+            navigate('/farmers/details/:id');
+          });
         })
         .catch((error) => {
           // Handling errors by resetting loading state, showing an alert, and logging the error
           setLoading(false);
-          alert('An error happened. Please check console');
+          Swal.fire('Error', 'An error happened. Please check console', 'error'); // Use SweetAlert for error handling
           console.log(error);
         });
     };
@@ -89,7 +94,7 @@ const EditProducts = () => {
         (error) => {
           console.error(error);
           setLoading(false);
-          alert('Failed to upload image. Please try again.');
+          Swal.fire('Error', 'Failed to upload image. Please try again.', 'error'); // Use SweetAlert for error handling
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(uploadImageAndEdit);
@@ -102,105 +107,127 @@ const EditProducts = () => {
 
   // JSX for rendering the edit Products form
   return (
-    <div className='p-6 bg-gray-100 min-h-screen'>
-      <BackButton destination='/farmers/details/:id' />
-      <h1 className="text-3xl my-4 text-green-800">Edit Product</h1>
-      {loading ? <Spinner /> : ''}
-      <div className="flex flex-col border-2 border-green-500 rounded-lg p-6 mx-auto bg-white shadow-lg w-4/5 max-w-3xl">
-        <div className="my-4">
-          <label className='text-lg font-semibold text-gray-700'>Product No</label>
-          <input
-            type="text"
-            value={ProductNo}
-            onChange={(e) => setProductNo(e.target.value)}
-            readOnly
-            className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
-          />
+    <div className="flex flex-col min-h-screen bg-[url('/bg.jpg')] bg-cover">
+      <Header /> {/* Add header */}
+      <div className="flex-grow pt-12">
+        <BackButton destination='/farmers/details/:id' />
+        <div className="flex justify-center bg-primary w-2/5 m-auto pt-8 pb-8 rounded-lg opacity-95">
+          <div className="flex flex-col w-full max-w-lg p-4">
+            <h1 className="text-3xl mb-4 text-white-800">Edit Product</h1>
+            {loading ? <Spinner /> : ''}
+            <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="w-full px-3 mb-6">
+                <label className='block uppercase tracking-wide text-white text-xs font-bold mb-2'>Product No</label>
+                <input
+                  type="text"
+                  value={ProductNo}
+                  onChange={(e) => setProductNo(e.target.value)}
+                  readOnly
+                  className='appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                />
+              </div>
+            </div>
+            <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="w-full px-3 mb-6">
+                <label className='block uppercase tracking-wide text-white text-xs font-bold mb-2'>Product Name</label>
+                <input
+                  type="text"
+                  value={ProductName}
+                  onChange={(e) => setProductName(e.target.value)}
+                  className='appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                />
+              </div>
+            </div>
+            <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="w-full px-3 mb-6">
+                <label className='block uppercase tracking-wide text-white text-xs font-bold mb-2'>Image (Optional)</label>
+                <input
+                  id="image"
+                  name="image"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setImage(e.target.files[0])}
+                  className="appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                />
+                {currentImage && <img src={currentImage} alt="Current Product" className="mt-2 w-32 h-32 object-cover" />} {/* Display current image */}
+              </div>
+            </div>
+            <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="w-full px-3 mb-6">
+                <label className='block uppercase tracking-wide text-white text-xs font-bold mb-2'>Description</label>
+                <textarea
+                  value={Descriptioon}
+                  onChange={(e) => setDescriptioon(e.target.value)}
+                  className='appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                />
+              </div>
+            </div>
+            <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label className='block uppercase tracking-wide text-white text-xs font-bold mb-2'>Category</label>
+                <input
+                  type="text"
+                  value={Category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  className='appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                />
+              </div>
+              <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label className='block uppercase tracking-wide text-white text-xs font-bold mb-2'>Quantity</label>
+                <input
+                  type="number"
+                  value={Quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                  className='appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                />
+              </div>
+            </div>
+            <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label className='block uppercase tracking-wide text-white text-xs font-bold mb-2'>Selling Price</label>
+                <input
+                  type="number"
+                  value={SellingPrice}
+                  onChange={(e) => setSellingPrice(e.target.value)}
+                  className='appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                />
+              </div>
+            </div>
+            <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="w-full px-3 mb-6">
+                <label className='block uppercase tracking-wide text-white text-xs font-bold mb-2'>Farmer Name</label>
+                <input
+                  type="text"
+                  value={FarmerName}
+                  onChange={(e) => setFarmerName(e.target.value)}
+                  readOnly
+                  className='appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                />
+              </div>
+            </div>
+            <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="w-full px-3 mb-6">
+                <label className='block uppercase tracking-wide text-white text-xs font-bold mb-2'>Farmer Email</label>
+                <input
+                  type="email"
+                  value={FarmerEmail}
+                  onChange={(e) => setFarmerEmail(e.target.value)}
+                  readOnly
+                  className='appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                />
+              </div>
+            </div>
+            <button
+              className='bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+              type='button'
+              onClick={handleEditProducts}
+            >
+              Update Product
+            </button>
+          </div>
         </div>
-        <div className="my-4">
-          <label className='text-lg font-semibold text-gray-700'>Product Name</label>
-          <input
-            type="text"
-            value={ProductName}
-            onChange={(e) => setProductName(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
-          />
-        </div>
-        <div className="my-4">
-          <label className='text-lg font-semibold text-gray-700'>Image (Optional)</label>
-          <input
-            id="image"
-            name="image"
-            type="file"
-            accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
-            className="border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-          {currentImage && <img src={currentImage} alt="Current Product" className="mt-2 w-32 h-32 object-cover" />} {/* Display current image */}
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Description</label>
-          <textarea
-            value={Descriptioon}
-            onChange={(e) => setDescriptioon(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-            rows="4" // You can adjust the number of rows as needed
-          />
-        </div>
-
-        <div className="my-4">
-          <label className='text-lg font-semibold text-gray-700'>Category</label>
-          <select
-            value={Category}
-            onChange={(e) => setCategory(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
-          >
-            <option value="" disabled>Select Category</option>
-            <option value="Crop">Crop</option>
-            <option value="Fertilizer">Fertilizer</option>
-            <option value="Pesticide">Pesticide</option>
-          </select>
-        </div>
-        <div className='my-4'>
-          <label className='text-lg font-semibold text-gray-700'>Quantity</label>
-          <input
-            type='number'
-            value={Quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
-          />
-        </div>
-        <div className="my-4">
-          <label className='text-lg font-semibold text-gray-700'>Selling Price</label>
-          <input
-            type="number"
-            value={SellingPrice}
-            onChange={(e) => setSellingPrice(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
-          />
-        </div>
-        <div className="my-4">
-          <label className='text-lg font-semibold text-gray-700'>Farmer Name</label>
-          <input
-            type="text"
-            value={FarmerName}
-            onChange={(e) => setFarmerName(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
-          />
-        </div>
-        <div className="my-4">
-          <label className='text-lg font-semibold text-gray-700'>Farmer Email</label>
-          <input
-            type="text"
-            value={FarmerEmail}
-            onChange={(e) => setFarmerEmail(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
-          />
-        </div>
-        <button className='p-2 bg-green-600 text-white rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-500' onClick={handleEditProducts}>
-          Save
-        </button>
       </div>
+      <Footer /> {/* Add footer */}
     </div>
   );
 };

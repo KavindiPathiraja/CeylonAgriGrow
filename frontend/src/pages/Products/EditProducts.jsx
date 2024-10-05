@@ -6,6 +6,8 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { app } from "../../config/firebase";
+import Header from "../../components/header1"; // Import your Header component
+import Footer from "../../components/footer"; // Import your Footer component
 
 // Functional component for EditProducts
 const EditProducts = () => {
@@ -102,105 +104,109 @@ const EditProducts = () => {
 
   // JSX for rendering the edit Products form
   return (
-    <div className='p-6 bg-gray-100 min-h-screen'>
-      <BackButton destination='/products/allProducts' />
-      <h1 className="text-3xl my-4 text-green-800">Edit Product</h1>
-      {loading ? <Spinner /> : ''}
-      <div className="flex flex-col border-2 border-green-500 rounded-lg p-6 mx-auto bg-white shadow-lg w-4/5 max-w-3xl">
-        <div className="my-4">
-          <label className='text-lg font-semibold text-gray-700'>Product No</label>
-          <input
-            type="text"
-            value={ProductNo}
-            onChange={(e) => setProductNo(e.target.value)}
-            readOnly
-            className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
-          />
-        </div>
-        <div className="my-4">
-          <label className='text-lg font-semibold text-gray-700'>Product Name</label>
-          <input
-            type="text"
-            value={ProductName}
-            onChange={(e) => setProductName(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
-          />
-        </div>
-        <div className="my-4">
-          <label className='text-lg font-semibold text-gray-700'>Image (Optional)</label>
-          <input
-            id="image"
-            name="image"
-            type="file"
-            accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
-            className="border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-          {currentImage && <img src={currentImage} alt="Current Product" className="mt-2 w-32 h-32 object-cover" />} {/* Display current image */}
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Description</label>
-          <textarea
-            value={Description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-            rows="4" // You can adjust the number of rows as needed
-          />
-        </div>
+    <div className='flex flex-col min-h-screen'>
+      <Header /> {/* Header component */}
+      <div className='p-6 bg-gray-100 flex-grow'>
+        <BackButton destination='/products/allProducts' />
+        <h1 className="text-3xl my-4 text-green-800">Edit Product</h1>
+        {loading ? <Spinner /> : ''}
+        <div className="flex flex-col border-2 border-green-500 rounded-lg p-6 mx-auto bg-white shadow-lg w-4/5 max-w-3xl">
+          <div className="my-4">
+            <label className='text-lg font-semibold text-gray-700'>Product No</label>
+            <input
+              type="text"
+              value={ProductNo}
+              onChange={(e) => setProductNo(e.target.value)}
+              readOnly
+              className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
+            />
+          </div>
+          <div className="my-4">
+            <label className='text-lg font-semibold text-gray-700'>Product Name</label>
+            <input
+              type="text"
+              value={ProductName}
+              onChange={(e) => setProductName(e.target.value)}
+              className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
+            />
+          </div>
+          <div className="my-4">
+            <label className='text-lg font-semibold text-gray-700'>Image (Optional)</label>
+            <input
+              id="image"
+              name="image"
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImage(e.target.files[0])}
+              className="border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
+            {currentImage && <img src={currentImage} alt="Current Product" className="mt-2 w-32 h-32 object-cover" />} {/* Display current image */}
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Description</label>
+            <textarea
+              value={Description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              rows="4" // You can adjust the number of rows as needed
+            />
+          </div>
 
-        <div className="my-4">
-          <label className='text-lg font-semibold text-gray-700'>Category</label>
-          <select
-            value={Category}
-            onChange={(e) => setCategory(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
-          >
-            <option value="" disabled>Select Category</option>
-            <option value="Crop">Crop</option>
-            <option value="Fertilizer">Fertilizer</option>
-            <option value="Pesticide">Pesticide</option>
-          </select>
+          <div className="my-4">
+            <label className='text-lg font-semibold text-gray-700'>Category</label>
+            <select
+              value={Category}
+              onChange={(e) => setCategory(e.target.value)}
+              className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
+            >
+              <option value="" disabled>Select Category</option>
+              <option value="Crop">Crop</option>
+              <option value="Fertilizer">Fertilizer</option>
+              <option value="Pesticide">Pesticide</option>
+            </select>
+          </div>
+          <div className='my-4'>
+            <label className='text-lg font-semibold text-gray-700'>Quantity</label>
+            <input
+              type='number'
+              value={Quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+              className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
+            />
+          </div>
+          <div className="my-4">
+            <label className='text-lg font-semibold text-gray-700'>Selling Price</label>
+            <input
+              type="number"
+              value={SellingPrice}
+              onChange={(e) => setSellingPrice(e.target.value)}
+              className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
+            />
+          </div>
+          <div className="my-4">
+            <label className='text-lg font-semibold text-gray-700'>Farmer Name</label>
+            <input
+              type="text"
+              value={FarmerName}
+              onChange={(e) => setFarmerName(e.target.value)}
+              className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
+            />
+          </div>
+          <div className="my-4">
+            <label className='text-lg font-semibold text-gray-700'>Farmer Email</label>
+            <input
+              type="text"
+              value={FarmerEmail}
+              onChange={(e) => setFarmerEmail(e.target.value)}
+              className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
+            />
+          </div>
+          <button className='p-2 bg-green-600 text-white rounded-md hover:bg-green-500 focus:outline-none' onClick={handleEditProducts}>
+            Save Changes
+          </button>
         </div>
-        <div className='my-4'>
-          <label className='text-lg font-semibold text-gray-700'>Quantity</label>
-          <input
-            type='number'
-            value={Quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
-          />
-        </div>
-        <div className="my-4">
-          <label className='text-lg font-semibold text-gray-700'>Selling Price</label>
-          <input
-            type="number"
-            value={SellingPrice}
-            onChange={(e) => setSellingPrice(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
-          />
-        </div>
-        <div className="my-4">
-          <label className='text-lg font-semibold text-gray-700'>Farmer Name</label>
-          <input
-            type="text"
-            value={FarmerName}
-            onChange={(e) => setFarmerName(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
-          />
-        </div>
-        <div className="my-4">
-          <label className='text-lg font-semibold text-gray-700'>Farmer Email</label>
-          <input
-            type="text"
-            value={FarmerEmail}
-            onChange={(e) => setFarmerEmail(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
-          />
-        </div>
-        <button className='p-2 bg-green-600 text-white rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-500' onClick={handleEditProducts}>
-          Save
-        </button>
       </div>
+      <Footer /> {/* Footer component */}
     </div>
   );
 };

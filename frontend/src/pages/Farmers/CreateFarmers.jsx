@@ -8,6 +8,9 @@ import { useNavigate } from "react-router-dom";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { app } from "../../config/firebase";
 import Swal from 'sweetalert2';
+import Header from "../../components/header1"; // Assuming this is the path to your Header component
+import Footer from "../../components/footer"; // Assuming this is the path to your Footer component
+import '../add service.css'; // Ensure the CSS file is imported
 
 // Functional component for creating Farmers
 const CreateFarmers = () => {
@@ -18,7 +21,6 @@ const CreateFarmers = () => {
   const [Address, setAddress] = useState('');
   const [Password, setPassword] = useState('');
   const [image, setImage] = useState(null);
-
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const storage = getStorage(app);
@@ -102,79 +104,69 @@ const CreateFarmers = () => {
 
   // JSX for rendering the create Farmers form
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <BackButton destination='/farmers/Login' />
-      <h1 className="text-3xl my-4 text-green-800">Create Farmers</h1>
-      {loading && <Spinner />}
-      <div className="flex flex-col border-2 border-green-500 rounded-xl w-[600px] p-4 mx-auto bg-white">
-        <div className="my-4">
-          <label className='text-xl mr-4 text-gray-500'>Farmer Name</label>
-          <input
-            type="text"
-            value={FarmerName}
-            onChange={(e) => setFarmerName(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
-          />
+    <>
+      <Header />
+      <div className="bg-[url('/bg.jpg')] bg-cover min-h-screen">
+        <div className="pt-12">
+          <div className="flex justify-center bg-primary w-2/5 m-auto pt-8 pb-8 rounded-lg opacity-95">
+            <form className="w-full max-w-lg p-4" onSubmit={handleSaveFarmers}>
+              <h1 className="text-3xl mb-4 text-white-800">Create Farmers</h1>
+              <div className="flex flex-wrap -mx-3 mb-6">
+                <div className="w-full px-3 mb-6">
+                  <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2" htmlFor="farmer-name">
+                    Farmer Name
+                  </label>
+                  <input className="appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="farmer-name" type="text" placeholder="Farmer Name" onChange={(e) => setFarmerName(e.target.value)} required />
+                </div>
+              </div>
+              <div className="flex flex-wrap -mx-3 mb-6">
+                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                  <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2" htmlFor="contact-no">
+                    Contact No
+                  </label>
+                  <input className="appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="contact-no" type="text" placeholder="Contact No" onChange={(e) => setContactNo(e.target.value)} required />
+                </div>
+                <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                  <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2" htmlFor="email">
+                    Email
+                  </label>
+                  <input className="appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="email" type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
+                </div>
+              </div>
+              <div className="flex flex-wrap -mx-3 mb-6">
+                <div className="w-full px-3 mb-6">
+                  <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2" htmlFor="address">
+                    Address
+                  </label>
+                  <input className="appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="address" type="text" placeholder="Address" onChange={(e) => setAddress(e.target.value)} required />
+                </div>
+              </div>
+              <div className="flex flex-wrap -mx-3 mb-6">
+                <div className="w-full px-3 mb-6">
+                  <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2" htmlFor="password">
+                    Password
+                  </label>
+                  <input className="appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="password" type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />
+                </div>
+              </div>
+              <div className="flex flex-wrap -mx-3 mb-6">
+                <div className="w-full px-3 mb-6">
+                  <label className="block uppercase tracking-wide text-white text-xs font-bold mb-2" htmlFor="image">
+                    Upload Image
+                  </label>
+                  <input className="appearance-none block w-full bg-gray-200 text-black border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="image" type="file" onChange={(e) => setImage(e.target.files[0])} />
+                </div>
+              </div>
+              <button className="w-full bg-secondary hover:bg-lime-500 text-grey-300 font-bold py-2 px-4 border-b-4 border-lime-800 hover:border-lime-900 rounded" type="submit" disabled={loading}>
+                {loading ? <Spinner /> : "Create Farmer"}
+              </button>
+            </form>
+          </div>
         </div>
-        <div className="my-4">
-          <label className='text-xl mr-4 text-gray-500'>ContactNo</label>
-          <input
-            type='text'
-            value={ContactNo}
-            onChange={(e) => setContactNo(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
-          />
-        </div>
-        <div className="my-4">
-          <label className='text-xl mr-4 text-gray-500'>Email</label>
-          <input
-            type='text'
-            value={Email}
-            onChange={(e) => setEmail(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
-          />
-        </div>
-        <div className="my-4">
-          <label className='text-xl mr-4 text-gray-500'>Address</label>
-          <input
-            type="text"
-            value={Address}
-            onChange={(e) => setAddress(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
-          />
-        </div>
-        <div className="my-4">
-          <label className='text-xl mr-4 text-gray-500'>Password</label>
-          <input
-            type="password"
-            value={Password}
-            onChange={(e) => setPassword(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
-          />
-        </div>
-
-        <div className="my-4">
-          <label htmlFor="image" className="text-xl mr-4 text-gray-500">Image (Optional)</label>
-          <input
-            id="image"
-            name="image"
-            type="file"
-            accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
-            className="border-2 border-gray-500 px-4 py-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
-        </div>
-
-        <button
-          className='p-2 bg-pink-500 text-white rounded-md hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500'
-          onClick={handleSaveFarmers}
-        >
-          Save
-        </button>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
-// Exporting the CreateFarmers component
 export default CreateFarmers;
