@@ -15,6 +15,7 @@ import UpdateDisease from './pages/Disease/updateDisease'
 import SelectCrop from './pages/Disease/selectCropPage'
 import SingleDisease from './pages/Disease/SingleDisease'
 import DiseasePrediction from './pages/Disease/DiseasePredictionForm'
+import AllDiseases from './pages/Disease/AllPest&Diseases'
 
 import ShowProduct from './pages/Products/ShowProducts';
 import ReadOneProducts from './pages/Products/ReadOneProducts';
@@ -76,6 +77,8 @@ const App = () => {
       <Route path='/Pest&Disease/PredictDisease' element={<DiseasePrediction />}/>
       <Route path='/Pest&Disease/selectCrop/:cropType' element={<DiseaseList />}/>
       <Route path='/DiseaseList/:id' element={<SingleDisease />}/>
+      <Route path='/Pest&Disease/All' element={<AllDiseases />}/>
+      
     
 
 
