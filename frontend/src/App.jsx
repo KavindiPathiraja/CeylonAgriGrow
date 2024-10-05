@@ -1,12 +1,13 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Toaster } from "react-hot-toast";
-import CreateCrop from './pages/CreateCrop';
-import EditCrop from './pages/EditCrop';
-import ShowCrop from './pages/ShowCrop';
-import DeleteCrop from './pages/DeleteCrop';
-import AllCrop from './pages/AllCrop';
-import ReportCrop from './pages/ReportCrop';
+
+import CreateCrop from './pages/CropsPrediction/CreateCrop';
+import EditCrop from './pages/CropsPrediction/EditCrop';
+import ShowCrop from './pages/CropsPrediction/ShowCrop';
+import DeleteCrop from './pages/CropsPrediction/DeleteCrop';
+import AllCrop from './pages/CropsPrediction/AllCrop';
+import ReportCrop from './pages/CropsPrediction/ReportCrop';
 
 
 import AddDisease from './pages/Disease/AddDisease'
@@ -16,6 +17,7 @@ import UpdateDisease from './pages/Disease/updateDisease'
 import SelectCrop from './pages/Disease/selectCropPage'
 import SingleDisease from './pages/Disease/SingleDisease'
 import DiseasePrediction from './pages/Disease/DiseasePredictionForm'
+import AllDiseases from './pages/Disease/AllPest&Diseases'
 
 import ShowProduct from './pages/Products/ShowProducts';
 import ReadOneProducts from './pages/Products/ReadOneProducts';
@@ -141,6 +143,65 @@ const App = () => {
 
       </Routes>
     </>
+
+    <Routes>
+
+      <Route path="/ReadOneHome/:FarmerID" element={<ReadOneHome />} />
+
+      <Route path='/crops/create' element={<CreateCrop />} />
+      <Route path='/crops/details/:id' element={<ShowCrop />} />
+      <Route path='/crops/edit/:id' element={<EditCrop />} />
+      <Route path='/crops/getall' element={<AllCrop />} />
+      <Route path='/crops/report' element={<ReportCrop />} />
+      <Route path='/crops/delete/:id' element={<DeleteCrop />} />
+
+      <Route path='/' element={<Home />}/>
+
+      <Route path='/Pest&Disease/diseaseTable/addNew' element={<AddDisease />}/>
+      <Route path='/Pest&Disease/diseaseTable' element={<DiseaseTable />}/>
+      <Route path='/Pest&Disease/diseaseTable/UpdateDisease/:id' element={<UpdateDisease />}/>
+      <Route path='/Pest&Disease/selectCrop' element={<SelectCrop />}/>
+      <Route path='/Pest&Disease/PredictDisease' element={<DiseasePrediction />}/>
+      <Route path='/Pest&Disease/selectCrop/:cropType' element={<DiseaseList />}/>
+      <Route path='/DiseaseList/:id' element={<SingleDisease />}/>
+      <Route path='/Pest&Disease/All' element={<AllDiseases />}/>
+      
+    
+
+
+      <Route path='/products/allProducts' element={<ShowProduct />}/>
+      <Route path='/products/details/:id' element={<ReadOneProducts />}/>
+      <Route path='/products/create' element={<CreateProducts />}/>
+      <Route path='/products/edit/:id' element={<EditProducts />}/>
+      <Route path='/products/delete/:id' element={<DeleteProducts />}/>
+
+      <Route path='/farmers/allFarmers' element={<ShowFarmers />}/>
+      <Route path='/farmers/details/:id' element={<ReadOneFarmers />}/>
+      <Route path='/farmers/create' element={<CreateFarmers />}/>
+      <Route path='/farmers/edit/:id' element={<EditFarmers />}/>
+      <Route path='/farmers/delete/:id' element={<DeleteFarmers />}/>
+
+      <Route path='/farmers/Login' element={<Login />}/>
+
+      <Route path='/myProducts/details/:id' element={<ReadOneMyProducts />}/>
+      <Route path='/myProducts/create' element={<CreateMyProducts />}/>
+      <Route path='/myProducts/edit/:id' element={<EditMyProducts />}/>
+      <Route path='/myProducts/delete/:id' element={<DeleteMyProducts />}/>
+      
+      <Route path="/card/create/:FarmerID" element={<CreateCard />} />
+
+      <Route path="/itemcard/create" element={<ItemCard />} />
+      <Route path="/cart/main" element={<Main />} />
+      <Route path="/itemdis/:ProductNo/:FarmerID" element={<ItemDis />} />
+      <Route path="/cart/:FarmerID" element={<Cart />} />
+      <Route path="/checkout/:FarmerID" element={<Checkout />} />
+      <Route path="/my-orders/:FarmerID" element={<MyOrder />} />
+      <Route path="/allorders" element={<AllOrders />} />
+      <Route path="/deleteorder/:orderId" element={<DeleteOrder />} />
+
+      <Route path="/Hcard" element={<HCard />} />
+
+    </Routes>
   );
 }
 
